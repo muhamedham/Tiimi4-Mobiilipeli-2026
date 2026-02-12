@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6q086eyuuc04"]
 
-[ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/button.tscn" id="1_cfc18"]
+[ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/Button.tscn" id="1_cfc18"]
 
 [node name="Field" type="GridContainer"]
 anchors_preset = 15

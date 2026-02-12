@@ -13,7 +13,7 @@ config_version=5
 config/name="Memotap"
 run/main_scene="uid://0ikkpwvwksh4"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://btt4md18i885p"
 
 [dotnet]
 
@@ -22,7 +22,9 @@ project/assembly_name="Memotap"
 [file_customization]
 
 folder_colors={
-"res://scenes/": "purple"
+"res://res/": "yellow",
+"res://scenes/": "purple",
+"res://src/": "green"
 }
 
 [input_devices]

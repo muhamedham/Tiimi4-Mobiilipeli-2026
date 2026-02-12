@@ -11,7 +11,7 @@ public partial class PauseButton : MenuButton
 
 	public void OnPressed()
 	{
-		GetTree().ChangeSceneToFile("res://Menu.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
