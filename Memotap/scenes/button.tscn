@@ -6,14 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkm2ml1e3r7tw" path="res://res/RedButton.png" id="4_4amfo"]
 [ext_resource type="Texture2D" uid="uid://qambq5g481oo" path="res://res/PressedButton.png" id="5_2kp8h"]
 
-[node name="Button" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TileButton" type="TextureButton" parent="."]
-layout_mode = 0
+[node name="TileButton" type="TextureButton"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("2_4amfo")

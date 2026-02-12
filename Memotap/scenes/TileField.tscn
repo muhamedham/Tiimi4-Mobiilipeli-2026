@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6q086eyuuc04"]
+[gd_scene load_steps=3 format=3 uid="uid://b6q086eyuuc04"]
 
-[ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/Button.tscn" id="1_cfc18"]
+[ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/button.tscn" id="1_cfc18"]
+[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="2_cldf2"]
 
 [node name="Field" type="GridContainer"]
 anchors_preset = 15
@@ -58,3 +59,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons")]
+script = ExtResource("2_cldf2")
+_buttons = [NodePath("../Button"), NodePath("../Button2"), NodePath("../Button3"), NodePath("../Button4"), NodePath("../Button5"), NodePath("../Button6"), NodePath("../Button7"), NodePath("../Button8"), NodePath("../Button9")]
