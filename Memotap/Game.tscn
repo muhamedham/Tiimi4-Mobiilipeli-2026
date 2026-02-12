@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5qgnrojxogms"]
+
+[ext_resource type="PackedScene" uid="uid://bmypg7l4ajiuu" path="res://TileField.tscn" id="1_wbfu4"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_u44n3"]
+[ext_resource type="Script" path="res://PauseButton.cs" id="3_sb48q"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Field" parent="CanvasLayer" instance=ExtResource("1_wbfu4")]
+anchors_preset = -1
+anchor_left = 0.02
+anchor_right = 1.02
+offset_left = 153.0
+offset_top = 98.0
+offset_right = -569.0
+offset_bottom = -120.0
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "PAUSE"
+icon = ExtResource("2_u44n3")
+script = ExtResource("3_sb48q")
