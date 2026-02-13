@@ -8,19 +8,20 @@ public partial class GameRunner : Node
 
 	[Export] private Array<TileButton> _buttons = null;
 
-	private Array<TileButton> _buttonArr = new();
+	private Array<TileButton> _rndButtons = new();
 
 	private bool _wasPressedLastFrame = false;
-	private int index = 0;
-	private float _timeLimit = 2.0f;
+	private int _index = 0;
+
+	private int _level = 5;
+
+	[ExportGroup("Timer")]
+	[Export] public float _timeLimit = 2.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		for (int i = 0; i < 5; i++)
-		{
-			_buttonArr.Add(_buttons.PickRandom());
-		}
+		PickButtons();
 
 		ShowButtons();
 	}
@@ -28,33 +29,73 @@ public partial class GameRunner : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		bool isPressedNow = _buttonArr[index].ButtonPressed;
 
-		if (isPressedNow && !_wasPressedLastFrame)
+		bool isCorrectPressedNow = _rndButtons[_index].ButtonPressed;
+
+		if (isCorrectPressedNow && !_wasPressedLastFrame)
 		{
-			Something();
+			CorrectPressed();
 		}
 
-		_wasPressedLastFrame = isPressedNow;
+		_wasPressedLastFrame = isCorrectPressedNow;
+
+		if (_index >= _level)
+		{
+			_index = 0;
+			_level ++;
+
+			PickButtons();
+			ShowButtons();
+		}
 	}
 
-	private void Something()
+	private void CorrectPressed()
 	{
 		GD.Print("Correct button Pressed");
-		_buttonArr[index].SetGreen();
-		index++;
+		_rndButtons[_index].SetGreen();
+		_index++;
+	}
+
+	private void PickButtons()
+	{
+		//empty the array if there is something in it.
+		if (_rndButtons.Count != 0 )
+		{
+			_rndButtons.Clear();
+		}
+		//add buttons in random order to a new array
+		for (int i = 0; i < _level; i++)
+		{
+			_rndButtons.Add(_buttons.PickRandom());
+		}
 	}
 
 	public async void ShowButtons()
 	{
-		for (int i = 0; i < _buttonArr.Count; i++)
+
+		//Disable all buttons
+		for (int i = 0; i < _buttons.Count; i++)
 		{
-			_buttonArr[i].SetGreen();
-			_buttonArr[i].UpDateVisual();
+			_buttons[i].ChangeDisable();
+		}
+
+		// loop through buttons turn them to green then turn back
+		for (int i = 0; i < _rndButtons.Count; i++)
+		{
+			_rndButtons[i].SetGreen();
+			_rndButtons[i].UpDateVisual();
 
 			await ToSignal(GetTree().CreateTimer(_timeLimit), "timeout");
-			_buttonArr[i].Reset();
+			_rndButtons[i].Reset();
 
 		}
+
+		// Disable all buttons
+		for (int i = 0; i < _buttons.Count; i++)
+		{
+			_buttons[i].ChangeDisable();
+		}
 	}
+
+
 }

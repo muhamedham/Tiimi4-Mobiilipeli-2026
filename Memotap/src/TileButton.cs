@@ -27,6 +27,7 @@ public partial class TileButton : Godot.TextureButton
 	public override void _Ready()
 	{
 		SetState(TileState.Wrong);
+
 		Pressed += OnPressed;
 	}
 
@@ -36,15 +37,14 @@ public partial class TileButton : Godot.TextureButton
 
 		UpDateVisual();
 		StartResetTimer();
-	}
 
+	}
 
 	public void SetState(TileState newState)
 	{
 		CurrentState = newState;
 
 	}
-
 	public void UpDateVisual()
 	{
 		switch (CurrentState)
@@ -60,18 +60,16 @@ public partial class TileButton : Godot.TextureButton
 				break;
 		}
 	}
-	private async void StartResetTimer()
+	public async void StartResetTimer()
 	{
 		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
 		Reset();
-
 	}
 
 	public void SetGreen()
 	{
 		GD.Print("Turn green called");
 		this.SetState(TileState.Right);
-
 	}
 
 	public void Reset()
@@ -79,5 +77,20 @@ public partial class TileButton : Godot.TextureButton
 		this.SetState(TileState.Default);
 		this.UpDateVisual();
 		this.SetState(TileState.Wrong);
+	}
+
+	public void ChangeDisable()
+	{
+		if (this.Disabled)
+		{
+			this.Disabled = false;
+			return;
+		}
+
+		if (!this.Disabled)
+		{
+			this.Disabled = true;
+			return;
+		}
 	}
 }
