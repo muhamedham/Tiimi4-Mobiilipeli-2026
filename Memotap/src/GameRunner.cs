@@ -18,6 +18,8 @@ public partial class GameRunner : Node
 	[ExportGroup("Timer")]
 	[Export] public float _timeLimit = 2.0f;
 
+	private TileButton _correctButton = null;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,6 +32,35 @@ public partial class GameRunner : Node
 	public override void _Process(double delta)
 	{
 
+		if (_correctButton != _rndButtons[_index])
+		{
+			_correctButton = _rndButtons[_index];
+		}
+
+
+		for (int i = 0; i < _buttons.Count; i++)
+		{
+			bool isAButtonPressedNow = _buttons[i].ButtonPressed;
+
+			if (isAButtonPressedNow && _correctButton.ButtonPressed && !_wasPressedLastFrame)
+			{
+				GD.Print("A Correct Button has Been pressed");
+				CorrectPressed();
+			}
+
+			else if (isAButtonPressedNow && !_wasPressedLastFrame)
+			{
+				GD.Print("A wrong Button must have been Pressed");
+				//Do something with wrong button press
+			}
+
+			_wasPressedLastFrame = isAButtonPressedNow;
+		}
+
+		//en tiiä kumpi on parempi, looppaa monta kertaa button array ja rekisteröi monta painallusta peräkkäin
+
+/*
+
 		bool isCorrectPressedNow = _rndButtons[_index].ButtonPressed;
 
 		if (isCorrectPressedNow && !_wasPressedLastFrame)
@@ -38,22 +69,25 @@ public partial class GameRunner : Node
 		}
 
 		_wasPressedLastFrame = isCorrectPressedNow;
+		*/
 
-		if (_index >= _level)
-		{
-			_index = 0;
-			_level ++;
-
-			PickButtons();
-			ShowButtons();
-		}
 	}
+
 
 	private void CorrectPressed()
 	{
 		GD.Print("Correct button Pressed");
 		_rndButtons[_index].SetGreen();
 		_index++;
+
+		if (_index >= _level)
+			{
+				_index = 0;
+				_level ++;
+
+				PickButtons();
+				ShowButtons();
+			}
 	}
 
 	private void PickButtons()
