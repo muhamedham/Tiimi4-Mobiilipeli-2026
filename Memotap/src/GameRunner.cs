@@ -31,35 +31,41 @@ public partial class GameRunner : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+/* EI TOIMI RIP MOTI
 		if (_correctButton != _rndButtons[_index])
 		{
 			_correctButton = _rndButtons[_index];
 		}
 
 
+
 		for (int i = 0; i < _buttons.Count; i++)
 		{
+
 			bool isAButtonPressedNow = _buttons[i].ButtonPressed;
+
 
 			if (isAButtonPressedNow && _correctButton.ButtonPressed && !_wasPressedLastFrame)
 			{
 				GD.Print("A Correct Button has Been pressed");
 				CorrectPressed();
+				break;
+
 			}
 
 			else if (isAButtonPressedNow && !_wasPressedLastFrame)
 			{
 				GD.Print("A wrong Button must have been Pressed");
+				break;
 				//Do something with wrong button press
 			}
 
 			_wasPressedLastFrame = isAButtonPressedNow;
 		}
-
+*/
 		//en tiiä kumpi on parempi, looppaa monta kertaa button array ja rekisteröi monta painallusta peräkkäin
 
-/*
+
 
 		bool isCorrectPressedNow = _rndButtons[_index].ButtonPressed;
 
@@ -69,7 +75,7 @@ public partial class GameRunner : Node
 		}
 
 		_wasPressedLastFrame = isCorrectPressedNow;
-		*/
+		
 
 	}
 
