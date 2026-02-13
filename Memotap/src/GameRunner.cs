@@ -13,7 +13,7 @@ public partial class GameRunner : Node
 	private bool _wasPressedLastFrame = false;
 	private int _index = 0;
 
-	private int _level = 5;
+	private int _level = 3;
 
 	[ExportGroup("Timer")]
 	[Export] public float _timeLimit = 2.0f;

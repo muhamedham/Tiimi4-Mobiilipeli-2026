@@ -21,7 +21,7 @@ public partial class TileButton : Godot.TextureButton
 	private TileState CurrentState = TileState.Default;
 
 	[ExportGroup("Timer")]
-	[Export] public float TimeLimit = 1.2f;
+	[Export] public float TimeLimit = 1.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -84,12 +84,14 @@ public partial class TileButton : Godot.TextureButton
 		if (this.Disabled)
 		{
 			this.Disabled = false;
+			GD.Print("Button enabled");
 			return;
 		}
 
 		if (!this.Disabled)
 		{
 			this.Disabled = true;
+			GD.Print("button disabled");
 			return;
 		}
 	}
