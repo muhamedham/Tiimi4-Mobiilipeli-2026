@@ -20,6 +20,7 @@ public partial class TileButton : Godot.TextureButton
 
 	private TileState CurrentState = TileState.Default;
 
+
 	[ExportGroup("Timer")]
 	[Export] public float TimeLimit = 1.0f;
 
@@ -27,6 +28,8 @@ public partial class TileButton : Godot.TextureButton
 	public override void _Ready()
 	{
 		SetState(TileState.Wrong);
+
+
 
 		Pressed += OnPressed;
 	}
@@ -37,6 +40,9 @@ public partial class TileButton : Godot.TextureButton
 
 		UpDateVisual();
 		StartResetTimer();
+
+
+
 
 	}
 

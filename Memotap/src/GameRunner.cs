@@ -23,6 +23,7 @@ public partial class GameRunner : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
 		PickButtons();
 
 		ShowButtons();
@@ -49,6 +50,7 @@ public partial class GameRunner : Node
 			{
 				GD.Print("A Correct Button has Been pressed");
 				CorrectPressed();
+				_wasPressedLastFrame = true;
 				break;
 
 			}
@@ -56,15 +58,16 @@ public partial class GameRunner : Node
 			else if (isAButtonPressedNow && !_wasPressedLastFrame)
 			{
 				GD.Print("A wrong Button must have been Pressed");
+				_wasPressedLastFrame = true;
 				break;
 				//Do something with wrong button press
 			}
 
 			_wasPressedLastFrame = isAButtonPressedNow;
 		}
-*/
-		//en tiiä kumpi on parempi, looppaa monta kertaa button array ja rekisteröi monta painallusta peräkkäin
 
+		//en tiiä kumpi on parempi, looppaa monta kertaa button array ja rekisteröi monta painallusta peräkkäin
+*/
 
 
 		bool isCorrectPressedNow = _rndButtons[_index].ButtonPressed;
@@ -75,12 +78,12 @@ public partial class GameRunner : Node
 		}
 
 		_wasPressedLastFrame = isCorrectPressedNow;
-		
 
 	}
 
 
-	private void CorrectPressed()
+
+	public async void CorrectPressed()
 	{
 		GD.Print("Correct button Pressed");
 		_rndButtons[_index].SetGreen();
@@ -90,12 +93,11 @@ public partial class GameRunner : Node
 			{
 				_index = 0;
 				_level ++;
-
+				await ToSignal(GetTree().CreateTimer(_timeLimit), "timeout");
 				PickButtons();
 				ShowButtons();
 			}
 	}
-
 	private void PickButtons()
 	{
 		//empty the array if there is something in it.
