@@ -15,50 +15,59 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 3
 
-[node name="Button" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button2" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button2" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button3" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button3" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button4" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button4" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button5" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button5" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button6" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button6" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button7" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button7" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button8" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button8" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
-[node name="Button9" parent="." instance=ExtResource("1_cfc18")]
+[node name="Button9" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+gameRunner = NodePath("../GameRunner")
 
 [node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons")]
 script = ExtResource("2_cldf2")

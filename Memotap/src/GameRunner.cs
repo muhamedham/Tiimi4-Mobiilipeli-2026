@@ -10,7 +10,6 @@ public partial class GameRunner : Node
 
 	private Array<TileButton> _rndButtons = new();
 
-	private bool _wasPressedLastFrame = false;
 	private int _index = 0;
 
 	private int _level = 3;
@@ -18,75 +17,24 @@ public partial class GameRunner : Node
 	[ExportGroup("Timer")]
 	[Export] public float _timeLimit = 2.0f;
 
-	private TileButton _correctButton = null;
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
 		PickButtons();
-
 		ShowButtons();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+
+	//TODO do something when the wrong button has been pressed
+	public void WrongPressed()
 	{
-/* EI TOIMI RIP MOTI
-		if (_correctButton != _rndButtons[_index])
-		{
-			_correctButton = _rndButtons[_index];
-		}
-
-
-
-		for (int i = 0; i < _buttons.Count; i++)
-		{
-
-			bool isAButtonPressedNow = _buttons[i].ButtonPressed;
-
-
-			if (isAButtonPressedNow && _correctButton.ButtonPressed && !_wasPressedLastFrame)
-			{
-				GD.Print("A Correct Button has Been pressed");
-				CorrectPressed();
-				_wasPressedLastFrame = true;
-				break;
-
-			}
-
-			else if (isAButtonPressedNow && !_wasPressedLastFrame)
-			{
-				GD.Print("A wrong Button must have been Pressed");
-				_wasPressedLastFrame = true;
-				break;
-				//Do something with wrong button press
-			}
-
-			_wasPressedLastFrame = isAButtonPressedNow;
-		}
-
-		//en tiiä kumpi on parempi, looppaa monta kertaa button array ja rekisteröi monta painallusta peräkkäin
-*/
-
-
-		bool isCorrectPressedNow = _rndButtons[_index].ButtonPressed;
-
-		if (isCorrectPressedNow && !_wasPressedLastFrame)
-		{
-			CorrectPressed();
-		}
-
-		_wasPressedLastFrame = isCorrectPressedNow;
-
+		GD.Print("Wrong button has been pressed, DO SOMETHING");
 	}
-
 
 
 	public async void CorrectPressed()
 	{
 		GD.Print("Correct button Pressed");
-		_rndButtons[_index].SetGreen();
 		_index++;
 
 		if (_index >= _level)
@@ -96,7 +44,10 @@ public partial class GameRunner : Node
 				await ToSignal(GetTree().CreateTimer(_timeLimit), "timeout");
 				PickButtons();
 				ShowButtons();
+
 			}
+
+		_rndButtons[_index].SetGreen();
 	}
 	private void PickButtons()
 	{
@@ -131,13 +82,13 @@ public partial class GameRunner : Node
 			_rndButtons[i].Reset();
 
 		}
-
-		// Disable all buttons
+		// set the first button to turn green when pressed
+		_rndButtons[0].SetGreen();
+		// Enable all buttons
 		for (int i = 0; i < _buttons.Count; i++)
 		{
 			_buttons[i].ChangeDisable();
 		}
 	}
-
 
 }

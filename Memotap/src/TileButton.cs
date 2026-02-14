@@ -13,6 +13,8 @@ public partial class TileButton : Godot.TextureButton
 
 
 
+	[Export] public GameRunner gameRunner;
+
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D DefaultTexture;
 	[Export] public Texture2D RightTexture;
@@ -20,17 +22,14 @@ public partial class TileButton : Godot.TextureButton
 
 	private TileState CurrentState = TileState.Default;
 
-
 	[ExportGroup("Timer")]
 	[Export] public float TimeLimit = 1.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// default buttons to wrong if they are pressed.
 		SetState(TileState.Wrong);
-
-
-
 		Pressed += OnPressed;
 	}
 
@@ -41,16 +40,21 @@ public partial class TileButton : Godot.TextureButton
 		UpDateVisual();
 		StartResetTimer();
 
-
-
-
+		// if the tile state has not been set to right by gamerunner it's wrong
+		if (CurrentState == TileState.Wrong)
+		{
+			gameRunner.WrongPressed();
+		} else
+		{
+			gameRunner.CorrectPressed();
+		}
 	}
 
 	public void SetState(TileState newState)
 	{
 		CurrentState = newState;
-
 	}
+
 	public void UpDateVisual()
 	{
 		switch (CurrentState)
@@ -66,6 +70,7 @@ public partial class TileButton : Godot.TextureButton
 				break;
 		}
 	}
+
 	public async void StartResetTimer()
 	{
 		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
@@ -80,8 +85,10 @@ public partial class TileButton : Godot.TextureButton
 
 	public void Reset()
 	{
+		// turn button to default and show it to the player.
 		this.SetState(TileState.Default);
 		this.UpDateVisual();
+		// prefire button to wrong when its next pressed.
 		this.SetState(TileState.Wrong);
 	}
 
