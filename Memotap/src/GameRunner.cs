@@ -44,7 +44,6 @@ public partial class GameRunner : Node
 				await ToSignal(GetTree().CreateTimer(_timeLimit), "timeout");
 				PickButtons();
 				ShowButtons();
-
 			}
 
 		_rndButtons[_index].SetGreen();

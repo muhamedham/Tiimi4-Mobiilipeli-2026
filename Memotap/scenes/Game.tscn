@@ -12,10 +12,10 @@
 anchors_preset = -1
 anchor_left = 0.02
 anchor_right = 1.02
-offset_left = 153.0
-offset_top = 98.0
-offset_right = -569.0
-offset_bottom = -120.0
+offset_left = 333.96
+offset_top = 118.0
+offset_right = 2264.96
+offset_bottom = 2553.0
 
 [node name="MenuButton" type="MenuButton" parent="."]
 offset_right = 8.0

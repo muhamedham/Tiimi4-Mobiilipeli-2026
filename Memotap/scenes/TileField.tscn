@@ -7,12 +7,11 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 103.0
-offset_top = 95.0
-offset_right = -618.0
-offset_bottom = -135.0
+offset_right = 1931.0
+offset_bottom = 2435.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.12346328, 0.11995484)
 columns = 3
 
 [node name="Button" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
