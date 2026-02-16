@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=5 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
-[ext_resource type="Texture2D" uid="uid://btt4md18i885p" path="res://res/icon.svg" id="2_u44n3"]
+[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
 [ext_resource type="Script" uid="uid://d342jyf1wjeiw" path="res://src/PauseButton.cs" id="3_cpr0p"]
+[ext_resource type="Texture2D" uid="uid://cqklgftwhmqml" path="res://art/pause.png" id="3_s0nni"]
 
 [node name="Game" type="Node2D"]
 
@@ -12,14 +13,24 @@
 anchors_preset = -1
 anchor_left = 0.02
 anchor_right = 1.02
-offset_left = 153.0
-offset_top = 98.0
-offset_right = -569.0
-offset_bottom = -120.0
+offset_left = 333.96
+offset_top = 118.0
+offset_right = 2527.084
+offset_bottom = 2821.261
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.656662, 16.308685)
+mouse_filter = 2
+texture = ExtResource("2_78awf")
+expand_mode = 1
 
 [node name="MenuButton" type="MenuButton" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
+scale = Vector2(0.1, 0.1)
 text = "PAUSE"
-icon = ExtResource("2_u44n3")
+icon = ExtResource("3_s0nni")
+icon_alignment = 1
 script = ExtResource("3_cpr0p")

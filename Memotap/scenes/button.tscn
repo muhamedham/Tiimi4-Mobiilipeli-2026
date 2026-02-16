@@ -1,25 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://c44gyc5gmggsr"]
 
 [ext_resource type="Script" uid="uid://drvn72aefgh7c" path="res://src/TileButton.cs" id="1_lt4la"]
-[ext_resource type="Texture2D" uid="uid://c8b25nk2bi8wn" path="res://res/DefaultButton.png" id="2_4amfo"]
-[ext_resource type="Texture2D" uid="uid://cp6uwq8owvnju" path="res://res/GreenButton.png" id="4_1bdt2"]
-[ext_resource type="Texture2D" uid="uid://dkm2ml1e3r7tw" path="res://res/RedButton.png" id="4_4amfo"]
-[ext_resource type="Texture2D" uid="uid://qambq5g481oo" path="res://res/PressedButton.png" id="5_2kp8h"]
+[ext_resource type="Texture2D" uid="uid://c77ya22abcbfr" path="res://art/taso_button_pressed_resized.png" id="2_1bdt2"]
+[ext_resource type="Texture2D" uid="uid://dm52ku7hgxpxa" path="res://art/default-taso_button1-resized.png" id="4_8m7bo"]
+[ext_resource type="Texture2D" uid="uid://c8262rkw56c5i" path="res://art/correct_taso_button2-resized.png" id="5_t81cg"]
+[ext_resource type="Texture2D" uid="uid://skaeoficl7dn" path="res://art/wrong_taso_button_resized.png" id="6_is61r"]
 
-[node name="Button" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TileButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture_normal = ExtResource("2_4amfo")
-texture_pressed = ExtResource("5_2kp8h")
+[node name="TileButton" type="TextureButton"]
+offset_right = 1025.0
+offset_bottom = 1025.0
+texture_normal = ExtResource("4_8m7bo")
+texture_pressed = ExtResource("2_1bdt2")
 script = ExtResource("1_lt4la")
-DefaultTexture = ExtResource("2_4amfo")
-RightTexture = ExtResource("4_1bdt2")
-WrongTexture = ExtResource("4_4amfo")
+DefaultTexture = ExtResource("4_8m7bo")
+RightTexture = ExtResource("5_t81cg")
+WrongTexture = ExtResource("6_is61r")
 TimeLimit = 1.5

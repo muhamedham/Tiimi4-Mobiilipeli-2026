@@ -11,8 +11,9 @@ public partial class TileButton : Godot.TextureButton
 		Right
 	}
 
-	[ExportGroup("Index")]
-	[Export] public int index = 0;
+
+
+	[Export] public GameRunner gameRunner;
 
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D DefaultTexture;
@@ -22,31 +23,39 @@ public partial class TileButton : Godot.TextureButton
 	private TileState CurrentState = TileState.Default;
 
 	[ExportGroup("Timer")]
-	[Export] public float TimeLimit = 3.0f;
+	[Export] public float TimeLimit = 1.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// default buttons to wrong if they are pressed.
+		SetState(TileState.Wrong);
 		Pressed += OnPressed;
 	}
 
 	private void OnPressed()
 	{
 		GD.Print("I have been pressed");
-		SetState(TileState.Right);
 
 		UpDateVisual();
 		StartResetTimer();
-	}
 
+		// if the tile state has not been set to right by gamerunner it's wrong
+		if (CurrentState == TileState.Wrong)
+		{
+			gameRunner.WrongPressed();
+		} else
+		{
+			gameRunner.CorrectPressed();
+		}
+	}
 
 	public void SetState(TileState newState)
 	{
 		CurrentState = newState;
-		UpDateVisual();
 	}
 
-	private void UpDateVisual()
+	public void UpDateVisual()
 	{
 		switch (CurrentState)
 		{
@@ -61,11 +70,42 @@ public partial class TileButton : Godot.TextureButton
 				break;
 		}
 	}
-	private async void StartResetTimer()
+
+	public async void StartResetTimer()
 	{
 		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
-		SetState(TileState.Default);
+		Reset();
 	}
 
+	public void SetGreen()
+	{
+		GD.Print("Turn green called");
+		this.SetState(TileState.Right);
+	}
 
+	public void Reset()
+	{
+		// turn button to default and show it to the player.
+		this.SetState(TileState.Default);
+		this.UpDateVisual();
+		// prefire button to wrong when its next pressed.
+		this.SetState(TileState.Wrong);
+	}
+
+	public void ChangeDisable()
+	{
+		if (this.Disabled)
+		{
+			this.Disabled = false;
+			GD.Print("Button enabled");
+			return;
+		}
+
+		if (!this.Disabled)
+		{
+			this.Disabled = true;
+			GD.Print("button disabled");
+			return;
+		}
+	}
 }

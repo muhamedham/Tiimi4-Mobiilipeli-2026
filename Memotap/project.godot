@@ -22,6 +22,7 @@ project/assembly_name="Memotap"
 [file_customization]
 
 folder_colors={
+"res://art/": "pink",
 "res://res/": "yellow",
 "res://scenes/": "purple",
 "res://src/": "green"
