@@ -7,8 +7,8 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 889.09265
-offset_bottom = 1677.875
+offset_right = 451.7157
+offset_bottom = 1035.9669
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12346328, 0.11995484)

@@ -22,6 +22,7 @@ public partial class GameRunner : Node
 	{
 		PickButtons();
 		ShowButtons();
+
 	}
 
 
@@ -35,6 +36,8 @@ public partial class GameRunner : Node
 	public async void CorrectPressed()
 	{
 		GD.Print("Correct button Pressed");
+		// set the button that was just pressed as not correct
+		_rndButtons[_index].SetIsCorrect(false);
 		_index++;
 
 		if (_index >= _level)
@@ -46,7 +49,7 @@ public partial class GameRunner : Node
 				ShowButtons();
 			}
 
-		_rndButtons[_index].SetGreen();
+		_rndButtons[_index].SetIsCorrect(true);
 	}
 	private void PickButtons()
 	{
@@ -60,6 +63,9 @@ public partial class GameRunner : Node
 		{
 			_rndButtons.Add(_buttons.PickRandom());
 		}
+
+		// set the first button as the correct button
+		_rndButtons[0].SetIsCorrect(true);
 	}
 
 	public async void ShowButtons()
@@ -81,8 +87,7 @@ public partial class GameRunner : Node
 			_rndButtons[i].Reset();
 
 		}
-		// set the first button to turn green when pressed
-		_rndButtons[0].SetGreen();
+
 		// Enable all buttons
 		for (int i = 0; i < _buttons.Count; i++)
 		{

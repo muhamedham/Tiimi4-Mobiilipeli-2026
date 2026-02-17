@@ -23,7 +23,10 @@ public partial class TileButton : Godot.TextureButton
 	private TileState CurrentState = TileState.Default;
 
 	[ExportGroup("Timer")]
-	[Export] public float TimeLimit = 1.0f;
+	[Export] public float TimeLimit = 0.5f;
+
+
+	private bool CorrectBtn = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -37,17 +40,20 @@ public partial class TileButton : Godot.TextureButton
 	{
 		GD.Print("I have been pressed");
 
-		UpDateVisual();
-		StartResetTimer();
-
 		// if the tile state has not been set to right by gamerunner it's wrong
-		if (CurrentState == TileState.Wrong)
+		if (CorrectBtn)
 		{
-			gameRunner.WrongPressed();
+			SetState(TileState.Right);
+			UpDateVisual();
+			gameRunner.CorrectPressed();
+
 		} else
 		{
-			gameRunner.CorrectPressed();
+			SetState(TileState.Wrong);
+			UpDateVisual();
+			gameRunner.WrongPressed();
 		}
+		StartResetTimer();
 	}
 
 	public void SetState(TileState newState)
@@ -88,8 +94,6 @@ public partial class TileButton : Godot.TextureButton
 		// turn button to default and show it to the player.
 		this.SetState(TileState.Default);
 		this.UpDateVisual();
-		// prefire button to wrong when its next pressed.
-		this.SetState(TileState.Wrong);
 	}
 
 	public void ChangeDisable()
@@ -107,5 +111,10 @@ public partial class TileButton : Godot.TextureButton
 			GD.Print("button disabled");
 			return;
 		}
+	}
+
+	public void SetIsCorrect(bool isCorrrect)
+	{
+		this.CorrectBtn = isCorrrect;
 	}
 }
