@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class TileButton : Godot.TextureButton
 {
@@ -36,24 +37,26 @@ public partial class TileButton : Godot.TextureButton
 		Pressed += OnPressed;
 	}
 
-	private void OnPressed()
+	private async void OnPressed()
 	{
 		GD.Print("I have been pressed");
 
-		// if the tile state has not been set to right by gamerunner it's wrong
+		// if the tile state has not been set to chosen by gamerunner it's wrong
 		if (CorrectBtn)
 		{
 			SetState(TileState.Right);
 			UpDateVisual();
+			await StartResetTimer();
 			gameRunner.CorrectPressed();
 
 		} else
 		{
 			SetState(TileState.Wrong);
 			UpDateVisual();
+			await StartResetTimer();
 			gameRunner.WrongPressed();
 		}
-		StartResetTimer();
+
 	}
 
 	public void SetState(TileState newState)
@@ -61,7 +64,7 @@ public partial class TileButton : Godot.TextureButton
 		CurrentState = newState;
 	}
 
-	public void UpDateVisual()
+	public async void UpDateVisual()
 	{
 		switch (CurrentState)
 		{
@@ -75,9 +78,11 @@ public partial class TileButton : Godot.TextureButton
 				TextureNormal = WrongTexture;
 				break;
 		}
+
+
 	}
 
-	public async void StartResetTimer()
+	public async Task StartResetTimer()
 	{
 		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
 		Reset();
@@ -89,7 +94,7 @@ public partial class TileButton : Godot.TextureButton
 		this.SetState(TileState.Right);
 	}
 
-	public void Reset()
+	public async void Reset()
 	{
 		// turn button to default and show it to the player.
 		this.SetState(TileState.Default);

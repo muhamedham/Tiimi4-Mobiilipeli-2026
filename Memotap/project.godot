@@ -28,6 +28,10 @@ folder_colors={
 "res://src/": "green"
 }
 
+[global_group]
+
+test=""
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
