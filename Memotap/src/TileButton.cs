@@ -64,7 +64,7 @@ public partial class TileButton : Godot.TextureButton
 		CurrentState = newState;
 	}
 
-	public async void UpDateVisual()
+	public void UpDateVisual()
 	{
 		switch (CurrentState)
 		{
@@ -78,8 +78,6 @@ public partial class TileButton : Godot.TextureButton
 				TextureNormal = WrongTexture;
 				break;
 		}
-
-
 	}
 
 	public async Task StartResetTimer()

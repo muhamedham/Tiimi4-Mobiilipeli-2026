@@ -19,12 +19,8 @@ public partial class GameRunner : Node
 	// current level of the game (how many buttons to show)
 	private int _level = 3;
 
-	//how many are wrong
 	private int _lives = 3;
-	//[ExportGroup("")]
 
-	//how many wrong needed to trigger game over
-	//[Export] private int _maxMistakes = 4;
 
 	[ExportGroup("Timers")]
 	[Export] public float _flashDuration = 0.75f;
