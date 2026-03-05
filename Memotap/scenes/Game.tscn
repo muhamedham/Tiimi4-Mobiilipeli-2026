@@ -77,7 +77,7 @@ offset_top = 0.0
 offset_right = -270.0
 offset_bottom = 0.0
 
-[node name="HeartField" parent="GameUI" instance=ExtResource("7_400sg")]
+[node name="HeartField" parent="." instance=ExtResource("7_400sg")]
 offset_left = 809.0
 offset_top = 21.0
 offset_right = 827.25867
@@ -86,7 +86,7 @@ offset_bottom = 29.656988
 [node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts")]
 script = ExtResource("7_kiw3p")
 _buttons = [NodePath("../Field/Button"), NodePath("../Field/Button2"), NodePath("../Field/Button3"), NodePath("../Field/Button4"), NodePath("../Field/Button5"), NodePath("../Field/Button6"), NodePath("../Field/Button7"), NodePath("../Field/Button8"), NodePath("../Field/Button9")]
-_hearts = [NodePath("../GameUI/HeartField/HeartButton3"), NodePath("../GameUI/HeartField/HeartButton2"), NodePath("../GameUI/HeartField/HeartButton")]
+_hearts = [NodePath("../HeartField/HeartButton3"), NodePath("../HeartField/HeartButton2"), NodePath("../HeartField/HeartButton")]
 
 [editable path="Field"]
-[editable path="GameUI/HeartField"]
+[editable path="HeartField"]
