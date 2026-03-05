@@ -1,12 +1,11 @@
 using Godot;
 using System;
-using System.ComponentModel;
 
-public partial class PauseButton : TextureButton
+public partial class ResumeButton : Button
 {
 
 	[Signal]
-	public delegate void PauseRequestEventHandler();
+	public delegate void ResumeRequestEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,6 +15,7 @@ public partial class PauseButton : TextureButton
 
 	public void OnPressed()
 	{
-		EmitSignal(SignalName.PauseRequest);
+		EmitSignal(SignalName.ResumeRequest);
+		GD.Print("OnPressed called");
 	}
 }
