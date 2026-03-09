@@ -144,16 +144,4 @@ public partial class GameRunner : Node
 			GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 
 	}
-
-
-	public void OnPausePressed()
-	{
-		Engine.TimeScale = 0;
-	}
-
-	public void OnResumePressed()
-	{
-		Engine.TimeScale = 1;
-	}
-
 }

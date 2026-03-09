@@ -30,7 +30,7 @@ public partial class PauseMenu : Control
 	public void Pause()
 	{
 
-		gameRunner.OnPausePressed();
+		Engine.TimeScale = 0;
 
 		GetTree().Paused = true;
 		Visible = true;
@@ -40,7 +40,7 @@ public partial class PauseMenu : Control
 	public void Resume()
 	{
 
-		gameRunner.OnResumePressed();
+		Engine.TimeScale = 1;
 
 		GD.Print("resume called");
 		GetTree().Paused = false;
