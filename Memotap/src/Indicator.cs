@@ -27,21 +27,10 @@ public partial class Indicator : TextureRect
 	{
 	}
 
-    public void SetActive()
-    {
-        SetState(TileState.Active);
-        UpDateVisual();
-    }
-
-    public void SetInactive()
-    {
-        SetState(TileState.Inactive);
-        UpDateVisual();
-    }
-
 	public void SetState(TileState newState)
 	{
 		CurrentState = newState;
+		UpDateVisual();
 	}
 
 	public void UpDateVisual()

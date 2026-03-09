@@ -56,7 +56,6 @@ offset_left = 906.0
 offset_top = 200.0
 offset_right = 1006.0
 offset_bottom = 300.0
-scale = Vector2(2, 2)
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
 offset_left = 900.0

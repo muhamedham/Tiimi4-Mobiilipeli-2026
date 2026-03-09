@@ -35,6 +35,8 @@ public partial class GameRunner : Node
 		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
 
 
+
+
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		await ShowButtons();
@@ -53,7 +55,7 @@ public partial class GameRunner : Node
 			GameOver();
 		}
 
-		if (_lives > -1) _hearts[_lives].SetInactive();
+		if (_lives > -1) _hearts[_lives].SetState(Indicator.TileState.Inactive);
 
 		//show the curent level buttons again.
 		await ShowButtons();
@@ -101,7 +103,9 @@ public partial class GameRunner : Node
 
 	public async Task ShowButtons()
 	{
-		goStopTexture.SetActive();
+		//goStopTexture.SetSize();
+
+		goStopTexture.SetState(Indicator.TileState.Active);
 
 		//Disable all buttons
 		for (int i = 0; i < _buttons.Count; i++)
@@ -127,7 +131,11 @@ public partial class GameRunner : Node
 			_buttons[i].ChangeDisable();
 		}
 
-		goStopTexture.SetInactive();
+		
+		goStopTexture.SetState(Indicator.TileState.Inactive);
+
+		//goStopTexture.SetSize();
+
 	}
 
 	private void GameOver()

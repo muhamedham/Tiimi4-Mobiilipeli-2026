@@ -47,14 +47,14 @@ public partial class TileButton : Godot.TextureButton
 		{
 			SetState(TileState.Right);
 			UpDateVisual();
-			await StartResetTimer();
+			StartResetTimer();
 			gameRunner.CorrectPressed();
 
 		} else
 		{
 			SetState(TileState.Wrong);
 			UpDateVisual();
-			await StartResetTimer();
+			StartResetTimer();
 			gameRunner.WrongPressed();
 		}
 
@@ -81,7 +81,7 @@ public partial class TileButton : Godot.TextureButton
 		}
 	}
 
-	public async Task StartResetTimer()
+	public async void StartResetTimer()
 	{
 		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
 		Reset();
