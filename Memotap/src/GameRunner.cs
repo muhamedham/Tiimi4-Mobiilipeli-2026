@@ -132,4 +132,15 @@ public partial class GameRunner : Node
 
 	}
 
+
+	public void OnPausePressed()
+	{
+		Engine.TimeScale = 0;
+	}
+
+	public void OnResumePressed()
+	{
+		Engine.TimeScale = 1;
+	}
+
 }
