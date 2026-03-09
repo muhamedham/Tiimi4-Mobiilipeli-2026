@@ -11,5 +11,5 @@ offset_bottom = 100.0
 texture = ExtResource("1_y0xxx")
 expand_mode = 1
 script = ExtResource("2_dxq8i")
-DefaultTexture = ExtResource("1_y0xxx")
-UsedTexture = ExtResource("3_s5wic")
+Activetexture = ExtResource("1_y0xxx")
+InactiveTexture = ExtResource("3_s5wic")

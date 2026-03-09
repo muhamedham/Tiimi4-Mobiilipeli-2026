@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public partial class GameRunner : Node
 {
+	GoStopTexture goStopTexture;
 
 	[ExportGroup("Arrays")]
 	[Export] private Array<TileButton> _buttons = null;
@@ -31,6 +32,9 @@ public partial class GameRunner : Node
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
 	{
+		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
+
+
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		await ShowButtons();
@@ -49,7 +53,7 @@ public partial class GameRunner : Node
 			GameOver();
 		}
 
-		if (_lives > -1) _hearts[_lives].UpDateVisual();
+		if (_lives > -1) _hearts[_lives].SetInactive();
 
 		//show the curent level buttons again.
 		await ShowButtons();
@@ -97,6 +101,7 @@ public partial class GameRunner : Node
 
 	public async Task ShowButtons()
 	{
+		goStopTexture.SetActive();
 
 		//Disable all buttons
 		for (int i = 0; i < _buttons.Count; i++)
@@ -121,6 +126,8 @@ public partial class GameRunner : Node
 		{
 			_buttons[i].ChangeDisable();
 		}
+
+		goStopTexture.SetInactive();
 	}
 
 	private void GameOver()

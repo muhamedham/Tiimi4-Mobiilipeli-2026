@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=10 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="7_kiw3p"]
+[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -21,33 +22,6 @@ offset_left = 357.0
 offset_top = 153.0
 offset_right = 2446.6904
 offset_bottom = 2564.4846
-
-[node name="Button" parent="Field" index="0" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button2" parent="Field" index="1" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button3" parent="Field" index="2" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button4" parent="Field" index="3" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button5" parent="Field" index="4" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button6" parent="Field" index="5" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button7" parent="Field" index="6" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button8" parent="Field" index="7" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
-
-[node name="Button9" parent="Field" index="8" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../GameRunner")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
@@ -76,6 +50,13 @@ offset_left = 323.0
 offset_top = 0.0
 offset_right = -270.0
 offset_bottom = 0.0
+
+[node name="GoStopTexture" parent="GameUI" instance=ExtResource("9_g4kob")]
+offset_left = 906.0
+offset_top = 200.0
+offset_right = 1006.0
+offset_bottom = 300.0
+scale = Vector2(2, 2)
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
 offset_left = 900.0

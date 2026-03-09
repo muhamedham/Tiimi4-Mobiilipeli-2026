@@ -14,7 +14,7 @@ public partial class TileButton : Godot.TextureButton
 
 
 
-	[Export] public GameRunner gameRunner;
+	GameRunner gameRunner;
 
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D DefaultTexture;
@@ -32,6 +32,7 @@ public partial class TileButton : Godot.TextureButton
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		gameRunner = GetNode<GameRunner>("/root/Game/GameRunner");
 		// default buttons to wrong if they are pressed.
 		SetState(TileState.Wrong);
 		Pressed += OnPressed;

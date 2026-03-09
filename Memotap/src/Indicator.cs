@@ -1,25 +1,24 @@
 using Godot;
 using System;
 
-public partial class HeartButton : Sprite2D
+public partial class Indicator : TextureRect
 {
 
 		public enum TileState
 	{
-		Default,
-		Used,
+		Active,
+		Inactive,
 	}
 
-	private TileState CurrentState = TileState.Default;
+	private TileState CurrentState = TileState.Active;
 
 	[ExportGroup("My Textures")]
-	[Export] public Texture2D DefaultTexture;
-	[Export] public Texture2D UsedTexture;
+	[Export] public Texture2D Activetexture;
+	[Export] public Texture2D InactiveTexture;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		SetState(TileState.Used);
 
 	}
 
@@ -27,6 +26,18 @@ public partial class HeartButton : Sprite2D
 	public override void _Process(double delta)
 	{
 	}
+
+    public void SetActive()
+    {
+        SetState(TileState.Active);
+        UpDateVisual();
+    }
+
+    public void SetInactive()
+    {
+        SetState(TileState.Inactive);
+        UpDateVisual();
+    }
 
 	public void SetState(TileState newState)
 	{
@@ -38,11 +49,11 @@ public partial class HeartButton : Sprite2D
 		GD.Print("UpdateVisual Callded.");
 		switch (CurrentState)
 		{
-			case TileState.Default:
-				Texture = DefaultTexture;
+			case TileState.Active:
+				Texture = Activetexture;
 				break;
-			case TileState.Used:
-				Texture = UsedTexture;
+			case TileState.Inactive:
+				Texture = InactiveTexture;
 				break;
 		}
 	}
