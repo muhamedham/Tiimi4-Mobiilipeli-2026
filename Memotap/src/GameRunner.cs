@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 using Godot.Collections;
-using System.Threading.Tasks;
+
 
 public partial class GameRunner : Node
 {
@@ -34,12 +34,9 @@ public partial class GameRunner : Node
 	{
 		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
 
-
-
-
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
-		await ShowButtons();
+		ShowButtons();
 	}
 
 
@@ -58,7 +55,8 @@ public partial class GameRunner : Node
 		if (_lives > -1) _hearts[_lives].SetState(Indicator.TileState.Inactive);
 
 		//show the curent level buttons again.
-		await ShowButtons();
+		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
+		ShowButtons();
 		_rndButtons[_index].SetIsCorrect(true);
 	}
 
@@ -78,7 +76,7 @@ public partial class GameRunner : Node
 				_level ++;
 				PickButtons();
 				await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
-				await ShowButtons();
+				ShowButtons();
 			}
 
 		_rndButtons[_index].SetIsCorrect(true);
@@ -101,7 +99,7 @@ public partial class GameRunner : Node
 		_rndButtons[0].SetIsCorrect(true);
 	}
 
-	public async Task ShowButtons()
+	public async void ShowButtons()
 	{
 		//goStopTexture.SetSize();
 
@@ -131,7 +129,7 @@ public partial class GameRunner : Node
 			_buttons[i].ChangeDisable();
 		}
 
-		
+
 		goStopTexture.SetState(Indicator.TileState.Inactive);
 
 		//goStopTexture.SetSize();
