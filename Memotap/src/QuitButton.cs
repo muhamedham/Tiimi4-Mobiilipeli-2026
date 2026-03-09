@@ -4,13 +4,17 @@ using System;
 public partial class QuitButton : Button
 {
 	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		ButtonUp += OnRelease;
 	}
 
+
+
 	public void OnRelease()
 	{
+		GD.Print("Quit called");
 		GetTree().Quit();
 	}
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckofub57x0rws"]
 
 [ext_resource type="Texture2D" uid="uid://dyq0qwf0qigro" path="res://art/heart_button.png" id="1_7ewem"]
-[ext_resource type="Script" uid="uid://bpx16chxhg805" path="res://src/HeartButton.cs" id="2_mdjqs"]
+[ext_resource type="Script" uid="uid://3ixtnlnk4syc" path="res://src/HeartButton.cs" id="2_mdjqs"]
 [ext_resource type="Texture2D" uid="uid://cw8larcqtpq14" path="res://art/heart_button_gray_scale.png" id="3_dgfir"]
 
 [node name="HeartButton" type="Sprite2D"]

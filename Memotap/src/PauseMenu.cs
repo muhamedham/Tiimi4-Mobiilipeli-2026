@@ -46,6 +46,8 @@ public partial class PauseMenu : Control
 
 	public void Quit()
 	{
+		//mystistä
+		GD.Print("quit FUNC Called");
 		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 	}
 }

@@ -31,17 +31,26 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 gameRunner = NodePath("")
 
+[node name="Button4" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+gameRunner = NodePath("")
+
 [node name="Button5" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 gameRunner = NodePath("")
+<<<<<<< HEAD
 
 [node name="Button4" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 gameRunner = NodePath("")
+=======
+>>>>>>> 3c7aeb3ec6cd2383dea4c6a212562066e86c1e03
 
 [node name="Button6" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
 layout_mode = 2
