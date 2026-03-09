@@ -9,7 +9,7 @@ public partial class GameRunner : Node
 
 	[ExportGroup("Arrays")]
 	[Export] private Array<TileButton> _buttons = null;
-	[Export] private Array<HeartButton> _hearts = null;
+	[Export] private Array<HeartTexture> _hearts = null;
 
 	private Array<TileButton> _rndButtons = new();
 

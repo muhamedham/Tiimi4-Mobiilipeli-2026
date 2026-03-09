@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3kfrsxgrfe6b"]
+
+[ext_resource type="Texture2D" uid="uid://dyq0qwf0qigro" path="res://art/heart_button.png" id="1_y0xxx"]
+[ext_resource type="Script" uid="uid://736hcc0qakhm" path="res://src/HeartTexture.cs" id="2_dxq8i"]
+[ext_resource type="Texture2D" uid="uid://cw8larcqtpq14" path="res://art/heart_button_gray_scale.png" id="3_s5wic"]
+
+[node name="HeartTexture" type="TextureRect"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("1_y0xxx")
+expand_mode = 1
+script = ExtResource("2_dxq8i")
+DefaultTexture = ExtResource("1_y0xxx")
+UsedTexture = ExtResource("3_s5wic")

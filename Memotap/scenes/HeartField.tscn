@@ -1,21 +1,23 @@
 [gd_scene load_steps=2 format=3 uid="uid://bynqth46u1w47"]
 
-[ext_resource type="PackedScene" uid="uid://ckofub57x0rws" path="res://scenes/HeartButton.tscn" id="1_12mfi"]
+[ext_resource type="PackedScene" uid="uid://c3kfrsxgrfe6b" path="res://scenes/HeartTexture.tscn" id="1_12mfi"]
 
-[node name="HeartField" type="GridContainer"]
-offset_right = 18.258682
-offset_bottom = 8.656988
-scale = Vector2(15.554244, 5.5446534)
-columns = 3
+[node name="HeartField" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="HeartButton" parent="." instance=ExtResource("1_12mfi")]
-position = Vector2(2.82881, 3.0660164)
-scale = Vector2(0.0057625705, 0.0057625705)
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 100.0
 
-[node name="HeartButton2" parent="." instance=ExtResource("1_12mfi")]
-position = Vector2(8.293556, 3.0660167)
-scale = Vector2(0.005777481, 0.005777481)
+[node name="Heart" parent="Container" instance=ExtResource("1_12mfi")]
+layout_mode = 2
 
-[node name="HeartButton3" parent="." instance=ExtResource("1_12mfi")]
-position = Vector2(14.401215, 3.6070786)
-scale = Vector2(0.007073071, 0.007073071)
+[node name="Heart2" parent="Container" instance=ExtResource("1_12mfi")]
+layout_mode = 2
+
+[node name="Heart3" parent="Container" instance=ExtResource("1_12mfi")]
+layout_mode = 2
