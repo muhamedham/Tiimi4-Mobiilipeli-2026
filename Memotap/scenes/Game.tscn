@@ -5,9 +5,6 @@
 [ext_resource type="Script" uid="uid://cr5vrsawk7w2l" path="res://src/GameUI.cs" id="3_aug50"]
 [ext_resource type="Script" uid="uid://d342jyf1wjeiw" path="res://src/PauseButton.cs" id="3_cpr0p"]
 [ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/pause.png" id="3_s0nni"]
-[ext_resource type="PackedScene" uid="uid://dqqdqhnc1eatc" path="res://scenes/HeartField.tscn" id="5_s0nni"]
-[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="6_aug50"]
-[ext_resource type="Texture2D" uid="uid://cqklgftwhmqml" path="res://art/pause.png" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="7_kiw3p"]
@@ -15,56 +12,6 @@
 [node name="Game" type="Node2D"]
 process_mode = 1
 
-[node name="MenuButton" type="MenuButton" parent="CanvasLayer"]
-offset_right = 684.0
-offset_bottom = 686.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("3_s0nni")
-icon_alignment = 1
-script = ExtResource("3_cpr0p")
-
-[node name="Field" parent="CanvasLayer" instance=ExtResource("1_wbfu4")]
-anchors_preset = -1
-anchor_left = 0.02
-anchor_right = 1.02
-offset_left = 333.96
-offset_top = 118.0
-offset_right = 4106.501
-offset_bottom = 3604.8887
-
-[node name="Button" parent="CanvasLayer/Field" index="0" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button2" parent="CanvasLayer/Field" index="1" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button3" parent="CanvasLayer/Field" index="2" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button5" parent="CanvasLayer/Field" index="3" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button4" parent="CanvasLayer/Field" index="4" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button6" parent="CanvasLayer/Field" index="5" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button7" parent="CanvasLayer/Field" index="6" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button8" parent="CanvasLayer/Field" index="7" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="Button9" parent="CanvasLayer/Field" index="8" node_paths=PackedStringArray("gameRunner")]
-gameRunner = NodePath("../../../GameRunner")
-
-[node name="HeartContainer" parent="CanvasLayer" instance=ExtResource("5_s0nni")]
-offset_left = 883.0
-offset_top = 22.0
-offset_right = -119.0
-offset_bottom = -346.224
-scale = Vector2(0.3, 0.3)
 [node name="Field" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
 anchors_preset = -1
@@ -111,13 +58,6 @@ mouse_filter = 2
 texture = ExtResource("2_78awf")
 expand_mode = 1
 
-[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts")]
-script = ExtResource("6_aug50")
-_buttons = [NodePath("../CanvasLayer/Field/Button"), NodePath("../CanvasLayer/Field/Button2"), NodePath("../CanvasLayer/Field/Button3"), NodePath("../CanvasLayer/Field/Button5"), NodePath("../CanvasLayer/Field/Button4"), NodePath("../CanvasLayer/Field/Button6"), NodePath("../CanvasLayer/Field/Button7"), NodePath("../CanvasLayer/Field/Button8"), NodePath("../CanvasLayer/Field/Button9")]
-_hearts = [NodePath("../CanvasLayer/HeartContainer/HeartButton"), NodePath("../CanvasLayer/HeartContainer/HeartButton2"), NodePath("../CanvasLayer/HeartContainer/HeartButton3")]
-
-[editable path="CanvasLayer/Field"]
-[editable path="CanvasLayer/HeartContainer"]
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("3_aug50")
 
@@ -146,7 +86,7 @@ offset_bottom = 29.656988
 [node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts")]
 script = ExtResource("7_kiw3p")
 _buttons = [NodePath("../Field/Button"), NodePath("../Field/Button2"), NodePath("../Field/Button3"), NodePath("../Field/Button4"), NodePath("../Field/Button5"), NodePath("../Field/Button6"), NodePath("../Field/Button7"), NodePath("../Field/Button8"), NodePath("../Field/Button9")]
-_hearts = [NodePath("../HeartField/HeartButton3"), NodePath("../HeartField/HeartButton2"), NodePath("../HeartField/HeartButton")]
+_hearts = [NodePath("../HeartField/HeartButton"), NodePath("../HeartField/HeartButton2"), NodePath("../HeartField/HeartButton3")]
 
 [editable path="Field"]
 [editable path="HeartField"]
