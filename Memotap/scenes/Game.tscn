@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="7_kiw3p"]
-[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
+[ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/scoreboard.tscn" id="8_qy1jj"]
+[ext_resource type="PackedScene" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -36,8 +37,10 @@ expand_mode = 1
 script = ExtResource("3_aug50")
 
 [node name="PauseButton" type="TextureButton" parent="GameUI"]
-offset_right = 1088.0
-offset_bottom = 1928.0
+offset_left = 18.999998
+offset_top = 19.999998
+offset_right = 1107.0
+offset_bottom = 1948.0
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("3_s0nni")
 script = ExtResource("3_cpr0p")
@@ -57,6 +60,16 @@ offset_top = 200.0
 offset_right = 1006.0
 offset_bottom = 300.0
 
+[node name="Score" parent="GameUI" instance=ExtResource("8_qy1jj")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.0
+offset_top = 19.0
+offset_right = 121.0
+offset_bottom = 107.0
+grow_horizontal = 2
+
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
 offset_left = 900.0
 offset_top = 23.0
@@ -64,10 +77,23 @@ offset_right = 918.25867
 offset_bottom = 38.714287
 scale = Vector2(0.7, 0.7)
 
-[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts")]
+[node name="Heart" parent="HeartField/Container" index="0"]
+Activetexture = null
+InactiveTexture = null
+
+[node name="Heart2" parent="HeartField/Container" index="1"]
+Activetexture = null
+InactiveTexture = null
+
+[node name="Heart3" parent="HeartField/Container" index="2"]
+Activetexture = null
+InactiveTexture = null
+
+[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts", "_score")]
 script = ExtResource("7_kiw3p")
 _buttons = [NodePath("../Field/Button"), NodePath("../Field/Button2"), NodePath("../Field/Button3"), NodePath("../Field/Button4"), NodePath("../Field/Button5"), NodePath("../Field/Button6"), NodePath("../Field/Button7"), NodePath("../Field/Button8"), NodePath("../Field/Button9")]
 _hearts = [NodePath("../HeartField/Container/Heart3"), NodePath("../HeartField/Container/Heart2"), NodePath("../HeartField/Container/Heart")]
+_score = NodePath("../GameUI/Score")
 
 [editable path="Field"]
 [editable path="HeartField"]

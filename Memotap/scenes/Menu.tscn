@@ -57,9 +57,9 @@ texture = ExtResource("4_jmdev")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = 322.0
-offset_top = -176.0
-offset_right = 1346.0
-offset_bottom = 1360.0
+offset_left = 274.0
+offset_top = 7.0
+offset_right = 1298.0
+offset_bottom = 535.3333
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_b6cxs")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://x5y2xbi82fjm"]
+
+[ext_resource type="Script" uid="uid://dwlke0fj3t84k" path="res://src/Score.cs" id="1_ucmtr"]
+
+[node name="Score" type="Label"]
+offset_left = -116.0
+offset_top = 10.0
+offset_right = 118.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "LEVEL 1"
+script = ExtResource("1_ucmtr")

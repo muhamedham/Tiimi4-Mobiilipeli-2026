@@ -12,16 +12,18 @@ public partial class GameRunner : Node
 	[Export] private Array<TileButton> _buttons = null;
 	[Export] private Array<HeartTexture> _hearts = null;
 
+	// Tasolaskuri- komponentti
+	[Export] private Score _score = null;
+
 	private Array<TileButton> _rndButtons = new();
 
 	//tracks how far we are into the current level
 	private int _index = 0;
 
 	// current level of the game (how many buttons to show)
-	private int _level = 3;
+	private int _level = 1;
 
 	private int _lives = 3;
-
 
 	[ExportGroup("Timers")]
 	[Export] public float _flashDuration = 0.75f;
@@ -32,11 +34,21 @@ public partial class GameRunner : Node
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
 	{
+
+		/*
+		Ready metodissa voisi määritellä kaikki aiemmin määritellyt
+		'heart', 'score' ja 'button'.
+
+		jokainen määriteltäisiin for-loopissa Getnode- metodilla kunnes ei enään löydy elementtiä
+
+		*/
 		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
 
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		ShowButtons();
+
+		_score.SetText(_level);
 	}
 
 
@@ -74,6 +86,7 @@ public partial class GameRunner : Node
 			{
 				_index = 0;
 				_level ++;
+				_score.SetText(_level);
 				PickButtons();
 				await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 				ShowButtons();
