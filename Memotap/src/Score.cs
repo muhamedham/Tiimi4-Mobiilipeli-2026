@@ -6,6 +6,6 @@ public partial class Score : Godot.Label
 	//
 	public void SetText(int value)
 	{
-		Text = "LEVEL" + value.ToString();
+		Text = "LEVEL " + value.ToString();
 	}
 }

@@ -1,23 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bynqth46u1w47"]
+[gd_scene load_steps=3 format=3 uid="uid://bynqth46u1w47"]
 
-[ext_resource type="PackedScene" uid="uid://c3kfrsxgrfe6b" path="res://scenes/HeartTexture.tscn" id="1_12mfi"]
+[ext_resource type="Script" uid="uid://j2scu5jgsjp8" path="res://src/HeartField.cs" id="1_12mfi"]
+[ext_resource type="PackedScene" uid="uid://c3kfrsxgrfe6b" path="res://scenes/HeartTexture.tscn" id="2_y0txn"]
 
-[node name="HeartField" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Container" type="HBoxContainer" parent="."]
-layout_mode = 0
+[node name="Container" type="HBoxContainer"]
 offset_right = 300.0
 offset_bottom = 100.0
-
-[node name="Heart" parent="Container" instance=ExtResource("1_12mfi")]
-layout_mode = 2
-
-[node name="Heart2" parent="Container" instance=ExtResource("1_12mfi")]
-layout_mode = 2
-
-[node name="Heart3" parent="Container" instance=ExtResource("1_12mfi")]
-layout_mode = 2
+script = ExtResource("1_12mfi")
+_heartScene = ExtResource("2_y0txn")

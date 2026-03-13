@@ -1,68 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6q086eyuuc04"]
+[gd_scene load_steps=3 format=3 uid="uid://b6q086eyuuc04"]
 
 [ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/button.tscn" id="1_cfc18"]
+[ext_resource type="Script" uid="uid://b6648ld30kfui" path="res://src/TileField.cs" id="1_hrcbo"]
 
-[node name="Field" type="GridContainer"]
+[node name="TileField" type="GridContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 451.7157
-offset_bottom = 1035.9669
+offset_right = 808.0969
+offset_bottom = 1494.4727
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12346328, 0.11995484)
 columns = 3
-
-[node name="Button" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button2" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button3" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button4" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button5" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button6" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button7" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button8" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
-
-[node name="Button9" parent="." node_paths=PackedStringArray("gameRunner") instance=ExtResource("1_cfc18")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-gameRunner = NodePath("")
+script = ExtResource("1_hrcbo")
+_buttonScene = ExtResource("1_cfc18")

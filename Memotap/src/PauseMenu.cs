@@ -4,8 +4,6 @@ using System;
 public partial class PauseMenu : Control
 {
 	// Called when the node enters the scene tree for the first time.
-
-	GameRunner gameRunner;
 	public override void _Ready()
 	{
 		Visible = false;
@@ -14,7 +12,7 @@ public partial class PauseMenu : Control
 		RestartButton restartButton = GetNode<RestartButton>("PanelContainer/VBoxContainer/RestartButton");
 		BackButton backButton = GetNode<BackButton>("PanelContainer/VBoxContainer/BackButton");
 
-		gameRunner = GetNode<GameRunner>("/root/Game/GameRunner");
+
 
 		resumeButton.ResumeRequest += Resume;
 		restartButton.RestartRequest += Restart;

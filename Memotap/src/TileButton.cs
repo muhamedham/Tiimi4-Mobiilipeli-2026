@@ -11,10 +11,6 @@ public partial class TileButton : Godot.TextureButton
 		Right
 	}
 
-
-
-	GameRunner gameRunner;
-
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D DefaultTexture;
 	[Export] public Texture2D RightTexture;
@@ -25,16 +21,32 @@ public partial class TileButton : Godot.TextureButton
 	[ExportGroup("Timer")]
 	[Export] public float TimeLimit = 0.5f;
 
+	[Signal] public delegate void CorrectPressEventHandler();
+	[Signal] public delegate void WrongPressEventHandler();
+
 
 	private bool CorrectBtn = false;
+
+	public TileButton()
+	{
+
+	}
+
+    public override void _EnterTree()
+    {
+        Pressed += OnPressed;
+    }
+
+    public override void _ExitTree()
+    {
+        Pressed -= OnPressed;
+    }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		gameRunner = GetNode<GameRunner>("/root/Game/GameRunner");
 		// default buttons to wrong if they are pressed.
 		SetState(TileState.Wrong);
-		Pressed += OnPressed;
 	}
 
 	private async void OnPressed()
@@ -47,14 +59,14 @@ public partial class TileButton : Godot.TextureButton
 			SetState(TileState.Right);
 			UpDateVisual();
 			StartResetTimer();
-			gameRunner.CorrectPressed();
+			EmitSignal(SignalName.CorrectPress);
 
 		} else
 		{
 			SetState(TileState.Wrong);
 			UpDateVisual();
 			StartResetTimer();
-			gameRunner.WrongPressed();
+			EmitSignal(SignalName.WrongPress);
 		}
 
 	}

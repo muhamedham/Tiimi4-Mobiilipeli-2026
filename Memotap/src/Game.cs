@@ -4,16 +4,20 @@ using System;
 using Godot.Collections;
 
 
-public partial class GameRunner : Node
+public partial class Game : Node2D
 {
 	GoStopTexture goStopTexture;
+	HeartField heartField;
+	TileField tileField;
+	Score _score;
 
-	[ExportGroup("Arrays")]
-	[Export] private Array<TileButton> _buttons = null;
-	[Export] private Array<HeartTexture> _hearts = null;
+	//[Export] private Array<TileButton> _buttons = null;
+
+	private Array <TileButton> _buttons = new();
+	private Array <HeartTexture> _hearts = new();
 
 	// Tasolaskuri- komponentti
-	[Export] private Score _score = null;
+
 
 	private Array<TileButton> _rndButtons = new();
 
@@ -21,9 +25,21 @@ public partial class GameRunner : Node
 	private int _index = 0;
 
 	// current level of the game (how many buttons to show)
-	private int _level = 1;
+	[Export] private int _level = 1;
 
-	private int _lives = 3;
+	[Export] private int _maxHealth = 3;
+	[Export] public int _btnCount = 9;
+	private int _lives;
+
+	public int Lives
+	{
+		get {return _lives; }
+		set
+		{
+			_lives = Mathf.Clamp(value, 0, _maxHealth);
+		}
+	}
+
 
 	[ExportGroup("Timers")]
 	[Export] public float _flashDuration = 0.75f;
@@ -32,8 +48,10 @@ public partial class GameRunner : Node
 
 
 	// Called when the node enters the scene tree for the first time.
-	public override async void _Ready()
-	{
+    public async override void _EnterTree()
+    {
+
+		Lives = _maxHealth;
 
 		/*
 		Ready metodissa voisi määritellä kaikki aiemmin määritellyt
@@ -42,24 +60,50 @@ public partial class GameRunner : Node
 		jokainen määriteltäisiin for-loopissa Getnode- metodilla kunnes ei enään löydy elementtiä
 
 		*/
+
+		_score = GetNode<Score>("/root/Game/GameUI/Score");
+
 		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
+
+		heartField = GetNode<HeartField>("/root/Game/HeartField");
+		_hearts = heartField.Setup(this);
+
+
+		tileField = GetNode<TileField>("/root/Game/TileField");
+		_buttons = tileField.Setup(this);
+
+		foreach (var item in _buttons)
+		{
+			item.CorrectPress += CorrectPressed;
+			item.WrongPress += WrongPressed;
+		}
+
+		_score.SetText(_level);
+
 
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		ShowButtons();
+    }
 
-		_score.SetText(_level);
-	}
+    public override void _ExitTree()
+    {
+		foreach (var item in _buttons)
+		{
+			item.CorrectPress -= CorrectPressed;
+			item.WrongPress -= WrongPressed;
+		}
+    }
 
 
-
-	//TODO do something when the wrong button has been pressed
+	//TODO: do something when the wrong button has been pressed
 	public async void WrongPressed()
 	{
+		goStopTexture.SetState(Indicator.TileState.Active);
 		_lives --;
 		_index = 0;
 
-		if (_lives == -1)
+		if (Lives == -1)
 		{
 			GameOver();
 		}
@@ -84,6 +128,7 @@ public partial class GameRunner : Node
 		// go into the next level
 		if (_index >= _level)
 			{
+				goStopTexture.SetState(Indicator.TileState.Active);
 				_index = 0;
 				_level ++;
 				_score.SetText(_level);
@@ -115,8 +160,6 @@ public partial class GameRunner : Node
 	public async void ShowButtons()
 	{
 		//goStopTexture.SetSize();
-
-		goStopTexture.SetState(Indicator.TileState.Active);
 
 		//Disable all buttons
 		for (int i = 0; i < _buttons.Count; i++)
@@ -151,8 +194,7 @@ public partial class GameRunner : Node
 
 	private void GameOver()
 	{
-		//TODO: do something else when the game is over
-			_lives =3;
+		//TODO: do something when the game is over
 			_index = 0;
 			GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 

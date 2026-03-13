@@ -1,5 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
 
+[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
 [ext_resource type="Script" uid="uid://cr5vrsawk7w2l" path="res://src/GameUI.cs" id="3_aug50"]
@@ -7,22 +8,26 @@
 [ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/pause.png" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
-[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/GameRunner.cs" id="7_kiw3p"]
-[ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/scoreboard.tscn" id="8_qy1jj"]
-[ext_resource type="PackedScene" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
+[ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/Score.tscn" id="8_qy1jj"]
+[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
+script = ExtResource("1_qy1jj")
+_level = 3
+_maxHealth = 5
 
-[node name="Field" parent="." instance=ExtResource("1_wbfu4")]
+[node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
 anchors_preset = -1
 anchor_left = 0.02
-anchor_right = 1.02
+anchor_right = 0.02
+anchor_bottom = 0.0
 offset_left = 357.0
 offset_top = 153.0
-offset_right = 2446.6904
-offset_bottom = 2564.4846
+offset_right = 3847.9165
+offset_bottom = 3929.4204
+scale = Vector2(0.11147484, 0.107637346)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
@@ -46,6 +51,7 @@ texture_normal = ExtResource("3_s0nni")
 script = ExtResource("3_cpr0p")
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("6_kiw3p")]
+visible = false
 anchors_preset = 14
 anchor_left = 0.0
 anchor_right = 1.0
@@ -71,29 +77,11 @@ offset_bottom = 107.0
 grow_horizontal = 2
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
-offset_left = 900.0
-offset_top = 23.0
-offset_right = 918.25867
-offset_bottom = 38.714287
+offset_left = 716.0
+offset_top = 24.0
+offset_right = 734.25867
+offset_bottom = 39.714287
 scale = Vector2(0.7, 0.7)
 
-[node name="Heart" parent="HeartField/Container" index="0"]
-Activetexture = null
-InactiveTexture = null
-
-[node name="Heart2" parent="HeartField/Container" index="1"]
-Activetexture = null
-InactiveTexture = null
-
-[node name="Heart3" parent="HeartField/Container" index="2"]
-Activetexture = null
-InactiveTexture = null
-
-[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_buttons", "_hearts", "_score")]
-script = ExtResource("7_kiw3p")
-_buttons = [NodePath("../Field/Button"), NodePath("../Field/Button2"), NodePath("../Field/Button3"), NodePath("../Field/Button4"), NodePath("../Field/Button5"), NodePath("../Field/Button6"), NodePath("../Field/Button7"), NodePath("../Field/Button8"), NodePath("../Field/Button9")]
-_hearts = [NodePath("../HeartField/Container/Heart3"), NodePath("../HeartField/Container/Heart2"), NodePath("../HeartField/Container/Heart")]
-_score = NodePath("../GameUI/Score")
-
-[editable path="Field"]
+[editable path="TileField"]
 [editable path="HeartField"]
