@@ -101,10 +101,7 @@ public partial class Game : Node2D
 			button.CorrectPress += CorrectPressed;
 			button.WrongPress += WrongPressed;
 		}
-
-
-
-
+		
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		ShowButtons();
