@@ -14,8 +14,7 @@
 [node name="Game" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_qy1jj")
-_level = 3
-_maxHealth = 5
+_maxHealth = 4
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
@@ -31,9 +30,16 @@ scale = Vector2(0.11147484, 0.107637346)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+offset_left = -3.0000002
+offset_top = 3.0
+offset_right = 37.104687
+offset_bottom = 42.816048
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(28.656662, 16.308685)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("2_78awf")
 expand_mode = 1
@@ -42,16 +48,18 @@ expand_mode = 1
 script = ExtResource("3_aug50")
 
 [node name="PauseButton" type="TextureButton" parent="GameUI"]
+anchors_preset = -1
+anchor_right = 0.11100001
+anchor_bottom = 0.15400001
 offset_left = 18.999998
 offset_top = 19.999998
-offset_right = 1107.0
-offset_bottom = 1948.0
+offset_right = 979.128
+offset_bottom = 1848.208
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("3_s0nni")
 script = ExtResource("3_cpr0p")
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("6_kiw3p")]
-visible = false
 anchors_preset = 14
 anchor_left = 0.0
 anchor_right = 1.0
@@ -61,26 +69,33 @@ offset_right = -270.0
 offset_bottom = 0.0
 
 [node name="GoStopTexture" parent="GameUI" instance=ExtResource("9_g4kob")]
+anchors_preset = -1
+anchor_top = 0.30900002
+anchor_right = 1.0
+anchor_bottom = 0.61700004
 offset_left = 906.0
-offset_top = 200.0
-offset_right = 1006.0
-offset_bottom = 300.0
+offset_top = -0.23200989
+offset_right = -146.0
+offset_bottom = -99.81604
 
 [node name="Score" parent="GameUI" instance=ExtResource("8_qy1jj")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -113.0
-offset_top = 19.0
-offset_right = 121.0
-offset_bottom = 107.0
+anchors_preset = -1
+anchor_top = 0.062000003
+anchor_right = 0.98
+anchor_bottom = 0.165
+offset_left = 463.0
+offset_top = -21.176003
+offset_right = -431.95996
+offset_bottom = 0.0799942
 grow_horizontal = 2
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 716.0
 offset_top = 24.0
-offset_right = 734.25867
-offset_bottom = 39.714287
+offset_right = 1286.0
+offset_bottom = 136.85715
 scale = Vector2(0.7, 0.7)
 
 [editable path="TileField"]

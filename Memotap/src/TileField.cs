@@ -6,6 +6,7 @@ using Godot.Collections;
 public partial class TileField : GridContainer
 {
 	[Export] private PackedScene _buttonScene = null;
+
 	private Array<TileButton> _buttons = new();
 
 	public Array<TileButton> Setup(Game gameRunner)

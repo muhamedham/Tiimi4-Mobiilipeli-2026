@@ -6,10 +6,10 @@ using Godot.Collections;
 
 public partial class Game : Node2D
 {
-	GoStopTexture goStopTexture;
-	HeartField heartField;
-	TileField tileField;
-	Score _score;
+	GoStopTexture _goStopTexture = null;
+	HeartField _heartField = null;
+	TileField _tileField = null;
+	Score _score =null;
 
 	//[Export] private Array<TileButton> _buttons = null;
 
@@ -62,23 +62,47 @@ public partial class Game : Node2D
 		*/
 
 		_score = GetNode<Score>("/root/Game/GameUI/Score");
-
-		goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
-
-		heartField = GetNode<HeartField>("/root/Game/HeartField");
-		_hearts = heartField.Setup(this);
-
-
-		tileField = GetNode<TileField>("/root/Game/TileField");
-		_buttons = tileField.Setup(this);
-
-		foreach (var item in _buttons)
+		if (_score == null)
 		{
-			item.CorrectPress += CorrectPressed;
-			item.WrongPress += WrongPressed;
+			GD.PushError("_score node Not found");
+		} else
+		{
+			_score.SetText(_level);
 		}
 
-		_score.SetText(_level);
+		_goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
+		if (_goStopTexture == null)
+		{
+			GD.PushError("_goStopTesxure node not found");
+		}
+
+		_heartField = GetNode<HeartField>("/root/Game/HeartField");
+		if (_heartField == null)
+		{
+			GD.PushError("_heartField node not found");
+		} else
+		{
+			_hearts = _heartField.Setup(this);
+		}
+
+
+		_tileField = GetNode<TileField>("/root/Game/TileField");
+		if (_tileField == null)
+		{
+			GD.PushError("_tileField node not found");
+		} else
+		{
+			_buttons = _tileField.Setup(this);
+		}
+
+		//loop through _buttons arr and start listening to each signal.
+		foreach (TileButton button in _buttons)
+		{
+			button.CorrectPress += CorrectPressed;
+			button.WrongPress += WrongPressed;
+		}
+
+
 
 
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
@@ -88,6 +112,7 @@ public partial class Game : Node2D
 
     public override void _ExitTree()
     {
+		// stop listening to the signals
 		foreach (var item in _buttons)
 		{
 			item.CorrectPress -= CorrectPressed;
@@ -99,16 +124,17 @@ public partial class Game : Node2D
 	//TODO: do something when the wrong button has been pressed
 	public async void WrongPressed()
 	{
-		goStopTexture.SetState(Indicator.TileState.Active);
-		_lives --;
+		_goStopTexture.SetState(Indicator.TileState.Active);
+		Lives--;
 		_index = 0;
 
-		if (Lives == -1)
-		{
-			GameOver();
+		if (Lives <= 0)
+		{	// wait until the end of the frame
+			CallDeferred(MethodName.GameOver);
 		}
 
-		if (_lives > -1) _hearts[_lives].SetState(Indicator.TileState.Inactive);
+		_hearts[Lives].SetState(Indicator.TileState.Inactive);
+
 
 		//show the curent level buttons again.
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
@@ -128,7 +154,7 @@ public partial class Game : Node2D
 		// go into the next level
 		if (_index >= _level)
 			{
-				goStopTexture.SetState(Indicator.TileState.Active);
+				_goStopTexture.SetState(Indicator.TileState.Active);
 				_index = 0;
 				_level ++;
 				_score.SetText(_level);
@@ -186,7 +212,7 @@ public partial class Game : Node2D
 		}
 
 
-		goStopTexture.SetState(Indicator.TileState.Inactive);
+		_goStopTexture.SetState(Indicator.TileState.Inactive);
 
 		//goStopTexture.SetSize();
 
