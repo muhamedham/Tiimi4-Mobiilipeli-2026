@@ -14,7 +14,6 @@
 [node name="Game" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_qy1jj")
-_maxHealth = 4
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
@@ -30,7 +29,6 @@ scale = Vector2(0.11147484, 0.107637346)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
-anchors_preset = -1
 offset_left = -3.0000002
 offset_top = 3.0
 offset_right = 37.104687
@@ -60,6 +58,7 @@ texture_normal = ExtResource("3_s0nni")
 script = ExtResource("3_cpr0p")
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("6_kiw3p")]
+visible = false
 anchors_preset = 14
 anchor_left = 0.0
 anchor_right = 1.0
@@ -90,6 +89,7 @@ offset_bottom = 0.0799942
 grow_horizontal = 2
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 716.0

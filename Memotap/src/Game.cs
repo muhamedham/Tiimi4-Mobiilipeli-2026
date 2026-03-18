@@ -16,6 +16,8 @@ public partial class Game : Node2D
 	private Array <TileButton> _buttons = new();
 	private Array <HeartTexture> _hearts = new();
 
+	private Array<Array<Array<int>>> _levelsArr =new();
+
 	// Tasolaskuri- komponentti
 
 
@@ -50,6 +52,8 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
     public async override void _EnterTree()
     {
+
+		_levelsArr = File.LoadFile();
 
 		Lives = _maxHealth;
 
@@ -101,7 +105,7 @@ public partial class Game : Node2D
 			button.CorrectPress += CorrectPressed;
 			button.WrongPress += WrongPressed;
 		}
-		
+
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		ShowButtons();
@@ -149,7 +153,7 @@ public partial class Game : Node2D
 		_index++;
 
 		// go into the next level
-		if (_index >= _level)
+		if (_index >= _rndButtons.Count)
 			{
 				_goStopTexture.SetState(Indicator.TileState.Active);
 				_index = 0;
@@ -165,17 +169,25 @@ public partial class Game : Node2D
 
 	private void PickButtons()
 	{
+
+
+		Array <int> jep = _levelsArr[_level -1].PickRandom();
+
+		GD.Print(jep[0], jep[1]);
+
 		//empty the array if there is something in it.
 		if (_rndButtons.Count != 0 )
 		{
 			_rndButtons.Clear();
 		}
 		//add buttons in random order to a new array
-		for (int i = 0; i < _level; i++)
+		int jepLength = jep.Count;
+		for (int i = 0; i < jepLength; i++)
 		{
-			_rndButtons.Add(_buttons.PickRandom());
+			int randomIndex = GD.RandRange(0,jep.Count-1);
+			_rndButtons.Add(_buttons[jep[randomIndex]]);
+			jep.RemoveAt(randomIndex);
 		}
-
 		// set the first button as the correct button
 		_rndButtons[0].SetIsCorrect(true);
 	}
