@@ -2,14 +2,19 @@ using Godot;
 using System;
 
 using Godot.Collections;
+using System.Reflection.Metadata;
+using System.Collections.Generic;
+using System.Linq;
 
 
 public partial class Game : Node2D
 {
-	GoStopTexture _goStopTexture = null;
-	HeartField _heartField = null;
-	TileField _tileField = null;
-	Score _score =null;
+
+	[ExportGroup("Node references")]
+	[Export] GoStopTexture _goStopTexture = null;
+	[Export] HeartField _heartField = null;
+	[Export] TileField _tileField = null;
+	[Export] Score _score =null;
 
 	//[Export] private Array<TileButton> _buttons = null;
 
@@ -45,38 +50,11 @@ public partial class Game : Node2D
 	[Export] public float _flashDuration = 0.75f;
 	[Export] public float _nextRoundDelay = 2.0f;
 
-
-
 	// Called when the node enters the scene tree for the first time.
-    public async override void _EnterTree()
-    {
+	public async override void _EnterTree()
+	{
 
 		Lives = _maxHealth;
-
-		/*
-		Ready metodissa voisi määritellä kaikki aiemmin määritellyt
-		'heart', 'score' ja 'button'.
-
-		jokainen määriteltäisiin for-loopissa Getnode- metodilla kunnes ei enään löydy elementtiä
-
-		*/
-
-		_score = GetNode<Score>("/root/Game/GameUI/Score");
-		if (_score == null)
-		{
-			GD.PushError("_score node Not found");
-		} else
-		{
-			_score.SetText(_level);
-		}
-
-		_goStopTexture = GetNode<GoStopTexture>("/root/Game/GameUI/GoStopTexture");
-		if (_goStopTexture == null)
-		{
-			GD.PushError("_goStopTesxure node not found");
-		}
-
-		_heartField = GetNode<HeartField>("/root/Game/HeartField");
 		if (_heartField == null)
 		{
 			GD.PushError("_heartField node not found");
@@ -85,8 +63,6 @@ public partial class Game : Node2D
 			_hearts = _heartField.Setup(this);
 		}
 
-
-		_tileField = GetNode<TileField>("/root/Game/TileField");
 		if (_tileField == null)
 		{
 			GD.PushError("_tileField node not found");
@@ -105,17 +81,17 @@ public partial class Game : Node2D
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 		PickButtons();
 		ShowButtons();
-    }
+	}
 
-    public override void _ExitTree()
-    {
+	public override void _ExitTree()
+	{
 		// stop listening to the signals
 		foreach (var item in _buttons)
 		{
 			item.CorrectPress -= CorrectPressed;
 			item.WrongPress -= WrongPressed;
 		}
-    }
+	}
 
 
 	//TODO: do something when the wrong button has been pressed
@@ -221,5 +197,38 @@ public partial class Game : Node2D
 			_index = 0;
 			GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 
+	}
+
+	private void ReadFiles()
+	{
+		
+	}
+
+	private string[] GetAvailableLevels()
+	{
+		var dir = DirAccess.Open("./res/levels");
+
+		if (dir == null)
+		{
+			GD.Print("could not find level directory");
+			return [];
+		}
+
+		Array <string> levels = new();
+		dir.ListDirBegin();
+
+		string fileName = dir.GetNext();
+
+		while (fileName != String.Empty)
+		{
+			if (!dir.CurrentIsDir() && fileName.EndsWith(".txt"))
+			{
+				levels.Add(fileName);
+			}
+			fileName = dir.GetNext();
+		}
+
+		dir.ListDirEnd();
+		return levels.ToArray();
 	}
 }
