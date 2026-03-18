@@ -12,10 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/SequenceLoader.cs" id="11_3xj3m"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
-_maxHealth = 4
+_goStopTexture = NodePath("GameUI/GoStopTexture")
+_heartField = NodePath("HeartField")
+_tileField = NodePath("TileField")
+_score = NodePath("GameUI/Score")
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1

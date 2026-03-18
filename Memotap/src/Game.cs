@@ -14,8 +14,7 @@ public partial class Game : Node2D
 	[Export] GoStopTexture _goStopTexture = null;
 	[Export] HeartField _heartField = null;
 	[Export] TileField _tileField = null;
-	[Export] Score _score =null;
-
+	[Export] Score _score = null;
 	//[Export] private Array<TileButton> _buttons = null;
 
 	private Array <TileButton> _buttons = new();
@@ -45,6 +44,11 @@ public partial class Game : Node2D
 		}
 	}
 
+	//List of all found level fileNames
+	private Array<string> _levelNames = null;
+
+	[Export] private int _levelLength = 3; 
+
 
 	[ExportGroup("Timers")]
 	[Export] public float _flashDuration = 0.75f;
@@ -53,6 +57,8 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
+
+		LoadLevels();
 
 		Lives = _maxHealth;
 		if (_heartField == null)
@@ -79,7 +85,7 @@ public partial class Game : Node2D
 		}
 		
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
-		PickButtons();
+		BuildSequence();
 		ShowButtons();
 	}
 
@@ -131,7 +137,7 @@ public partial class Game : Node2D
 				_index = 0;
 				_level ++;
 				_score.SetText(_level);
-				PickButtons();
+				BuildSequence();
 				await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
 				ShowButtons();
 			}
@@ -139,8 +145,11 @@ public partial class Game : Node2D
 		_rndButtons[_index].SetIsCorrect(true);
 	}
 
-	private void PickButtons()
+	private void BuildSequence()
 	{
+		int[][] data = SequenceLoader.LoadSequences(_levelNames[_level - 1]);
+
+
 		//empty the array if there is something in it.
 		if (_rndButtons.Count != 0 )
 		{
@@ -199,36 +208,20 @@ public partial class Game : Node2D
 
 	}
 
-	private void ReadFiles()
+	// Takes an entire level read straight from the file and returns a scrambled one with
+	// the the amount of items defined by '_levelLength'
+	// WORKING PROGRESS!!
+	private static int[] LevelScrambler(int[] lvl)
 	{
-		
+		int[] scrambled = [];
+
+		return scrambled;
 	}
 
-	private string[] GetAvailableLevels()
+	// WORKING PROGRESS!!
+	private void LoadLevels()
 	{
-		var dir = DirAccess.Open("./res/levels");
-
-		if (dir == null)
-		{
-			GD.Print("could not find level directory");
-			return [];
-		}
-
-		Array <string> levels = new();
-		dir.ListDirBegin();
-
-		string fileName = dir.GetNext();
-
-		while (fileName != String.Empty)
-		{
-			if (!dir.CurrentIsDir() && fileName.EndsWith(".txt"))
-			{
-				levels.Add(fileName);
-			}
-			fileName = dir.GetNext();
-		}
-
-		dir.ListDirEnd();
-		return levels.ToArray();
+		_levelNames = SequenceLoader.GetAvailableLevels();
+		GD.Print(_levelNames);
 	}
 }

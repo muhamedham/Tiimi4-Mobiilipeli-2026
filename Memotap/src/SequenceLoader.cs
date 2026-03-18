@@ -13,20 +13,27 @@ using System.Linq;
 public partial class SequenceLoader : Node
 {
     // The directory where all '.txt' level files reside
-    private const string _seqDir = "./res/levels";
+    private const string _lvlDir = "./res/levels";
 
+    // This function receives a <string> parameter representing the filename of the level
+    // corresponding the current level. Based on that, a 2D array of sequences is returned
+    // from the file.
     public static int[][] LoadSequences(string level)
         {
 
+        // Check if a file is found and handle unfound ones
         if (!FileAccess.FileExists(level))
         {
-            GD.PrintErr($"SequenceLoader: file not found at {_seqDir + level}");
+            GD.PrintErr($"SequenceLoader: file not found at {_lvlDir + level}");
             return System.Array.Empty<int[]>();
         }
 
-        using var file = FileAccess.Open(_seqDir + level, FileAccess.ModeFlags.Read);
+        // Variables for the file and the upcoming sequences
+        using var file = FileAccess.Open(_lvlDir + level, FileAccess.ModeFlags.Read);
         var sequences = new List<int[]>();
 
+        // While the EOF hasnt been reached, iterate through lines collecting 
+        // sequences and appending them to the 2D array
         while (!file.EofReached())
         {
             string line = file.GetLine().Trim();
@@ -42,19 +49,27 @@ public partial class SequenceLoader : Node
 
         return sequences.ToArray();
     }
-    public static string[] GetAvailableLevels()
+
+    // This function returns the names of all files, and should be used so that
+    // the game doesn't end up iterating out of bounds.
+    public static Array<string> GetAvailableLevels()
     {
-        var dir = DirAccess.Open(_seqDir);
+
+        // Assign and chek if a directory with given name is found
+        var dir = DirAccess.Open(_lvlDir);
 
         if (dir == null)
         {
-            GD.Print("could not find level directory");
+            GD.Print($"could not find level directory {_lvlDir}");
             return [];
         }
 
+        // Create the name array and initialize the 'DirAccess' streams
         Array <string> levels = new();
         dir.ListDirBegin();
 
+
+        // Iterate through filenames ending in '.txt' until none are found
         string fileName = dir.GetNext();
 
         while (fileName != String.Empty)
@@ -67,6 +82,9 @@ public partial class SequenceLoader : Node
         }
 
         dir.ListDirEnd();
-        return levels.ToArray();
+
+        // Needed because during testing array has been scrambled.
+        levels.Sort();
+        return levels;
     }
 }
