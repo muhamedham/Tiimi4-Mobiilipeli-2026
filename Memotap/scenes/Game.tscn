@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
+[ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/SequenceLoader.cs" id="11_3xj3m"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -30,7 +31,6 @@ scale = Vector2(0.11147484, 0.107637346)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
-anchors_preset = -1
 offset_left = -3.0000002
 offset_top = 3.0
 offset_right = 37.104687
@@ -90,6 +90,7 @@ offset_bottom = 0.0799942
 grow_horizontal = 2
 
 [node name="HeartField" parent="." instance=ExtResource("7_400sg")]
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 716.0
@@ -97,6 +98,9 @@ offset_top = 24.0
 offset_right = 1286.0
 offset_bottom = 136.85715
 scale = Vector2(0.7, 0.7)
+
+[node name="SequenceLoader" type="Node" parent="."]
+script = ExtResource("11_3xj3m")
 
 [editable path="TileField"]
 [editable path="HeartField"]
