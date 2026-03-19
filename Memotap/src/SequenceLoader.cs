@@ -19,17 +19,17 @@ public partial class SequenceLoader : Node
     // corresponding the current level. Based on that, a 2D array of sequences is returned
     // from the file.
     public static int[][] LoadSequences(string level)
-        {
-
+    {
+        
         // Check if a file is found and handle unfound ones
-        if (!FileAccess.FileExists(level))
+        if (!FileAccess.FileExists( _lvlDir + "/" + level))
         {
-            GD.PrintErr($"SequenceLoader: file not found at {_lvlDir + level}");
+            GD.PrintErr($"SequenceLoader: file not found at {_lvlDir + "/" + level}");
             return System.Array.Empty<int[]>();
         }
 
         // Variables for the file and the upcoming sequences
-        using var file = FileAccess.Open(_lvlDir + level, FileAccess.ModeFlags.Read);
+        using var file = FileAccess.Open(_lvlDir + "/" + level, FileAccess.ModeFlags.Read);
         var sequences = new List<int[]>();
 
         // While the EOF hasnt been reached, iterate through lines collecting 

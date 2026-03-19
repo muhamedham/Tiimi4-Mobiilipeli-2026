@@ -1,18 +1,17 @@
-[gd_scene format=3 uid="uid://0ikkpwvwksh4"]
+[gd_scene load_steps=5 format=3 uid="uid://0ikkpwvwksh4"]
 
-[ext_resource type="Texture2D" uid="uid://btt4md18i885p" path="res://res/icon.svg" id="1_11y2r"]
 [ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/PlayButton.cs" id="2_o0tnf"]
 [ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/QuitButton.cs" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="4_jmdev"]
 [ext_resource type="Texture2D" uid="uid://d0fsktvjsqs2i" path="res://art/Memologo.png" id="5_b6cxs"]
 
-[node name="Menu" type="Node2D" unique_id=687312093]
+[node name="Menu" type="Node2D"]
 process_mode = 3
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1869025901]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1853517381]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.367
 anchor_top = 0.4
@@ -27,20 +26,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=790734390]
+[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 60.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "PELAA"
-icon = ExtResource("1_11y2r")
 flat = true
-alignment = 0
 language = "fi_FI"
 script = ExtResource("2_o0tnf")
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=779804042]
+[node name="QuitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
@@ -50,13 +47,13 @@ text = "SULJE"
 flat = true
 script = ExtResource("3_jmdev")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=986231899]
+[node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("4_jmdev")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=881449139]
+[node name="TextureRect2" type="TextureRect" parent="."]
 offset_left = 292.0
 offset_top = -169.0
 offset_right = 1316.0

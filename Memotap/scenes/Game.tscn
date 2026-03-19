@@ -19,6 +19,7 @@ _goStopTexture = NodePath("GameUI/GoStopTexture")
 _heartField = NodePath("HeartField")
 _tileField = NodePath("TileField")
 _score = NodePath("GameUI/Score")
+_levelLength = 1
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1

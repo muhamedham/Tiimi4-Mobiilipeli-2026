@@ -5,59 +5,49 @@ using Godot.Collections;
 using System.Reflection.Metadata;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 
 public partial class Game : Node2D
 {
 
-	[ExportGroup("Node references")]
-	[Export] GoStopTexture _goStopTexture = null;
-	[Export] HeartField _heartField = null;
-	[Export] TileField _tileField = null;
-	[Export] Score _score = null;
-	//[Export] private Array<TileButton> _buttons = null;
+// ---- Node references ----
+[ExportGroup("Node references")]
+[Export] private GoStopTexture _goStopTexture = null;
+[Export] private HeartField _heartField = null;
+[Export] private TileField _tileField = null;
+[Export] private Score _score = null;
 
-	private Array <TileButton> _buttons = new();
-	private Array <HeartTexture> _hearts = new();
+// ---- Timers ----
+[ExportGroup("Timers")]
+[Export] public float _flashDuration = 0.75f;
+[Export] public float _nextRoundDelay = 2.0f;
 
-	// Tasolaskuri- komponentti
+// ---- Tuning ----
+[ExportGroup("Tuning")]
+[Export] private int _level = 1;
+[Export] private int _maxHealth = 3;
+[Export] public int _btnCount = 9;
+[Export] private int _levelLength = 3;
 
+// ---- Runtime state ----
+private int _index = 0;
+private int _lives;
+private Array<string> _levelNames = null;
+private Array<TileButton> _buttons = new();
+private Array<TileButton> _rndButtons = new();
+private Array<HeartTexture> _hearts = new();
 
-	private Array<TileButton> _rndButtons = new();
-
-	//tracks how far we are into the current level
-	private int _index = 0;
-
-	// current level of the game (how many buttons to show)
-	[Export] private int _level = 1;
-
-	[Export] private int _maxHealth = 3;
-	[Export] public int _btnCount = 9;
-	private int _lives;
-
-	public int Lives
-	{
-		get {return _lives; }
-		set
-		{
-			_lives = Mathf.Clamp(value, 0, _maxHealth);
-		}
-	}
-
-	//List of all found level fileNames
-	private Array<string> _levelNames = null;
-
-	[Export] private int _levelLength = 3; 
-
-
-	[ExportGroup("Timers")]
-	[Export] public float _flashDuration = 0.75f;
-	[Export] public float _nextRoundDelay = 2.0f;
-
+// ---- Properties ----
+public int Lives
+{
+    get { return _lives; }
+    set { _lives = Mathf.Clamp(value, 0, _maxHealth); }
+}
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
-
+		//Testing
 		LoadLevels();
 
 		Lives = _maxHealth;
@@ -210,12 +200,30 @@ public partial class Game : Node2D
 
 	// Takes an entire level read straight from the file and returns a scrambled one with
 	// the the amount of items defined by '_levelLength'
+	// the parameter int[][]
 	// WORKING PROGRESS!!
-	private static int[] LevelScrambler(int[] lvl)
+	private int[][] LevelScrambler(int[][] lvl)
 	{
-		int[] scrambled = [];
+		// checking that the level given has 
+		if (lvl.Length < _levelLength)
+		{
+			GD.Print($"Level must have at least {_levelLength} items, Returning array.");
+			return lvl;
+		}
 
-		return scrambled;
+		// Clones the 2D array with 'Shallow clone' meaning it clones the outer layer
+		// but the inner arrays remain as references to the originals.
+		int[][] shuffled = (int[][])lvl.Clone();
+
+		// The Fisher-Yates method of shuffling
+		for (int i = shuffled.Length - 1; i > 0; i--)
+		{
+			int j = (int)(GD.Randi() % (uint)(i + 1));
+			(shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
+		}
+
+		// This syntax makes it so that the list cuts off at desired length
+		return shuffled[.._levelLength];
 	}
 
 	// WORKING PROGRESS!!
@@ -223,5 +231,23 @@ public partial class Game : Node2D
 	{
 		_levelNames = SequenceLoader.GetAvailableLevels();
 		GD.Print(_levelNames);
+
+		
+
+		for (int i = 0; i < _levelNames.Count; i++)
+		{
+			GD.Print(_levelNames[i]);
+			int[][] levels = SequenceLoader.LoadSequences(_levelNames[i]);
+
+			for (int j = 0; j < levels.Count(); j++)
+			{
+				GD.Print(" ");
+
+				for (int k = 0; k < levels[j].Length; k++)
+				{
+					GD.Print(levels[j][k]);
+				}
+			}
+		}
 	}
 }
