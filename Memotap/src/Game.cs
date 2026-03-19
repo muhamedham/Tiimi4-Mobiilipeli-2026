@@ -169,8 +169,6 @@ public partial class Game : Node2D
 
 	private void PickButtons()
 	{
-
-
 		Array <int> jep = _levelsArr[_level -1].PickRandom();
 
 		GD.Print(jep[0], jep[1]);

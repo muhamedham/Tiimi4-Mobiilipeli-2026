@@ -33,11 +33,10 @@ public static class File
             GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in level file at line {json.GetErrorLine()}");
         }
 
-
         Dictionary dict = json.Data.AsGodotDictionary();
 
         Array<Array<Array<int>>> Levels = new();
-        
+
 
         foreach (var (key, value) in dict)
         {
