@@ -7,6 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Timers;
+using System.Runtime.CompilerServices;
+using System.Data.SqlTypes;
+using System.Security;
+using System.Net.Http.Headers;
 
 
 public partial class Game : Node2D
@@ -23,6 +28,7 @@ public partial class Game : Node2D
 	// ---- Timers ----
 	[ExportGroup("Timers")]
 	[Export] public float _flashDuration = 0.75f;
+	[Export] public float _pressFlashDuration = 0.5f;
 	[Export] public float _betweenFlashDuration = 0.5f;
 	[Export] public float _nextRoundDelay = 2.0f;
 	[Export] public float _wrongPressDelay = 2.0f;
@@ -52,6 +58,7 @@ public partial class Game : Node2D
 	private int _currentlevelIndex = 0;
 	private int _currentSequenceIndex = 0;
 	private int[] _activeSequence = [];
+	private TileButton _correctButton = null;
 
 
 	// ---- GODOT MANAGEMENT ---- 
@@ -60,6 +67,7 @@ public partial class Game : Node2D
 	public async override void _EnterTree()
 	{
 
+		// Check that all elements were found
 		Lives = _maxHealth;
 		if (_heartField == null)
 		{
@@ -77,15 +85,19 @@ public partial class Game : Node2D
 			_buttons = _tileField.Setup(this);
 		}
 
+		// Disable inputs to avoid early disturbance
+		SetAllButtonsDisabled(true);
+
 		//loop through _buttons arr and start listening to each signal.
 		foreach (TileButton button in _buttons)
 		{
-			button.CorrectPress += CorrectPressed;
-			button.WrongPress += WrongPressed;
+			button.CorrectPress += () => CorrectPressed(button);
+			button.WrongPress += () => WrongPressed(button);
 		}
 
 		_soundLoader.Setup(_buttons);
 
+		// Load level data
 		_levelNames = SequenceLoader.GetAvailableLevels();
 		LoadLevel();
 		await Timer(_nextRoundDelay);
@@ -95,10 +107,10 @@ public partial class Game : Node2D
 	public override void _ExitTree()
 	{
 		// stop listening to the signals
-		foreach (var item in _buttons)
+		foreach (var button in _buttons)
 		{
-			item.CorrectPress -= CorrectPressed;
-			item.WrongPress -= WrongPressed;
+			button.CorrectPress -= () => CorrectPressed(button);
+			button.WrongPress -= () => WrongPressed(button);
 		}
 	}
 
@@ -108,8 +120,6 @@ public partial class Game : Node2D
 	// Responsible for playing the sequence to the player
 	private async void PlaySequence()
 	{
-		SetAllButtonsDisabled(true);
-
 		// Update indicator to active and set up the sequence loop
 		// by fetching the current sequence from the shuffled sequences
 		_goStopTexture.SetState(Indicator.TileState.Active);
@@ -127,7 +137,7 @@ public partial class Game : Node2D
 
 		// Update the indicator and set correct input
 		_currentSequenceIndex = 0;
-		_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
+		SetCorrectButton(_activeSequence[_currentSequenceIndex]);
 		_goStopTexture.SetState(Indicator.TileState.Inactive);
 
 		// Correct inputs should be setup by now and inputs get unlocked
@@ -192,10 +202,11 @@ public partial class Game : Node2D
 	//
 	// TODO: a resetting mechanic where the wrongPressed resets you
 	// back to a certain point
-	public void WrongPressed()
+	public async Task WrongPressed(TileButton sender)
 	{
-		// Disable all buttons to stop player from pressing any other
-		// buttons and potentially losing any additional lives
+		_ = ShowWrongButton(sender); // color the button accordingly
+		
+		// Disable all buttons to stop additional inputs during process
 		SetAllButtonsDisabled(true);
 
 		// Trigger indicator and reset sequenceIndex, also remove life
@@ -210,14 +221,15 @@ public partial class Game : Node2D
 
 	// Gets called upon signal from a button being pressed with
 	// '_isCorrect' == true. Sets own correct as false and calls handler.
-	//
-	//TODO: There is a slight window where if you repress at the right time,
-	// you can lose life.
-	public void CorrectPressed()
+	public async Task CorrectPressed(TileButton sender)
 	{
+		_ = ShowCorrectButton(sender); // color the button accordingly
+
+		// Disable all buttons to stop additional input during the process 
+		SetAllButtonsDisabled(true);
+
 		// set the button that was just pressed as not correct,
 		// update index
-		_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(false);
 		_currentSequenceIndex++;
 
 		// call handler for processing followup
@@ -277,11 +289,43 @@ public partial class Game : Node2D
 		}
 		else // if sequence is not over, simply update next correct button
 		{
-			_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
+			SetCorrectButton(_activeSequence[_currentSequenceIndex]);
+			SetAllButtonsDisabled(false);
 		}
 	}
 
 
+	// ---- Button management ----
+
+	// Responsible for coloring and resetting button
+	private async Task ShowCorrectButton(TileButton Button)
+	{
+		Button.SetGreen();
+		await Timer(_pressFlashDuration);
+		Button.Reset();
+	}
+	
+	// Responsible for coloring and resetting button
+	private async Task ShowWrongButton(TileButton Button)
+	{
+		Button.SetRed();
+		await Timer(_pressFlashDuration);
+		Button.Reset();
+	}
+
+	// Sets reference for the correct button and enables correct within button
+	// doublecheck exists so that no re-iteration of arrays is needed,
+	// while allowing buttons to still send the correct or wrong signal
+	private void SetCorrectButton(int index)
+	{
+		if (_correctButton != null)
+			_correctButton.IsCorrect = false;
+
+		_correctButton = _buttons[index];
+		_correctButton.IsCorrect = true;
+	}
+
+	
 	// ---- Helpers ----
 
 	// Helper function that disables all buttons, blocking input
