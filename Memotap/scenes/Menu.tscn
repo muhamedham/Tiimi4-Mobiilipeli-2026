@@ -48,7 +48,8 @@ flat = true
 script = ExtResource("3_jmdev")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1152.0
+offset_top = -55.0
+offset_right = 1224.0
 offset_bottom = 648.0
 texture = ExtResource("4_jmdev")
 expand_mode = 1

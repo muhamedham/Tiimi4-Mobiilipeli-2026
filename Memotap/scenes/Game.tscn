@@ -19,7 +19,7 @@ _goStopTexture = NodePath("GameUI/GoStopTexture")
 _heartField = NodePath("HeartField")
 _tileField = NodePath("TileField")
 _score = NodePath("GameUI/Score")
-_levelLength = 1
+_maxHealth = 5
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
@@ -36,11 +36,9 @@ scale = Vector2(0.11147484, 0.107637346)
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
 offset_left = -3.0000002
-offset_top = 3.0
-offset_right = 37.104687
-offset_bottom = 42.816048
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -22.0
+offset_right = 37.967785
+offset_bottom = 19.348972
 scale = Vector2(28.656662, 16.308685)
 size_flags_horizontal = 3
 size_flags_vertical = 3

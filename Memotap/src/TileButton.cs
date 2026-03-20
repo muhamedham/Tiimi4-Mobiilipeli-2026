@@ -25,7 +25,8 @@ public partial class TileButton : Godot.TextureButton
 	[Signal] public delegate void WrongPressEventHandler();
 
 
-	private bool CorrectBtn = false;
+	private bool _correctBtn = false;
+	private bool _isProcessing = false;
 
 	public TileButton()
 	{
@@ -51,24 +52,33 @@ public partial class TileButton : Godot.TextureButton
 
 	private async void OnPressed()
 	{
-		GD.Print("I have been pressed");
+		GD.Print("Onpressed called");
+		if (_isProcessing) 
+		{
+			GD.Print("Onpressed returns; processing");
+			return;
+		}
+
+		_isProcessing = true;
 
 		// if the tile state has not been set to chosen by gamerunner it's wrong
-		if (CorrectBtn)
+		if (_correctBtn)
 		{
 			SetState(TileState.Right);
 			UpDateVisual();
-			StartResetTimer();
 			EmitSignal(SignalName.CorrectPress);
 
 		} else
 		{
 			SetState(TileState.Wrong);
 			UpDateVisual();
-			StartResetTimer();
 			EmitSignal(SignalName.WrongPress);
 		}
 
+		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
+		Reset();
+		_isProcessing = false;
+		GD.Print("OnPressed return; Done");
 	}
 
 	public void SetState(TileState newState)
@@ -92,16 +102,13 @@ public partial class TileButton : Godot.TextureButton
 		}
 	}
 
-	public async void StartResetTimer()
-	{
-		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
-		Reset();
-	}
 
 	public void SetGreen()
 	{
 		GD.Print("Turn green called");
 		this.SetState(TileState.Right);
+
+		UpDateVisual();
 	}
 
 	public async void Reset()
@@ -130,6 +137,6 @@ public partial class TileButton : Godot.TextureButton
 
 	public void SetIsCorrect(bool isCorrrect)
 	{
-		this.CorrectBtn = isCorrrect;
+		this._correctBtn = isCorrrect;
 	}
 }
