@@ -29,7 +29,6 @@ public partial class Game : Node2D
 
 	// ---- Tuning ----
 	[ExportGroup("Tuning")]
-	[Export] private int _level = 1;
 	[Export] private int _maxHealth = 3;
 	[Export] public int _btnCount = 9;
 	[Export] private int _levelLength = 3;
@@ -37,7 +36,6 @@ public partial class Game : Node2D
 	// ---- Runtime state ----
 	private int _lives;
 	private Array<TileButton> _buttons = new();
-	private Array<TileButton> _rndButtons = new();
 	private Array<HeartTexture> _hearts = new();
 
 	// ---- Properties ----
@@ -55,6 +53,8 @@ public partial class Game : Node2D
 	private int _currentSequenceIndex = 0;
 	private int[] _activeSequence = [];
 
+
+	// ---- GODOT MANAGEMENT ---- 
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
@@ -102,6 +102,87 @@ public partial class Game : Node2D
 		}
 	}
 
+
+	// ---- GameLoop Management ----
+
+	// Responsible for playing the sequence to the player
+	private async void PlaySequence()
+	{
+		SetAllButtonsDisabled(true);
+
+		// Update indicator to active and set up the sequence loop
+		// by fetching the current sequence from the shuffled sequences
+		_goStopTexture.SetState(Indicator.TileState.Active);
+ 		_activeSequence = _levelSequences[_currentlevelIndex];
+
+		// Iterate through the active sequence
+		for (int i = 0; i < _activeSequence.Length; i++)
+		{
+			TileButton btn = _buttons[_activeSequence[i]];
+			btn.SetGreen();
+			await Timer(_flashDuration);
+			btn.Reset();
+			await Timer(_betweenFlashDuration);
+		}
+
+		// Update the indicator and set correct input
+		_currentSequenceIndex = 0;
+		_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
+		_goStopTexture.SetState(Indicator.TileState.Inactive);
+
+		// Correct inputs should be setup by now and inputs get unlocked
+		SetAllButtonsDisabled(false);
+	}
+
+	//TODO: Some kind of GAMEOVER screen or setback mechanic (or both!
+	// menu that gives both as options?)
+	private void GameOver()
+	{
+		//TODO: do something when the game is over
+		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+	}
+
+
+	// ---- Level management ----
+
+	// Loads and sets up the active level, called once per level
+	private void LoadLevel()
+	{
+		int[][] completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
+		_levelSequences = ShuffleLevel(completeLevel);
+	}
+
+	// Takes an entire level read straight from the file and returns a scrambled one with
+	// the the amount of items defined by '_levelLength'
+	// the parameter int[][]
+	// WORKING PROGRESS!!
+	private int[][] ShuffleLevel(int[][] lvl)
+	{
+		// checking that the level given has
+		if (lvl.Length < _levelLength)
+		{
+			GD.Print($"Level must have at least {_levelLength} items, Returning array.");
+			return lvl;
+		}
+
+		// Clones the 2D array with 'Shallow clone' meaning it clones the outer layer
+		// but the inner arrays remain as references to the originals.
+		int[][] shuffled = (int[][])lvl.Clone();
+
+		// The Fisher-Yates method of shuffling
+		for (int i = shuffled.Length - 1; i > 0; i--)
+		{
+			int j = (int)(GD.Randi() % (uint)(i + 1));
+			(shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
+		}
+
+		// This syntax makes it so that the list cuts off at desired length
+		return shuffled[.._levelLength];
+	}
+
+
+	// ---- Input Handling ----
+
 	// Function that triggers upon receiving signal from button.
 	// Disables buttons to stop the user from 'spamming' button and
 	// losing unnecessary hearts.
@@ -141,14 +222,6 @@ public partial class Game : Node2D
 
 		// call handler for processing followup
 		HandleCorrectPress();
-	}
-
-	//TODO: Some kind of GAMEOVER screen or setback mechanic (or both!
-	// menu that gives both as options?)
-	private void GameOver()
-	{
-		//TODO: do something when the game is over
-		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 	}
 
 	// Handler for 'WrongPressed', updates hearts and calls 'GameOver'
@@ -209,69 +282,7 @@ public partial class Game : Node2D
 	}
 
 
-	// Loads and sets up the active level, called once per level
-	private void LoadLevel()
-	{
-		int[][] completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
-		_levelSequences = ShuffleLevel(completeLevel);
-	}
-
-	// Takes an entire level read straight from the file and returns a scrambled one with
-	// the the amount of items defined by '_levelLength'
-	// the parameter int[][]
-	// WORKING PROGRESS!!
-	private int[][] ShuffleLevel(int[][] lvl)
-	{
-		// checking that the level given has
-		if (lvl.Length < _levelLength)
-		{
-			GD.Print($"Level must have at least {_levelLength} items, Returning array.");
-			return lvl;
-		}
-
-		// Clones the 2D array with 'Shallow clone' meaning it clones the outer layer
-		// but the inner arrays remain as references to the originals.
-		int[][] shuffled = (int[][])lvl.Clone();
-
-		// The Fisher-Yates method of shuffling
-		for (int i = shuffled.Length - 1; i > 0; i--)
-		{
-			int j = (int)(GD.Randi() % (uint)(i + 1));
-			(shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
-		}
-
-		// This syntax makes it so that the list cuts off at desired length
-		return shuffled[.._levelLength];
-	}
-
-	// Responsible for playing the sequence to the player
-	private async void PlaySequence()
-	{
-		SetAllButtonsDisabled(true);
-
-		// Update indicator to active and set up the sequence loop
-		// by fetching the current sequence from the shuffled sequences
-		_goStopTexture.SetState(Indicator.TileState.Active);
- 		_activeSequence = _levelSequences[_currentlevelIndex];
-
-		// Iterate through the active sequence
-		for (int i = 0; i < _activeSequence.Length; i++)
-		{
-			TileButton btn = _buttons[_activeSequence[i]];
-			btn.SetGreen();
-			await Timer(_flashDuration);
-			btn.Reset();
-			await Timer(_betweenFlashDuration);
-		}
-
-		// Update the indicator and set correct input
-		_currentSequenceIndex = 0;
-		_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
-		_goStopTexture.SetState(Indicator.TileState.Inactive);
-
-		// Correct inputs should be setup by now and inputs get unlocked
-		SetAllButtonsDisabled(false);
-	}
+	// ---- Helpers ----
 
 	// Helper function that disables all buttons, blocking input
 	private void SetAllButtonsDisabled(bool b)
