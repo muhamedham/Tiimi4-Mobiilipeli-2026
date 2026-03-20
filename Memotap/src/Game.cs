@@ -18,6 +18,7 @@ public partial class Game : Node2D
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
+	[Export] private SoundLoader _soundLoader = null;
 
 	// ---- Timers ----
 	[ExportGroup("Timers")]
@@ -46,7 +47,7 @@ public partial class Game : Node2D
 		set { _lives = Mathf.Clamp(value, 0, _maxHealth); }
 	}
 
-	// ---- Level Management ---- 
+	// ---- Level Management ----
 	private int _currentLevel = 0;
 	private Array<string> _levelNames = null;
 	private int[][] _levelSequences = null;
@@ -58,7 +59,7 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
-		
+
 		Lives = _maxHealth;
 		if (_heartField == null)
 		{
@@ -82,7 +83,9 @@ public partial class Game : Node2D
 			button.CorrectPress += CorrectPressed;
 			button.WrongPress += WrongPressed;
 		}
-		
+
+		_soundLoader.Setup(_buttons);
+
 		_levelNames = SequenceLoader.GetAvailableLevels();
 		LoadLevel();
 		await Timer(_nextRoundDelay);
@@ -106,7 +109,7 @@ public partial class Game : Node2D
 	// '_isCorrect' == false.
 	// handles heart loss and triggers the replay of sequence.
 	//
-	// TODO: a resetting mechanic where the wrongPressed resets you 
+	// TODO: a resetting mechanic where the wrongPressed resets you
 	// back to a certain point
 	public void WrongPressed()
 	{
@@ -124,7 +127,7 @@ public partial class Game : Node2D
 		HandleWrongPress();
 	}
 
-	// Gets called upon signal from a button being pressed with 
+	// Gets called upon signal from a button being pressed with
 	// '_isCorrect' == true. Sets own correct as false and calls handler.
 	//
 	//TODO: There is a slight window where if you repress at the right time,
@@ -140,7 +143,7 @@ public partial class Game : Node2D
 		HandleCorrectPress();
 	}
 
-	//TODO: Some kind of GAMEOVER screen or setback mechanic (or both! 
+	//TODO: Some kind of GAMEOVER screen or setback mechanic (or both!
 	// menu that gives both as options?)
 	private void GameOver()
 	{
@@ -154,7 +157,7 @@ public partial class Game : Node2D
 	{
 		// Sets heart of array correspondent to amount of lives as inactive
 		_hearts[_lives].SetState(HeartTexture.TileState.Inactive);
-		
+
 		// Checks wether to end game or replay sequence
 		if (_lives <= 0)
 		{
@@ -195,10 +198,10 @@ public partial class Game : Node2D
 				LoadLevel();
 			}
 
-			// In both cases set timer and go to next round. 
+			// In both cases set timer and go to next round.
 			await Timer(_nextRoundDelay);
 			PlaySequence();
-		} 
+		}
 		else // if sequence is not over, simply update next correct button
 		{
 			_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
@@ -206,7 +209,7 @@ public partial class Game : Node2D
 	}
 
 
-	// Loads and sets up the active level, called once per level 
+	// Loads and sets up the active level, called once per level
 	private void LoadLevel()
 	{
 		int[][] completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
@@ -219,7 +222,7 @@ public partial class Game : Node2D
 	// WORKING PROGRESS!!
 	private int[][] ShuffleLevel(int[][] lvl)
 	{
-		// checking that the level given has 
+		// checking that the level given has
 		if (lvl.Length < _levelLength)
 		{
 			GD.Print($"Level must have at least {_levelLength} items, Returning array.");
@@ -265,7 +268,7 @@ public partial class Game : Node2D
 		_currentSequenceIndex = 0;
 		_buttons[_activeSequence[_currentSequenceIndex]].SetIsCorrect(true);
 		_goStopTexture.SetState(Indicator.TileState.Inactive);
-		
+
 		// Correct inputs should be setup by now and inputs get unlocked
 		SetAllButtonsDisabled(false);
 	}
@@ -278,6 +281,6 @@ public partial class Game : Node2D
 	}
 
 	// Helper function that acts as a timer
-	private SignalAwaiter Timer(float seconds) => 
+	private SignalAwaiter Timer(float seconds) =>
 		ToSignal(GetTree().CreateTimer(seconds),"timeout");
 }
