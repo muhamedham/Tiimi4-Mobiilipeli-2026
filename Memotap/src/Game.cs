@@ -18,6 +18,8 @@ public partial class Game : Node2D
 
 	private Array<Array<Array<int>>> _levelsArr =new();
 
+	[Export] SoundLoader soundLoader;
+
 	// Tasolaskuri- komponentti
 
 
@@ -106,7 +108,10 @@ public partial class Game : Node2D
 			button.WrongPress += WrongPressed;
 		}
 
+		soundLoader.Setup(_buttons);
+
 		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
+
 		PickButtons();
 		ShowButtons();
     }

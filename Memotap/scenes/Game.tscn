@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=14 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -10,10 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
+[ext_resource type="Script" uid="uid://bn72e2kbu35l4" path="res://src/SoundLoader.cs" id="11_mcffj"]
+[ext_resource type="AudioStream" uid="uid://cu7tsy0n0qqot" path="res://art/Sounds/Correct.wav" id="12_2rd6h"]
+[ext_resource type="AudioStream" uid="uid://b68phiroxxboy" path="res://art/Sounds/Wrong.wav" id="13_7ua8r"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("soundLoader")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
+soundLoader = NodePath("SoundLoader")
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
 process_mode = 1
@@ -58,7 +62,6 @@ texture_normal = ExtResource("3_s0nni")
 script = ExtResource("3_cpr0p")
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("6_kiw3p")]
-visible = false
 anchors_preset = 14
 anchor_left = 0.0
 anchor_right = 1.0
@@ -97,6 +100,11 @@ offset_top = 24.0
 offset_right = 1286.0
 offset_bottom = 136.85715
 scale = Vector2(0.7, 0.7)
+
+[node name="SoundLoader" type="Node" parent="."]
+script = ExtResource("11_mcffj")
+correctStream = ExtResource("12_2rd6h")
+wrongStream = ExtResource("13_7ua8r")
 
 [editable path="TileField"]
 [editable path="HeartField"]
