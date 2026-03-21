@@ -4,69 +4,63 @@ using System;
 
 public partial class SoundLoader : Node
 {
-    //TODO jos ääniä lisätään enemmän lisää ne arrayhin josta ne käydään läpi ja alustetaan?
-    AudioStreamPlayer correstSoundPlayer = new AudioStreamPlayer();
-    [Export] AudioStream correctStream;
+    //define the sounds to play
+    [Export] Array<AudioStream> audioStreams;
 
-    AudioStreamPlayer wrongSoundPlayer = new AudioStreamPlayer();
-    [Export] AudioStream wrongStream;
+    //make an array to the actual players
+    Array<AudioStreamPlayer> audioStreamPlayers = new();
 
     public void Setup(Array<TileButton> arr)
     {
-        correstSoundPlayer.Stream = correctStream;
-        //how many sound can be played at once by this player
-        correstSoundPlayer.MaxPolyphony = 5;
-        AddChild(correstSoundPlayer);
+        audioStreamPlayers.Resize(audioStreams.Count);
 
-        wrongSoundPlayer.Stream = wrongStream;
-        wrongSoundPlayer.MaxPolyphony = 5;
-        AddChild(wrongSoundPlayer);
+        // add audioplayers to all the sounds we have
+        for (int i = 0; i< audioStreams.Count; i++)
+        {
+            audioStreamPlayers[i] = new AudioStreamPlayer
+            {   //how many sound one player can play at once
+                MaxPolyphony = 5,
+
+                //what the player will play when called
+                Stream = audioStreams[i]
+            };
+            AddChild(audioStreamPlayers[i]);
+        }
 
         foreach (TileButton button in arr)
         {
-            button.CorrectPress += PlayCorrectSound;
-            button.WrongPress += PlayWrongSound;
+            button.CorrectPress += () => PlaySound(audioStreamPlayers[0]);
+            button.WrongPress += () => PlaySound(audioStreamPlayers[1]);
         }
 
         Node node = GetParent();
-
-        //CallDeferred(MethodName.NewMethod, node);
+        CallDeferred(MethodName.FindChildren, node);
 
     }
+    private void PlaySound(AudioStreamPlayer player)
+    {
+        player.Play();
+    }
 
-/*
+
 //Voisi käyttää jos nappeja ei enää lisätä koodissa vaan käsin
 // koodi etsii itse napit ja kuuntelee painallus signaaleja
-    private void NewMethod(Node node)
+    private void FindChildren(Node node)
     {
-        foreach (Node item in node.GetChildren())
+        foreach (Node child in node.GetChildren())
         {
-            if (item is TileButton button)
-            {
-                GD.Print("a tilebutton has been found");
-            }
 
-            if (item is Button btn && item is not TileButton)
+            if (child is Button btn && child is not TileButton)
             {
-                GD.Print("a button has been found");
-                btn.Pressed += PlayCorrectSound;
+                GD.Print(child.Name + " has been found");
+                btn.Pressed += () => PlaySound(audioStreamPlayers[2]);
             }
-            // call recursively it self to find all children
-            NewMethod(item);
+            // call recursively to find all children
+            FindChildren(child);
         }
 
     }
-*/
 
-    private void PlayCorrectSound()
-    {
-        correstSoundPlayer.Play();
-    }
-
-    private void PlayWrongSound()
-    {
-        wrongSoundPlayer.Play();
-    }
 
     //TODO? Lisää UI nappeihin myös äänet
     // ja silloin kun nappeja näytetään
