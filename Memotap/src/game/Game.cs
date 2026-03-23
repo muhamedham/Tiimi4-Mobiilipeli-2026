@@ -17,13 +17,19 @@ using System.Net.Http.Headers;
 public partial class Game : Node2D
 {
 
+
+	//  ---- Signals ----
+		//game over signal emitted when the game is over
+	[Signal] public delegate void GameOverSignalEventHandler();
+	[Signal] public delegate void ButtonShownSignalEventHandler();
+
 	// ---- Node references ----
 	[ExportGroup("Node references")]
 	[Export] private GoStopTexture _goStopTexture = null;
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
-	[Export] private SoundLoader _soundLoader = null;
+
 
 	// ---- Timers ----
 	[ExportGroup("Timers")]
@@ -61,7 +67,7 @@ public partial class Game : Node2D
 	private TileButton _correctButton = null;
 
 
-	// ---- GODOT MANAGEMENT ---- 
+	// ---- GODOT MANAGEMENT ----
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
@@ -95,7 +101,7 @@ public partial class Game : Node2D
 			button.WrongPress += () => WrongPressed(button);
 		}
 
-		_soundLoader.Setup(_buttons);
+		SoundLoader.Instance.Setup(_buttons);
 
 		// Load level data
 		_levelNames = SequenceLoader.GetAvailableLevels();
@@ -129,6 +135,7 @@ public partial class Game : Node2D
 		for (int i = 0; i < _activeSequence.Length; i++)
 		{
 			TileButton btn = _buttons[_activeSequence[i]];
+			EmitSignal(SignalName.ButtonShownSignal);
 			btn.SetGreen();
 			await Timer(_flashDuration);
 			btn.Reset();
@@ -148,8 +155,10 @@ public partial class Game : Node2D
 	// menu that gives both as options?)
 	private void GameOver()
 	{
+
 		//TODO: do something when the game is over
 		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+		EmitSignal(SignalName.GameOverSignal);
 	}
 
 
@@ -205,7 +214,7 @@ public partial class Game : Node2D
 	public async Task WrongPressed(TileButton sender)
 	{
 		_ = ShowWrongButton(sender); // color the button accordingly
-		
+
 		// Disable all buttons to stop additional inputs during process
 		SetAllButtonsDisabled(true);
 
@@ -225,7 +234,7 @@ public partial class Game : Node2D
 	{
 		_ = ShowCorrectButton(sender); // color the button accordingly
 
-		// Disable all buttons to stop additional input during the process 
+		// Disable all buttons to stop additional input during the process
 		SetAllButtonsDisabled(true);
 
 		// set the button that was just pressed as not correct,
@@ -304,7 +313,7 @@ public partial class Game : Node2D
 		await Timer(_pressFlashDuration);
 		Button.Reset();
 	}
-	
+
 	// Responsible for coloring and resetting button
 	private async Task ShowWrongButton(TileButton Button)
 	{
@@ -325,7 +334,7 @@ public partial class Game : Node2D
 		_correctButton.IsCorrect = true;
 	}
 
-	
+
 	// ---- Helpers ----
 
 	// Helper function that disables all buttons, blocking input

@@ -15,6 +15,14 @@ run/main_scene="uid://0ikkpwvwksh4"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="uid://btt4md18i885p"
 
+[audio]
+
+buses/default_bus_layout="uid://dmmm2cvxlbon8"
+
+[autoload]
+
+SoundLoader="*res://src/Loaders/SoundLoader.cs"
+
 [dotnet]
 
 project/assembly_name="Memotap"

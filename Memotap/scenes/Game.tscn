@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -11,19 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
-[ext_resource type="Script" uid="uid://dsqw56w2mghye" path="res://src/Loaders/SoundLoader.cs" id="12_7ua8r"]
-[ext_resource type="AudioStream" uid="uid://dkv4sn1hcrdfi" path="res://art/Sounds/klikkaus.mp3" id="13_r7sob"]
-[ext_resource type="AudioStream" uid="uid://b3h66j0aeaj6i" path="res://art/Sounds/wronganswer.mp3" id="14_r7sob"]
-[ext_resource type="AudioStream" uid="uid://cgniedjy11gja" path="res://art/Sounds/MemotapTaustaMusiikki.mp3" id="15_r7sob"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score", "_soundLoader")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
 _goStopTexture = NodePath("GameUI/GoStopTexture")
 _heartField = NodePath("HeartField")
 _tileField = NodePath("TileField")
 _score = NodePath("GameUI/Score")
-_soundLoader = NodePath("SoundLoader")
 _maxHealth = 5
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
@@ -108,10 +103,6 @@ scale = Vector2(0.7, 0.7)
 
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
-
-[node name="SoundLoader" type="Node" parent="."]
-script = ExtResource("12_7ua8r")
-audioStreams = Array[AudioStream]([ExtResource("13_r7sob"), ExtResource("14_r7sob"), ExtResource("15_r7sob")])
 
 [editable path="TileField"]
 [editable path="HeartField"]
