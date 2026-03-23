@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6q086eyuuc04"]
 
 [ext_resource type="PackedScene" uid="uid://c44gyc5gmggsr" path="res://scenes/button.tscn" id="1_cfc18"]
-[ext_resource type="Script" uid="uid://b6648ld30kfui" path="res://src/TileField.cs" id="1_hrcbo"]
+[ext_resource type="Script" uid="uid://b6648ld30kfui" path="res://src/game/TileField.cs" id="1_hrcbo"]
 
 [node name="TileField" type="GridContainer"]
 anchors_preset = 15

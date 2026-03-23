@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo8a20lwwiojx"]
+
+[ext_resource type="Texture2D" uid="uid://b1pmfwhi26jxu" path="res://art/UI/Indicators/stop_button.png" id="1_ttf0n"]
+[ext_resource type="Script" uid="uid://bw1a7dq15wc0v" path="res://src/UI/Indicators/GoStopTexture.cs" id="2_ik7ad"]
+[ext_resource type="Texture2D" uid="uid://dyun4idbuuspp" path="res://art/UI/Indicators/go_button.png" id="3_oi7go"]
+
+[node name="GoStopTexture" type="TextureRect"]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("1_ttf0n")
+expand_mode = 1
+stretch_mode = 6
+script = ExtResource("2_ik7ad")
+Activetexture = ExtResource("1_ttf0n")
+InactiveTexture = ExtResource("3_oi7go")
