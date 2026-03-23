@@ -1,9 +1,12 @@
 using Godot;
 using System;
+using System.Data;
+using System.Reflection.Metadata;
 
 public partial class TileButton : Godot.TextureButton
 {
 
+	// ---- TileState ----
 	public enum TileState
 	{
 		Default,
@@ -11,74 +14,69 @@ public partial class TileButton : Godot.TextureButton
 		Right
 	}
 
+	// ---- Textures ----
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D DefaultTexture;
 	[Export] public Texture2D RightTexture;
 	[Export] public Texture2D WrongTexture;
 
-	private TileState CurrentState = TileState.Default;
-
-	[ExportGroup("Timer")]
-	[Export] public float TimeLimit = 0.5f;
-
+	// ---- Signals ----
 	[Signal] public delegate void CorrectPressEventHandler();
 	[Signal] public delegate void WrongPressEventHandler();
 
 
-	private bool CorrectBtn = false;
-
-	public TileButton()
+	// ---- State variables ----
+	private bool _isCorrect;
+	public bool IsCorrect
 	{
-
+		get => _isCorrect;
+		set
+		{
+			_isCorrect = value;
+		}
 	}
 
-    public override void _EnterTree()
+	private TileState _currentState = TileState.Default;
+	
+
+	// ---- Godot Tree ----
+ 
+	// Triggers when node enters scene 
+	public override void _EnterTree()
     {
         Pressed += OnPressed;
     }
 
+	// Triggers when node exits scene
     public override void _ExitTree()
     {
         Pressed -= OnPressed;
     }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		// default buttons to wrong if they are pressed.
-		SetState(TileState.Wrong);
-	}
 
+	// ---- Signal sender ----
+
+	// Sends signal depending on if button is wrong or right
 	private async void OnPressed()
 	{
-		GD.Print("I have been pressed");
 
-		// if the tile state has not been set to chosen by gamerunner it's wrong
-		if (CorrectBtn)
+		if (_isCorrect)
 		{
-			SetState(TileState.Right);
-			UpDateVisual();
-			StartResetTimer();
 			EmitSignal(SignalName.CorrectPress);
-
-		} else
+		}
+		else
 		{
-			SetState(TileState.Wrong);
-			UpDateVisual();
-			StartResetTimer();
 			EmitSignal(SignalName.WrongPress);
 		}
-
 	}
 
-	public void SetState(TileState newState)
-	{
-		CurrentState = newState;
-	}
 
+	// ---- Tilestate management ----
+	
+	// Update the buttons current texture according to state
 	public void UpDateVisual()
 	{
-		switch (CurrentState)
+		switch (_currentState)
 		{
 			case TileState.Default:
 				TextureNormal = DefaultTexture;
@@ -92,44 +90,25 @@ public partial class TileButton : Godot.TextureButton
 		}
 	}
 
-	public async void StartResetTimer()
-	{
-		await ToSignal(GetTree().CreateTimer(TimeLimit), "timeout");
-		Reset();
-	}
 
+	// Set button to 'Right'-state
 	public void SetGreen()
 	{
-		GD.Print("Turn green called");
-		this.SetState(TileState.Right);
+		_currentState = TileState.Right;
+		UpDateVisual();
 	}
 
+	// Set button to 'Wrong'-state
+	public void SetRed()
+	{
+		_currentState = TileState.Wrong;
+		UpDateVisual();
+	}
+
+	// Set button to 'Default'-state
 	public async void Reset()
 	{
-		// turn button to default and show it to the player.
-		this.SetState(TileState.Default);
+		_currentState = TileState.Default;
 		this.UpDateVisual();
-	}
-
-	public void ChangeDisable()
-	{
-		if (this.Disabled)
-		{
-			this.Disabled = false;
-			GD.Print("Button enabled");
-			return;
-		}
-
-		if (!this.Disabled)
-		{
-			this.Disabled = true;
-			GD.Print("button disabled");
-			return;
-		}
-	}
-
-	public void SetIsCorrect(bool isCorrrect)
-	{
-		this.CorrectBtn = isCorrrect;
 	}
 }

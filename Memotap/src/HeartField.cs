@@ -13,7 +13,9 @@ public partial class HeartField : HBoxContainer
 	{
 		_hearts.Resize(gameRunner.Lives);
 
-		for (int i = 0; i < _hearts.Count; i++)
+		// iterate down so that heart references end up being from right to left
+		// (makes losing and gaining hearts simpler)
+		for (int i = _hearts.Count - 1; i >= 0; i--)
 		{
 			HeartTexture heart = _heartScene.Instantiate<HeartTexture>();
 			_hearts[i] = heart;

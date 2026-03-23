@@ -20,12 +20,11 @@ public partial class SequenceLoader : Node
     // from the file.
     public static int[][] LoadSequences(string level)
     {
-        
         // Check if a file is found and handle unfound ones
         if (!FileAccess.FileExists( _lvlDir + "/" + level))
         {
             GD.PrintErr($"SequenceLoader: file not found at {_lvlDir + "/" + level}");
-            return System.Array.Empty<int[]>();
+            return [];
         }
 
         // Variables for the file and the upcoming sequences

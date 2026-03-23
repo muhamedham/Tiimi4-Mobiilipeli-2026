@@ -6,50 +6,68 @@ using System.Reflection.Metadata;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Timers;
+using System.Runtime.CompilerServices;
+using System.Data.SqlTypes;
+using System.Security;
+using System.Net.Http.Headers;
 
 
 public partial class Game : Node2D
 {
 
-// ---- Node references ----
-[ExportGroup("Node references")]
-[Export] private GoStopTexture _goStopTexture = null;
-[Export] private HeartField _heartField = null;
-[Export] private TileField _tileField = null;
-[Export] private Score _score = null;
+	// ---- Node references ----
+	[ExportGroup("Node references")]
+	[Export] private GoStopTexture _goStopTexture = null;
+	[Export] private HeartField _heartField = null;
+	[Export] private TileField _tileField = null;
+	[Export] private Score _score = null;
+	[Export] private SoundLoader _soundLoader = null;
 
-// ---- Timers ----
-[ExportGroup("Timers")]
-[Export] public float _flashDuration = 0.75f;
-[Export] public float _nextRoundDelay = 2.0f;
+	// ---- Timers ----
+	[ExportGroup("Timers")]
+	[Export] public float _flashDuration = 0.75f;
+	[Export] public float _pressFlashDuration = 0.5f;
+	[Export] public float _betweenFlashDuration = 0.5f;
+	[Export] public float _nextRoundDelay = 2.0f;
+	[Export] public float _wrongPressDelay = 2.0f;
 
-// ---- Tuning ----
-[ExportGroup("Tuning")]
-[Export] private int _level = 1;
-[Export] private int _maxHealth = 3;
-[Export] public int _btnCount = 9;
-[Export] private int _levelLength = 3;
+	// ---- Tuning ----
+	[ExportGroup("Tuning")]
+	[Export] private int _maxHealth = 3;
+	[Export] public int _btnCount = 9;
+	[Export] private int _levelLength = 3;
 
-// ---- Runtime state ----
-private int _index = 0;
-private int _lives;
-private Array<string> _levelNames = null;
-private Array<TileButton> _buttons = new();
-private Array<TileButton> _rndButtons = new();
-private Array<HeartTexture> _hearts = new();
+	// ---- Runtime state ----
+	private int _lives;
+	private Array<TileButton> _buttons = new();
+	private Array<HeartTexture> _hearts = new();
 
-// ---- Properties ----
-public int Lives
-{
-    get { return _lives; }
-    set { _lives = Mathf.Clamp(value, 0, _maxHealth); }
-}
+	// ---- Properties ----
+	public int Lives
+	{
+		get { return _lives; }
+		set { _lives = Mathf.Clamp(value, 0, _maxHealth); }
+	}
+
+	// ---- Level Management ----
+	private int _currentLevel = 0;
+	private Array<string> _levelNames = null;
+	private int[][] _levelSequences = null;
+	private int _currentlevelIndex = 0;
+	private int _currentSequenceIndex = 0;
+	private int[] _activeSequence = [];
+	private TileButton _correctButton = null;
+
+
+	// ---- GODOT MANAGEMENT ---- 
+
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
-		//Testing
-		LoadLevels();
 
+		// Check that all elements were found
 		Lives = _maxHealth;
 		if (_heartField == null)
 		{
@@ -67,144 +85,90 @@ public int Lives
 			_buttons = _tileField.Setup(this);
 		}
 
+		// Disable inputs to avoid early disturbance
+		SetAllButtonsDisabled(true);
+
 		//loop through _buttons arr and start listening to each signal.
 		foreach (TileButton button in _buttons)
 		{
-			button.CorrectPress += CorrectPressed;
-			button.WrongPress += WrongPressed;
+			button.CorrectPress += () => CorrectPressed(button);
+			button.WrongPress += () => WrongPressed(button);
 		}
-		
-		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
-		BuildSequence();
-		ShowButtons();
+
+		_soundLoader.Setup(_buttons);
+
+		// Load level data
+		_levelNames = SequenceLoader.GetAvailableLevels();
+		LoadLevel();
+		await Timer(_nextRoundDelay);
+		PlaySequence();
 	}
 
 	public override void _ExitTree()
 	{
 		// stop listening to the signals
-		foreach (var item in _buttons)
+		foreach (var button in _buttons)
 		{
-			item.CorrectPress -= CorrectPressed;
-			item.WrongPress -= WrongPressed;
+			button.CorrectPress -= () => CorrectPressed(button);
+			button.WrongPress -= () => WrongPressed(button);
 		}
 	}
 
 
-	//TODO: do something when the wrong button has been pressed
-	public async void WrongPressed()
+	// ---- GameLoop Management ----
+
+	// Responsible for playing the sequence to the player
+	private async void PlaySequence()
 	{
+		// Update indicator to active and set up the sequence loop
+		// by fetching the current sequence from the shuffled sequences
 		_goStopTexture.SetState(Indicator.TileState.Active);
-		Lives--;
-		_index = 0;
+ 		_activeSequence = _levelSequences[_currentlevelIndex];
 
-		if (Lives <= 0)
-		{	// wait until the end of the frame
-			CallDeferred(MethodName.GameOver);
-		}
-
-		_hearts[Lives].SetState(Indicator.TileState.Inactive);
-
-
-		//show the curent level buttons again.
-		await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
-		ShowButtons();
-		_rndButtons[_index].SetIsCorrect(true);
-	}
-
-
-	public async void CorrectPressed()
-	{
-		GD.Print("Correct button Pressed");
-		// set the button that was just pressed as not correct
-
-		_rndButtons[_index].SetIsCorrect(false);
-		_index++;
-
-		// go into the next level
-		if (_index >= _level)
-			{
-				_goStopTexture.SetState(Indicator.TileState.Active);
-				_index = 0;
-				_level ++;
-				_score.SetText(_level);
-				BuildSequence();
-				await ToSignal(GetTree().CreateTimer(_nextRoundDelay), "timeout");
-				ShowButtons();
-			}
-
-		_rndButtons[_index].SetIsCorrect(true);
-	}
-
-	private void BuildSequence()
-	{
-		int[][] data = SequenceLoader.LoadSequences(_levelNames[_level - 1]);
-
-
-		//empty the array if there is something in it.
-		if (_rndButtons.Count != 0 )
+		// Iterate through the active sequence
+		for (int i = 0; i < _activeSequence.Length; i++)
 		{
-			_rndButtons.Clear();
-		}
-		//add buttons in random order to a new array
-		for (int i = 0; i < _level; i++)
-		{
-			_rndButtons.Add(_buttons.PickRandom());
-		}
-
-		// set the first button as the correct button
-		_rndButtons[0].SetIsCorrect(true);
-	}
-
-	public async void ShowButtons()
-	{
-		//goStopTexture.SetSize();
-
-		//Disable all buttons
-		for (int i = 0; i < _buttons.Count; i++)
-		{
-			_buttons[i].ChangeDisable();
+			TileButton btn = _buttons[_activeSequence[i]];
+			btn.SetGreen();
+			await Timer(_flashDuration);
+			btn.Reset();
+			await Timer(_betweenFlashDuration);
 		}
 
-		// loop through buttons turn them to green then turn back
-		for (int i = 0; i < _rndButtons.Count; i++)
-		{
-			_rndButtons[i].SetGreen();
-			_rndButtons[i].UpDateVisual();
-			//how long to show each button as green before turning back
-			await ToSignal(GetTree().CreateTimer(_flashDuration), "timeout");
-			_rndButtons[i].Reset();
-			await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
-
-		}
-
-		// Enable all buttons
-		for (int i = 0; i < _buttons.Count; i++)
-		{
-			_buttons[i].ChangeDisable();
-		}
-
-
+		// Update the indicator and set correct input
+		_currentSequenceIndex = 0;
+		SetCorrectButton(_activeSequence[_currentSequenceIndex]);
 		_goStopTexture.SetState(Indicator.TileState.Inactive);
 
-		//goStopTexture.SetSize();
-
+		// Correct inputs should be setup by now and inputs get unlocked
+		SetAllButtonsDisabled(false);
 	}
 
+	//TODO: Some kind of GAMEOVER screen or setback mechanic (or both!
+	// menu that gives both as options?)
 	private void GameOver()
 	{
 		//TODO: do something when the game is over
-			_index = 0;
-			GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+	}
 
+
+	// ---- Level management ----
+
+	// Loads and sets up the active level, called once per level
+	private void LoadLevel()
+	{
+		int[][] completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
+		_levelSequences = ShuffleLevel(completeLevel);
 	}
 
 	// Takes an entire level read straight from the file and returns a scrambled one with
 	// the the amount of items defined by '_levelLength'
 	// the parameter int[][]
 	// WORKING PROGRESS!!
-	private int[][] LevelScrambler(int[][] lvl)
+	private int[][] ShuffleLevel(int[][] lvl)
 	{
-		// checking that the level given has 
+		// checking that the level given has
 		if (lvl.Length < _levelLength)
 		{
 			GD.Print($"Level must have at least {_levelLength} items, Returning array.");
@@ -226,28 +190,152 @@ public int Lives
 		return shuffled[.._levelLength];
 	}
 
-	// WORKING PROGRESS!!
-	private void LoadLevels()
+
+	// ---- Input Handling ----
+
+	// Function that triggers upon receiving signal from button.
+	// Disables buttons to stop the user from 'spamming' button and
+	// losing unnecessary hearts.
+	// Signal is fired and function calls whenever user presses button with
+	// '_isCorrect' == false.
+	// handles heart loss and triggers the replay of sequence.
+	//
+	// TODO: a resetting mechanic where the wrongPressed resets you
+	// back to a certain point
+	public async Task WrongPressed(TileButton sender)
 	{
-		_levelNames = SequenceLoader.GetAvailableLevels();
-		GD.Print(_levelNames);
-
+		_ = ShowWrongButton(sender); // color the button accordingly
 		
+		// Disable all buttons to stop additional inputs during process
+		SetAllButtonsDisabled(true);
 
-		for (int i = 0; i < _levelNames.Count; i++)
+		// Trigger indicator and reset sequenceIndex, also remove life
+		_goStopTexture.SetState(Indicator.TileState.Active);
+		Lives--;
+		_currentSequenceIndex = 0;
+
+		// Called for handling GameOver calls and heart updates aswell as
+		// Replaying sequence
+		HandleWrongPress();
+	}
+
+	// Gets called upon signal from a button being pressed with
+	// '_isCorrect' == true. Sets own correct as false and calls handler.
+	public async Task CorrectPressed(TileButton sender)
+	{
+		_ = ShowCorrectButton(sender); // color the button accordingly
+
+		// Disable all buttons to stop additional input during the process 
+		SetAllButtonsDisabled(true);
+
+		// set the button that was just pressed as not correct,
+		// update index
+		_currentSequenceIndex++;
+
+		// call handler for processing followup
+		HandleCorrectPress();
+	}
+
+	// Handler for 'WrongPressed', updates hearts and calls 'GameOver'
+	// when lives go to 0
+	private async void HandleWrongPress()
+	{
+		// Sets heart of array correspondent to amount of lives as inactive
+		_hearts[_lives].SetState(HeartTexture.TileState.Inactive);
+
+		// Checks wether to end game or replay sequence
+		if (_lives <= 0)
 		{
-			GD.Print(_levelNames[i]);
-			int[][] levels = SequenceLoader.LoadSequences(_levelNames[i]);
-
-			for (int j = 0; j < levels.Count(); j++)
-			{
-				GD.Print(" ");
-
-				for (int k = 0; k < levels[j].Length; k++)
-				{
-					GD.Print(levels[j][k]);
-				}
-			}
+			GameOver();
+		} else
+		{
+			await Timer(_wrongPressDelay);
+			PlaySequence();
 		}
 	}
+
+	// Handler function for 'CorrectPressed' deals with potentially switching
+	// to next sequence, level, or just setting next sequence button as correct
+	private async void HandleCorrectPress()
+	{
+		// Checks if current sequence is over
+		if (_currentSequenceIndex >= _activeSequence.Length)
+		{
+			// Activate stop-indicator
+			_goStopTexture.SetState(Indicator.TileState.Active);
+
+			// reset local index and update LevelIndex
+			_currentSequenceIndex = 0;
+			_currentlevelIndex++;
+
+			// Check if upon updating LevelIndex its time to level up
+			if (_currentlevelIndex >= _levelSequences.Length)
+			{
+				// Resets LevelIndex and updates level
+				_currentlevelIndex = 0;
+				_currentLevel++;
+
+				// Update scoreboard
+				//TODO: update to switch between sprites
+				_score.SetText(_currentLevel + 1);
+
+				// Load the next levels sequences
+				LoadLevel();
+			}
+
+			// In both cases set timer and go to next round.
+			await Timer(_nextRoundDelay);
+			PlaySequence();
+		}
+		else // if sequence is not over, simply update next correct button
+		{
+			SetCorrectButton(_activeSequence[_currentSequenceIndex]);
+			SetAllButtonsDisabled(false);
+		}
+	}
+
+
+	// ---- Button management ----
+
+	// Responsible for coloring and resetting button
+	private async Task ShowCorrectButton(TileButton Button)
+	{
+		Button.SetGreen();
+		await Timer(_pressFlashDuration);
+		Button.Reset();
+	}
+	
+	// Responsible for coloring and resetting button
+	private async Task ShowWrongButton(TileButton Button)
+	{
+		Button.SetRed();
+		await Timer(_pressFlashDuration);
+		Button.Reset();
+	}
+
+	// Sets reference for the correct button and enables correct within button
+	// doublecheck exists so that no re-iteration of arrays is needed,
+	// while allowing buttons to still send the correct or wrong signal
+	private void SetCorrectButton(int index)
+	{
+		if (_correctButton != null)
+			_correctButton.IsCorrect = false;
+
+		_correctButton = _buttons[index];
+		_correctButton.IsCorrect = true;
+	}
+
+	
+	// ---- Helpers ----
+
+	// Helper function that disables all buttons, blocking input
+	private void SetAllButtonsDisabled(bool b)
+	{
+		for (int i = 0; i < _buttons.Count(); i++)
+			_buttons[i].SetDisabled(b);
+	}
+
+	// Helper function that acts as a timer
+	private SignalAwaiter Timer(float seconds) =>
+		ToSignal(GetTree().CreateTimer(seconds),"timeout");
 }
