@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://0ikkpwvwksh4"]
 
-[ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/PlayButton.cs" id="2_o0tnf"]
-[ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/QuitButton.cs" id="3_jmdev"]
+[ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/UI/Menus/PlayButton.cs" id="2_o0tnf"]
+[ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/UI/Menus/QuitButton.cs" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="4_jmdev"]
 [ext_resource type="Texture2D" uid="uid://d0fsktvjsqs2i" path="res://art/Memologo.png" id="5_b6cxs"]
 

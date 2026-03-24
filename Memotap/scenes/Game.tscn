@@ -1,29 +1,24 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
 
-[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/Game.cs" id="1_qy1jj"]
+[ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
-[ext_resource type="Script" uid="uid://cr5vrsawk7w2l" path="res://src/GameUI.cs" id="3_aug50"]
-[ext_resource type="Script" uid="uid://d342jyf1wjeiw" path="res://src/PauseButton.cs" id="3_cpr0p"]
-[ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/pause.png" id="3_s0nni"]
-[ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/PauseMenu.tscn" id="6_kiw3p"]
-[ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/HeartField.tscn" id="7_400sg"]
-[ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/Score.tscn" id="8_qy1jj"]
-[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/GoStopTexture.tscn" id="9_g4kob"]
-[ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/SequenceLoader.cs" id="11_3xj3m"]
-[ext_resource type="Script" uid="uid://dsqw56w2mghye" path="res://src/SoundLoader.cs" id="12_7ua8r"]
-[ext_resource type="AudioStream" uid="uid://dx4e2ns0gcbu2" path="res://art/Sounds/Correct.wav" id="13_r7sob"]
-[ext_resource type="AudioStream" uid="uid://kbcdk353smuq" path="res://art/Sounds/Wrong.wav" id="14_y5y3l"]
-[ext_resource type="AudioStream" uid="uid://b1ko6nqf2s3en" path="res://art/Sounds/level-up.wav" id="15_r7sob"]
+[ext_resource type="Script" uid="uid://cr5vrsawk7w2l" path="res://src/UI/Menus/GameUI.cs" id="3_aug50"]
+[ext_resource type="Script" uid="uid://d342jyf1wjeiw" path="res://src/UI/Menus/PauseButton.cs" id="3_cpr0p"]
+[ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/UI/pause.png" id="3_s0nni"]
+[ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
+[ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
+[ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
+[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
+[ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score", "_soundLoader")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
 _goStopTexture = NodePath("GameUI/GoStopTexture")
 _heartField = NodePath("HeartField")
 _tileField = NodePath("TileField")
 _score = NodePath("GameUI/Score")
-_soundLoader = NodePath("SoundLoader")
 _maxHealth = 5
 
 [node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
@@ -108,10 +103,6 @@ scale = Vector2(0.7, 0.7)
 
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
-
-[node name="SoundLoader" type="Node" parent="."]
-script = ExtResource("12_7ua8r")
-audioStreams = Array[AudioStream]([ExtResource("13_r7sob"), ExtResource("14_y5y3l"), ExtResource("15_r7sob")])
 
 [editable path="TileField"]
 [editable path="HeartField"]
