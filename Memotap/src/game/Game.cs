@@ -29,6 +29,7 @@ public partial class Game : Node2D
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
+	[Export] private GameOverMenu _gameOver = null; 
 
 
 	// ---- Timers ----
@@ -36,7 +37,7 @@ public partial class Game : Node2D
 	[Export] public float _flashDuration = 0.75f;
 	[Export] public float _pressFlashDuration = 0.5f;
 	[Export] public float _betweenFlashDuration = 0.5f;
-	[Export] public float _nextRoundDelay = 2.0f;
+	[Export] public float _nextRoundDelay = 1.0f;
 	[Export] public float _wrongPressDelay = 2.0f;
 
 	// ---- Tuning ----
