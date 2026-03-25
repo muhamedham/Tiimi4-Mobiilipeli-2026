@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0ikkpwvwksh4"]
+[gd_scene load_steps=9 format=3 uid="uid://0ikkpwvwksh4"]
 
 [ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/Memologo-cropped.png" id="2_b6cxs"]
 [ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/UI/Menus/PlayButton.cs" id="2_o0tnf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/UI/Menus/QuitButton.cs" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="4_jmdev"]
 [ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
+[ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/Welltech/Welltech_ilmantaustaa.png" id="7_aaywf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
@@ -24,25 +25,14 @@ grow_vertical = 2
 texture = ExtResource("4_jmdev")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
-offset_left = 309.0
-offset_top = -179.0
-offset_right = 1333.0
-offset_bottom = 1357.0
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_b6cxs")
-
 [node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -110.0
-offset_bottom = 203.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_aaywf")
@@ -54,13 +44,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -17
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(630, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_b6cxs")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 100
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_vertical = 3
@@ -73,7 +74,7 @@ expand_icon = true
 language = "fi_FI"
 script = ExtResource("2_o0tnf")
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_vertical = 3
@@ -84,3 +85,14 @@ icon = ExtResource("5_aaywf")
 flat = true
 expand_icon = true
 script = ExtResource("3_jmdev")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("7_aaywf")
+expand_mode = 1
