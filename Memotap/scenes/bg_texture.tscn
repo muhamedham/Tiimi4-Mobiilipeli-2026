@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr36lg753klqk"]
+
+[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="1_x6fb5"]
+
+[node name="TextureRect" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_x6fb5")
+expand_mode = 1

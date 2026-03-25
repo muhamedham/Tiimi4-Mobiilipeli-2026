@@ -7,16 +7,6 @@ public partial class PauseMenu : Control
 	public override void _Ready()
 	{
 		Visible = false;
-
-		ResumeButton resumeButton = GetNode<ResumeButton>("PanelContainer/VBoxContainer/ResumeButton");
-		RestartButton restartButton = GetNode<RestartButton>("PanelContainer/VBoxContainer/RestartButton");
-		BackButton backButton = GetNode<BackButton>("PanelContainer/VBoxContainer/BackButton");
-
-
-
-		resumeButton.ResumeRequest += Resume;
-		restartButton.RestartRequest += Restart;
-		backButton.BackRequest += Quit;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,7 +42,7 @@ public partial class PauseMenu : Control
 		GetTree().ReloadCurrentScene();
 	}
 
-	public void Quit()
+	public void Back()
 	{
 		//mystistä
 		Resume();

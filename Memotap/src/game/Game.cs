@@ -287,7 +287,7 @@ public partial class Game : Node2D
 
 				// Update scoreboard
 				//TODO: update to switch between sprites
-				_score.SetText(_currentLevel + 1);
+				_score.SetLevel(_currentLevel);
 
 				// Load the next levels sequences
 				LoadLevel();

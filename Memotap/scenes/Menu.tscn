@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://0ikkpwvwksh4"]
 
+[ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="1_aaywf"]
 [ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/Memologo-cropped.png" id="2_b6cxs"]
 [ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/UI/Menus/PlayButton.cs" id="2_o0tnf"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="3_b6cxs"]
 [ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/UI/Menus/QuitButton.cs" id="3_jmdev"]
-[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="4_jmdev"]
 [ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
 [ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/Welltech/Welltech_ilmantaustaa.png" id="7_aaywf"]
 
@@ -16,14 +16,7 @@ process_mode = 3
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_jmdev")
-expand_mode = 1
+[node name="BGTextures" parent="CanvasLayer" instance=ExtResource("1_aaywf")]
 
 [node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
 offset_right = 40.0

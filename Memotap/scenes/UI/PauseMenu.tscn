@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkydgglni72kp"]
+[gd_scene load_steps=4 format=3 uid="uid://bkydgglni72kp"]
 
 [ext_resource type="Script" uid="uid://cxvpmg2551p63" path="res://src/UI/Menus/PauseMenu.cs" id="1_jvnd5"]
-[ext_resource type="Script" uid="uid://b75cy0b7brcmh" path="res://src/UI/Menus/ResumeButton.cs" id="2_komsw"]
-[ext_resource type="Script" uid="uid://b2687qgqbctn8" path="res://src/UI/Menus/RestartButton.cs" id="3_5w6ei"]
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="3_73e60"]
-[ext_resource type="Script" uid="uid://djstokrprqdeg" path="res://src/UI/Menus/BackButton.cs" id="4_5w6ei"]
 
 [sub_resource type="Theme" id="Theme_5w6ei"]
 
@@ -40,17 +37,17 @@ theme_override_constants/separation = 10
 [node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "jatka"
-script = ExtResource("2_komsw")
 
 [node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_73e60")
 text = "Aloita uudestaan"
-script = ExtResource("3_5w6ei")
-theme_override_fonts/font = ExtResource("3_73e60")
 
 [node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Takaisin päävalikkoon
 "
-script = ExtResource("4_5w6ei")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ResumeButton" to="." method="Resume"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/RestartButton" to="." method="Restart"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BackButton" to="." method="Back"]

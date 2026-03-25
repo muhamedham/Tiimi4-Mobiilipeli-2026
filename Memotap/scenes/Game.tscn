@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
-[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_78awf"]
-[ext_resource type="Script" uid="uid://cr5vrsawk7w2l" path="res://src/UI/Menus/GameUI.cs" id="3_aug50"]
-[ext_resource type="Script" uid="uid://d342jyf1wjeiw" path="res://src/UI/Menus/PauseButton.cs" id="3_cpr0p"]
 [ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/UI/pause.png" id="3_s0nni"]
+[ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="4_2rd6h"]
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
@@ -14,56 +12,20 @@
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="10_mcffj"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score", "_gameOver")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
-_goStopTexture = NodePath("GameUI/GoStopTexture")
-_heartField = NodePath("HeartField")
-_tileField = NodePath("TileField")
-_score = NodePath("GameUI/Score")
+_goStopTexture = NodePath("GameLayer/GoStopTexture")
+_heartField = NodePath("GameLayer/HeartField")
+_tileField = NodePath("GameLayer/TileField")
+_score = NodePath("GameLayer/Score")
+_gameOver = NodePath("UILayer/GameOver")
 _maxHealth = 5
 
-[node name="TileField" parent="." instance=ExtResource("1_wbfu4")]
-process_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_right = 0.02
-anchor_bottom = 0.0
-offset_left = 357.0
-offset_top = 153.0
-offset_right = 3847.9165
-offset_bottom = 3929.4204
-scale = Vector2(0.11147484, 0.107637346)
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-z_index = -1
-offset_left = -3.0000002
-offset_top = -22.0
-offset_right = 37.967785
-offset_bottom = 19.348972
-scale = Vector2(28.656662, 16.308685)
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-texture = ExtResource("2_78awf")
-expand_mode = 1
-
-[node name="GameUI" type="CanvasLayer" parent="."]
-script = ExtResource("3_aug50")
-
-[node name="PauseButton" type="TextureButton" parent="GameUI"]
-anchors_preset = -1
-anchor_right = 0.11100001
-anchor_bottom = 0.15400001
-offset_left = 18.999998
-offset_top = 19.999998
-offset_right = 979.128
-offset_bottom = 1848.208
-scale = Vector2(0.1, 0.1)
-texture_normal = ExtResource("3_s0nni")
-script = ExtResource("3_cpr0p")
-
-[node name="PauseMenu" parent="GameUI" instance=ExtResource("6_kiw3p")]
+[node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
 anchors_preset = 14
 anchor_left = 0.0
 anchor_right = 1.0
@@ -72,28 +34,7 @@ offset_top = 0.0
 offset_right = -270.0
 offset_bottom = 0.0
 
-[node name="GoStopTexture" parent="GameUI" instance=ExtResource("9_g4kob")]
-anchors_preset = -1
-anchor_top = 0.30900002
-anchor_right = 1.0
-anchor_bottom = 0.61700004
-offset_left = 906.0
-offset_top = -0.23200989
-offset_right = -146.0
-offset_bottom = -99.81604
-
-[node name="Score" parent="GameUI" instance=ExtResource("8_qy1jj")]
-anchors_preset = -1
-anchor_top = 0.062000003
-anchor_right = 0.98
-anchor_bottom = 0.165
-offset_left = 463.0
-offset_top = -21.176003
-offset_right = -431.95996
-offset_bottom = 0.0799942
-grow_horizontal = 2
-
-[node name="GameOver" type="ColorRect" parent="GameUI"]
+[node name="GameOver" type="ColorRect" parent="UILayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -104,7 +45,7 @@ size_flags_vertical = 4
 color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
 script = ExtResource("10_2rd6h")
 
-[node name="PanelContainer" type="PanelContainer" parent="GameUI/GameOver"]
+[node name="PanelContainer" type="PanelContainer" parent="UILayer/GameOver"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -118,39 +59,46 @@ offset_bottom = 100.5625
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GameUI/GameOver/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/GameOver/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/GameOver/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GameOver/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("10_mcffj")
 text = "Peli Ohi"
 
-[node name="Button" type="Button" parent="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("10_mcffj")
 text = "Aloita uudelleen"
 
-[node name="RestartButton" type="Button" parent="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "aloita uudelleen"
 
-[node name="MenuButton" type="Button" parent="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "TAKAISIN PÄÄVALIKKOON"
 
-[node name="ContinueButton" type="Button" parent="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "JATKA TALLENNUSPISTEESTÄ"
 
-[node name="HeartField" parent="." instance=ExtResource("7_400sg")]
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" parent="BGLayer" instance=ExtResource("4_2rd6h")]
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartField" parent="GameLayer" instance=ExtResource("7_400sg")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -160,13 +108,57 @@ offset_right = 1286.0
 offset_bottom = 136.85715
 scale = Vector2(0.7, 0.7)
 
+[node name="TileField" parent="GameLayer" instance=ExtResource("1_wbfu4")]
+process_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_right = 0.02
+anchor_bottom = 0.0
+offset_left = 333.96
+offset_top = 153.0
+offset_right = 3824.8765
+offset_bottom = 3929.4204
+scale = Vector2(0.11147484, 0.107637346)
+
+[node name="PauseButton" type="TextureButton" parent="GameLayer"]
+anchors_preset = -1
+anchor_right = 0.11100001
+anchor_bottom = 0.15400001
+offset_left = 18.999998
+offset_top = 19.999998
+offset_right = 979.128
+offset_bottom = 1848.208
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_s0nni")
+
+[node name="GoStopTexture" parent="GameLayer" instance=ExtResource("9_g4kob")]
+anchors_preset = -1
+anchor_top = 0.30900002
+anchor_right = 1.0
+anchor_bottom = 0.61700004
+offset_left = 906.0
+offset_top = -0.23200989
+offset_right = -46.0
+offset_bottom = 0.18395996
+
+[node name="Score" parent="GameLayer" instance=ExtResource("8_qy1jj")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
 
-[connection signal="pressed" from="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="GameUI/GameOver" method="OnButtonPressed"]
-[connection signal="pressed" from="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="GameUI/GameOver" method="OnRestartPressed"]
-[connection signal="pressed" from="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="OnMenuPressed"]
-[connection signal="pressed" from="GameUI/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="OnContinuePressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="UILayer/GameOver" method="OnButtonPressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="UILayer/GameOver" method="OnRestartPressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="OnMenuPressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="OnContinuePressed"]
+[connection signal="pressed" from="GameLayer/PauseButton" to="UILayer/PauseMenu" method="Pause"]
 
-[editable path="TileField"]
-[editable path="HeartField"]
+[editable path="GameLayer/HeartField"]
+[editable path="GameLayer/TileField"]
