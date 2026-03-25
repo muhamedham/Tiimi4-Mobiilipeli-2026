@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://0ikkpwvwksh4"]
+[gd_scene load_steps=8 format=3 uid="uid://0ikkpwvwksh4"]
 
+[ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/Memologo-cropped.png" id="2_b6cxs"]
 [ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/UI/Menus/PlayButton.cs" id="2_o0tnf"]
+[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="3_b6cxs"]
 [ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/UI/Menus/QuitButton.cs" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="4_jmdev"]
-[ext_resource type="Texture2D" uid="uid://d0fsktvjsqs2i" path="res://art/Memologo.png" id="5_b6cxs"]
+[ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
 [node name="Menu" type="Node2D"]
 process_mode = 3
@@ -11,53 +15,72 @@ process_mode = 3
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.367
-anchor_top = 0.4
-anchor_right = 0.62700003
-anchor_bottom = 0.8
-offset_left = 0.2159729
-offset_top = -2.2000122
-offset_right = 4.695984
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
+texture = ExtResource("4_jmdev")
+expand_mode = 1
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 309.0
+offset_top = -179.0
+offset_right = 1333.0
+offset_bottom = 1357.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_b6cxs")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -110.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aaywf")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 100
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 60.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "PELAA"
+icon = ExtResource("3_b6cxs")
 flat = true
+expand_icon = true
 language = "fi_FI"
 script = ExtResource("2_o0tnf")
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "SULJE"
+icon = ExtResource("5_aaywf")
 flat = true
+expand_icon = true
 script = ExtResource("3_jmdev")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_top = -55.0
-offset_right = 1224.0
-offset_bottom = 648.0
-texture = ExtResource("4_jmdev")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = 292.0
-offset_top = -169.0
-offset_right = 1316.0
-offset_bottom = 1367.0
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("5_b6cxs")
