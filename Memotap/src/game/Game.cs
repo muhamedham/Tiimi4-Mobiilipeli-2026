@@ -13,6 +13,8 @@ public partial class Game : Node2D
 	//  ---- Signals ----
 		//game over signal emitted when the game is over
 	[Signal] public delegate void GameOverSignalEventHandler();
+
+		// emit a signal when a button is shown
 	[Signal] public delegate void ButtonShownSignalEventHandler();
 
 	// ---- Node references ----
@@ -54,6 +56,7 @@ public partial class Game : Node2D
 	private int _currentLevel = 0;
 	private Array<string> _levelNames = null;
 	private int[][] _levelSequences = null;
+	private int[][] _lastLevelSequences = null;
 	private int _currentlevelIndex = 0;
 	private int _currentSequenceIndex = 0;
 	private int[] _activeSequence = [];
@@ -94,7 +97,8 @@ public partial class Game : Node2D
 			button.WrongPress += () => WrongPressed(button);
 		}
 
-		SoundLoader.Instance.Setup(_buttons);
+		//give the buttons to soundloader to register sounds
+		SoundLoader.Instance.RegisterTileButtons(_buttons);
 
 		// Load level data
 		_levelNames = SequenceLoader.GetAvailableLevels();
@@ -148,10 +152,26 @@ public partial class Game : Node2D
 	// menu that gives both as options?)
 	private void GameOver()
 	{
-
 		//TODO: do something when the game is over
-		//GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 		EmitSignal(SignalName.GameOverSignal);
+	}
+
+	//store the last level to an array
+
+	private async void HandleCheckpoint()
+	{
+		Lives = _maxHealth;
+		if (_currentLevel != 0)
+		{
+			 _levelSequences = DupeArr(_lastLevelSequences);
+			 _currentLevel --;
+		}
+		_currentlevelIndex = 0;
+
+		UpdateScoreBoard();
+		FillHearts();
+		await Timer(_nextRoundDelay);
+		PlaySequence();
 	}
 
 
@@ -243,10 +263,10 @@ public partial class Game : Node2D
 	private async void HandleWrongPress()
 	{
 		// Sets heart of array correspondent to amount of lives as inactive
-		_hearts[_lives].SetState(HeartTexture.TileState.Inactive);
+		_hearts[Lives].SetState(Indicator.TileState.Inactive);
 
 		// Checks wether to end game or replay sequence
-		if (_lives <= 0)
+		if (Lives <= 0)
 		{
 			GameOver();
 		} else
@@ -272,20 +292,23 @@ public partial class Game : Node2D
 
 			// Check if upon updating LevelIndex its time to level up
 			if (_currentlevelIndex >= _levelSequences.Length)
-			{
-				// Resets LevelIndex and updates level
-				_currentlevelIndex = 0;
-				_currentLevel++;
+            {
+                // Resets LevelIndex and updates level
+                _currentlevelIndex = 0;
+                _currentLevel++;
 
-				// Update scoreboard
-				_score.SetLevel(_currentLevel);
+                // Update scoreboard
+                UpdateScoreBoard();
 
-				// Load the next levels sequences
-				LoadLevel();
-			}
+                _lastLevelSequences = DupeArr(_levelSequences);
 
-			// In both cases set timer and go to next round.
-			await Timer(_nextRoundDelay);
+
+                // Load the next levels sequences
+                LoadLevel();
+            }
+
+            // In both cases set timer and go to next round.
+            await Timer(_nextRoundDelay);
 			PlaySequence();
 		}
 		else // if sequence is not over, simply update next correct button
@@ -296,10 +319,11 @@ public partial class Game : Node2D
 	}
 
 
-	// ---- Button management ----
 
-	// Responsible for coloring and resetting button
-	private async Task ShowCorrectButton(TileButton Button)
+    // ---- Button management ----
+
+    // Responsible for coloring and resetting button
+    private async Task ShowCorrectButton(TileButton Button)
 	{
 		Button.SetGreen();
 		await Timer(_pressFlashDuration);
@@ -329,6 +353,21 @@ public partial class Game : Node2D
 
 	// ---- Helpers ----
 
+
+	private void FillHearts()
+	{
+		foreach (Indicator heart in _hearts)
+		{
+			heart.SetState(Indicator.TileState.Active);
+		}
+	}
+
+	//helper function to update the scoreboard
+	private void UpdateScoreBoard()
+    {
+        _score.SetLevel(_currentLevel);
+    }
+
 	// Helper function that disables all buttons, blocking input
 	private void SetAllButtonsDisabled(bool b)
 	{
@@ -336,7 +375,29 @@ public partial class Game : Node2D
 			_buttons[i].SetDisabled(b);
 	}
 
+	//helper function to deep copy an array
+	private int[][] DupeArr(int[][] oldArr)
+	{
+		int[][] newArr = new int[oldArr.Length][];
+		for (int i = 0; i < oldArr.Length; i++)
+		{
+			newArr[i] = new int[oldArr[i].Length];
+		}
+		for (int i = 0; i < oldArr.Length; i++)
+		{
+			for (int j = 0; j < oldArr[i].Length; j++)
+			{
+				newArr[i][j] = oldArr[i][j];
+			}
+		}
+		return newArr;
+	}
+
 	// Helper function that acts as a timer
 	private SignalAwaiter Timer(float seconds) =>
 		ToSignal(GetTree().CreateTimer(seconds),"timeout");
+
+
+
+
 }

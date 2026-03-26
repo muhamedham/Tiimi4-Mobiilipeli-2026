@@ -19,7 +19,7 @@ _goStopTexture = NodePath("GameLayer/GoStopTexture")
 _heartField = NodePath("GameLayer/HeartField")
 _tileField = NodePath("GameLayer/TileField")
 _score = NodePath("GameLayer/Score")
-_maxHealth = 1
+_maxHealth = 5
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -34,7 +34,6 @@ offset_right = -270.0
 offset_bottom = 0.0
 
 [node name="GameOver" type="ColorRect" parent="UILayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -165,7 +164,8 @@ _gameOverMenu = NodePath("../UILayer/GameOver")
 [connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="UILayer/GameOver" method="OnButtonPressed"]
 [connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="MenuController" method="Restart"]
 [connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="MenuController" method="Back"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="OnContinuePressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="HandleCheckpoint"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="MenuController" method="HideAll"]
 [connection signal="pressed" from="GameLayer/PauseButton" to="MenuController" method="Pause"]
 
 [editable path="UILayer/PauseMenu"]

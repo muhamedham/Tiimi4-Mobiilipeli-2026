@@ -3,21 +3,16 @@ using System;
 
 public partial class MenuController : Node
 {
-
-
 	// ---- Node references ----
 	[ExportGroup("Node references")]
-	
+
 	[Export] Control _pauseMenu;
 	[Export] ColorRect _gameOverMenu;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		// make sure the pause menu or gameover menu is not visible when first starting the game.
-		_pauseMenu.Visible = false;
-		_gameOverMenu.Visible = false;
-
-
+		HideAll();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +36,7 @@ public partial class MenuController : Node
 
 		GD.Print("resume called");
 		GetTree().Paused = false;
-		_pauseMenu.Visible = false;
+		HideAll();
 	}
 
 	// Reloads the current scene
@@ -62,5 +57,11 @@ public partial class MenuController : Node
 	private void GameOver()
 	{
 		_gameOverMenu.Visible = true;
+	}
+
+	private void HideAll()
+	{
+		_pauseMenu.Visible = false;
+		_gameOverMenu.Visible = false;
 	}
 }

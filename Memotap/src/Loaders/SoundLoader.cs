@@ -27,6 +27,7 @@ public partial class SoundLoader : Node
 
     AudioStreamPlayer songPlayer;
 
+    // make sure there is only one instance of the soundloader
     public override void _Ready()
     {
         if (Instance == null)
@@ -47,7 +48,7 @@ public partial class SoundLoader : Node
         };
         AddChild(songPlayer);
 
-
+        //load all the audio streams we want to play
         audioStreams =
         [
             GD.Load<AudioStream>("res://art/Sounds/klikkaus.mp3"),
@@ -57,6 +58,7 @@ public partial class SoundLoader : Node
 
         ];
 
+        //make as many sound players as we have sounds
         audioStreamPlayers.Resize(audioStreams.Count);
 
         // add audioplayers to all the sounds we have
@@ -71,18 +73,18 @@ public partial class SoundLoader : Node
 
                 Bus = "SFX"
             };
-
             AddChild(audioStreamPlayers[i]);
-
         }
 
+        //listen to scene changes to find all children
         GetTree().SceneChanged += () => FindChildren(GetParent());
 
         FindChildren(GetParent());
     }
 
-    public void Setup(Array<TileButton> arr)
+    public void RegisterTileButtons(Array<TileButton> arr)
     {
+        // the game has started so lower the volume of the background song
         songPlayer.VolumeDb = -30f;
 
         foreach (TileButton button in arr)
@@ -112,8 +114,8 @@ public partial class SoundLoader : Node
     }
 
 
-//Voisi käyttää jos nappeja ei enää lisätä koodissa vaan käsin
-// koodi etsii itse napit ja kuuntelee painallus signaaleja
+
+// find children if it is a button start listening to its signals
     private void FindChildren(Node parent)
     {
         foreach (Node child in parent.GetChildren())
@@ -130,12 +132,7 @@ public partial class SoundLoader : Node
             // call recursively to find all children
             FindChildren(child);
         }
-
     }
-
-
-    //TODO? Lisää UI nappeihin myös äänet
-    // ja silloin kun nappeja näytetään
 }
 
 //tutorial:
