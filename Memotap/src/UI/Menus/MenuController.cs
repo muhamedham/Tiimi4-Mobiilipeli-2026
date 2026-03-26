@@ -1,12 +1,23 @@
 using Godot;
 using System;
 
-public partial class PauseMenu : Control
+public partial class MenuController : Node
 {
+
+
+	// ---- Node references ----
+	[ExportGroup("Node references")]
+	
+	[Export] Control _pauseMenu;
+	[Export] ColorRect _gameOverMenu;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Visible = false;
+		// make sure the pause menu or gameover menu is not visible when first starting the game.
+		_pauseMenu.Visible = false;
+		_gameOverMenu.Visible = false;
+
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,25 +25,23 @@ public partial class PauseMenu : Control
 	{
 	}
 
-	// Pauses the game and shows the pause-menu
+
 	public void Pause()
 	{
-
 		Engine.TimeScale = 0;
 
 		GetTree().Paused = true;
-		Visible = true;
+		_pauseMenu.Visible = true;
 	}
 
 	// Sets 'paused' to false and hides the pause-menu
 	public void Resume()
 	{
-
 		Engine.TimeScale = 1;
 
 		GD.Print("resume called");
 		GetTree().Paused = false;
-		Visible = false;
+		_pauseMenu.Visible = false;
 	}
 
 	// Reloads the current scene
@@ -48,5 +57,10 @@ public partial class PauseMenu : Control
 		Resume();
 		GD.Print("quit FUNC Called");
 		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+	}
+
+	private void GameOver()
+	{
+		_gameOverMenu.Visible = true;
 	}
 }

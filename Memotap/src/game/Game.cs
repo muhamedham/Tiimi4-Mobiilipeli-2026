@@ -2,16 +2,8 @@ using Godot;
 using System;
 
 using Godot.Collections;
-using System.Reflection.Metadata;
-using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Timers;
-using System.Runtime.CompilerServices;
-using System.Data.SqlTypes;
-using System.Security;
-using System.Net.Http.Headers;
 
 
 public partial class Game : Node2D
@@ -29,7 +21,7 @@ public partial class Game : Node2D
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
-	[Export] private GameOverMenu _gameOver = null; 
+
 
 
 	// ---- Timers ----
@@ -158,7 +150,7 @@ public partial class Game : Node2D
 	{
 
 		//TODO: do something when the game is over
-		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+		//GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 		EmitSignal(SignalName.GameOverSignal);
 	}
 
@@ -286,7 +278,6 @@ public partial class Game : Node2D
 				_currentLevel++;
 
 				// Update scoreboard
-				//TODO: update to switch between sprites
 				_score.SetLevel(_currentLevel);
 
 				// Load the next levels sequences
