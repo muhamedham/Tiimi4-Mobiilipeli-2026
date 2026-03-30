@@ -1,17 +1,17 @@
 [gd_scene load_steps=10 format=3 uid="uid://bkydgglni72kp"]
 
-[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="1_3m1qe"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="1_6q0ex"]
 [ext_resource type="Script" uid="uid://q7ju5kggev42" path="res://src/UI/Menus/PauseMenu.cs" id="1_jvnd5"]
+[ext_resource type="Texture2D" uid="uid://h5g8y334xvwn" path="res://art/Uusi-tausta-resized.png" id="2_3m1qe"]
 [ext_resource type="Texture2D" uid="uid://5lvrn6wsjso" path="res://art/volume.png" id="3_2tp5j"]
-[ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="3_73e60"]
+[ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://resources/fonts/BAUHS93.ttf" id="3_73e60"]
 [ext_resource type="Texture2D" uid="uid://dkgj1jpwyxv3k" path="res://art/volume_off.png" id="4_rgmlj"]
 [ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Go_back_button.png" id="7_slthy"]
 
 [sub_resource type="Theme" id="Theme_5w6ei"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ecia5"]
-texture = ExtResource("1_3m1qe")
+texture = ExtResource("2_3m1qe")
 
 [node name="PauseMenu" type="ColorRect"]
 process_mode = 2

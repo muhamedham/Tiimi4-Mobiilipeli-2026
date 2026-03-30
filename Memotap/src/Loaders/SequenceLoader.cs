@@ -13,7 +13,7 @@ using System.Linq;
 public partial class SequenceLoader : Node
 {
     // The directory where all '.txt' level files reside
-    private const string _lvlDir = "./res/levels";
+    private const string _lvlDir = "res://levels";
 
     // This function receives a <string> parameter representing the filename of the level
     // corresponding the current level. Based on that, a 2D array of sequences is returned
@@ -23,7 +23,7 @@ public partial class SequenceLoader : Node
         // Check if a file is found and handle unfound ones
         if (!FileAccess.FileExists( _lvlDir + "/" + level))
         {
-            GD.PrintErr($"SequenceLoader: file not found at {_lvlDir + "/" + level}");
+            GD.PushError($"SequenceLoader: file not found at {_lvlDir + "/" + level}");
             return [];
         }
 

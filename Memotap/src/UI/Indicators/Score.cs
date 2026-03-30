@@ -9,10 +9,11 @@ public partial class Score : TextureRect
 {
 	// Fixed path where level textures reside
 	[ExportGroup("Level Texture path")]
-	[Export] private string _lvlPath = "./art/level";
+	private string _lvlPath = "res://art/level/";
 
 	// Array of loaded textures
 	private List<Texture2D> _textures = new List<Texture2D>();
+
 
 	// Called when node enters tree
     public override void _Ready()
@@ -24,16 +25,19 @@ public partial class Score : TextureRect
 	private void FetchTextures()
 	{
 		// Assign dir access to a variable and open stream
-		var dirStream = DirAccess.Open("./art/level");
+		var dirStream = DirAccess.Open(_lvlPath);
+
 
 		// Check validity of stream
 		if (dirStream == null)
 		{
-			GD.Print($"couldn't find {_lvlPath}");
+			GD.PushError($"couldn't find {_lvlPath}");
 			return;
 		}
 
 		var fileNames = new List<string>();
+
+		
 
 		// Start reading
 		dirStream.ListDirBegin();
@@ -44,11 +48,11 @@ public partial class Score : TextureRect
 		while (fileName != String.Empty)
 		{
 			// if filename ends within png in this dir, its a level
-			if (fileName.EndsWith(".png"))
+			if (fileName.EndsWith(".png.import"))
 			{
-				fileNames.Add(fileName);
+				fileNames.Add(fileName.Replace(".import",""));
 			}
-			
+
 			fileName = dirStream.GetNext();
 		}
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://co3l2gnet3l32"]
 
-[ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="1_6bcno"]
+[ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://resources/fonts/BAUHS93.ttf" id="1_6bcno"]
 [ext_resource type="Script" uid="uid://c786nv5pnl834" path="res://src/UI/Menus/GameOverMenu.cs" id="1_88ekj"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_0winm"]
 [ext_resource type="Texture2D" uid="uid://dolwgavn5oiae" path="res://art/Pelipäättyi.png" id="3_j3qfp"]

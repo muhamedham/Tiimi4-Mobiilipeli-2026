@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b8ekeashfw5ea"
-path="res://.godot/imported/Bauhaus 93 Regular.ttf-00f3c0baca321c8b2ce18aecce064645.fontdata"
+uid="uid://7jy8vbcuk36v"
+path="res://.godot/imported/BAUHS93.ttf-21cfc40d8f460af80a20814bbf8c9f6d.fontdata"
 
 [deps]
 
-source_file="res://res/fonts/Bauhaus 93 Regular.ttf"
-dest_files=["res://.godot/imported/Bauhaus 93 Regular.ttf-00f3c0baca321c8b2ce18aecce064645.fontdata"]
+source_file="res://resources/fonts/BAUHS93.ttf"
+dest_files=["res://.godot/imported/BAUHS93.ttf-21cfc40d8f460af80a20814bbf8c9f6d.fontdata"]
 
 [params]
 
