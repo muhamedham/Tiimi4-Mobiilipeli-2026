@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cr36lg753klqk"]
 
-[ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="1_x6fb5"]
+[ext_resource type="Texture2D" uid="uid://h5g8y334xvwn" path="res://art/Uusi-tausta-resized.png" id="1_x6fb5"]
 
 [node name="TextureRect" type="TextureRect"]
 anchors_preset = 15
