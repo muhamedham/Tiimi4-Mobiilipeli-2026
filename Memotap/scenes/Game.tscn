@@ -8,18 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
-[ext_resource type="Script" uid="uid://cuasqra6jxlwh" path="res://scenes/GameOverMenu.cs" id="10_2rd6h"]
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="10_mcffj"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
+[ext_resource type="Script" uid="uid://d0fm5hxy6e5ul" path="res://src/UI/Menus/MenuController.cs" id="12_mcffj"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score", "_gameOver")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
 _goStopTexture = NodePath("GameLayer/GoStopTexture")
 _heartField = NodePath("GameLayer/HeartField")
 _tileField = NodePath("GameLayer/TileField")
 _score = NodePath("GameLayer/Score")
-_gameOver = NodePath("UILayer/GameOver")
 _maxHealth = 5
 
 [node name="UILayer" type="CanvasLayer" parent="."]
@@ -43,7 +42,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
-script = ExtResource("10_2rd6h")
 
 [node name="PanelContainer" type="PanelContainer" parent="UILayer/GameOver"]
 layout_mode = 1
@@ -154,11 +152,22 @@ grow_horizontal = 2
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
 
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="UILayer/GameOver" method="OnButtonPressed"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="UILayer/GameOver" method="OnRestartPressed"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="OnMenuPressed"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="OnContinuePressed"]
-[connection signal="pressed" from="GameLayer/PauseButton" to="UILayer/PauseMenu" method="Pause"]
+[node name="MenuController" type="Node" parent="." node_paths=PackedStringArray("_pauseMenu", "_gameOverMenu")]
+script = ExtResource("12_mcffj")
+_pauseMenu = NodePath("../UILayer/PauseMenu")
+_gameOverMenu = NodePath("../UILayer/GameOver")
 
+[connection signal="GameOverSignal" from="." to="MenuController" method="GameOver"]
+[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/ResumeButton" to="MenuController" method="Resume"]
+[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/RestartButton" to="MenuController" method="Restart"]
+[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/BackButton" to="MenuController" method="Back"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="UILayer/GameOver" method="OnButtonPressed"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="MenuController" method="Restart"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="MenuController" method="Back"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="HandleCheckpoint"]
+[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="MenuController" method="HideAll"]
+[connection signal="pressed" from="GameLayer/PauseButton" to="MenuController" method="Pause"]
+
+[editable path="UILayer/PauseMenu"]
 [editable path="GameLayer/HeartField"]
 [editable path="GameLayer/TileField"]

@@ -31,7 +31,7 @@ public partial class SequenceLoader : Node
         using var file = FileAccess.Open(_lvlDir + "/" + level, FileAccess.ModeFlags.Read);
         var sequences = new List<int[]>();
 
-        // While the EOF hasnt been reached, iterate through lines collecting 
+        // While the EOF hasnt been reached, iterate through lines collecting
         // sequences and appending them to the 2D array
         while (!file.EofReached())
         {
