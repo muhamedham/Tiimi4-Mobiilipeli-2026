@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkydgglni72kp"]
+[gd_scene load_steps=10 format=3 uid="uid://bkydgglni72kp"]
 
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="1_3m1qe"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="1_6q0ex"]
+[ext_resource type="Script" uid="uid://q7ju5kggev42" path="res://src/UI/Menus/PauseMenu.cs" id="1_jvnd5"]
 [ext_resource type="Texture2D" uid="uid://5lvrn6wsjso" path="res://art/volume.png" id="3_2tp5j"]
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="3_73e60"]
 [ext_resource type="Texture2D" uid="uid://dkgj1jpwyxv3k" path="res://art/volume_off.png" id="4_rgmlj"]
@@ -12,13 +13,15 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ecia5"]
 texture = ExtResource("1_3m1qe")
 
-[node name="ColorRect" type="ColorRect"]
+[node name="PauseMenu" type="ColorRect"]
+process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
+script = ExtResource("1_jvnd5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -75,10 +78,14 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_73e60")
 text = "Aloita uudestaan"
 
-[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 icon = ExtResource("7_slthy")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResumeButton" to="." method="OnResumePressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/RestartButton" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/QuitButton" to="." method="OnQuitPressed"]

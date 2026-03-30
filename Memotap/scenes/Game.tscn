@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
-[ext_resource type="Script" uid="uid://d0fm5hxy6e5ul" path="res://src/UI/Menus/MenuController.cs" id="12_mcffj"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
@@ -91,14 +90,10 @@ grow_horizontal = 2
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
 
-[node name="MenuController" type="Node" parent="." node_paths=PackedStringArray("_pauseMenu", "_gameOverMenu")]
-script = ExtResource("12_mcffj")
-_pauseMenu = NodePath("../UILayer/PauseMenu")
-_gameOverMenu = NodePath("")
+[node name="MenuController" type="Node" parent="."]
 
 [connection signal="GameOverSignal" from="." to="MenuController" method="GameOver"]
-[connection signal="pressed" from="GameLayer/PauseButton" to="MenuController" method="Pause"]
+[connection signal="pressed" from="GameLayer/PauseButton" to="UILayer/PauseMenu" method="OnPausePressed"]
 
-[editable path="UILayer/PauseMenu"]
 [editable path="GameLayer/HeartField"]
 [editable path="GameLayer/TileField"]
