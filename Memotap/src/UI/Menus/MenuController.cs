@@ -6,7 +6,7 @@ public partial class MenuController : Node
 	// ---- Node references ----
 	[ExportGroup("Node references")]
 
-	[Export] Control _pauseMenu;
+	[Export] ColorRect _pauseMenu;
 	[Export] ColorRect _gameOverMenu;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

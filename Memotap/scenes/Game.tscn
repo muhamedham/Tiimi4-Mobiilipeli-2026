@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
+[ext_resource type="PackedScene" uid="uid://co3l2gnet3l32" path="res://scenes/GameOver.tscn" id="3_3xj3m"]
 [ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/UI/pause.png" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="4_2rd6h"]
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
-[ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://res/fonts/BAUHS93.ttf" id="10_mcffj"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 [ext_resource type="Script" uid="uid://d0fm5hxy6e5ul" path="res://src/UI/Menus/MenuController.cs" id="12_mcffj"]
 
@@ -25,69 +25,8 @@ _maxHealth = 5
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
-anchors_preset = 14
-anchor_left = 0.0
-anchor_right = 1.0
-offset_left = 323.0
-offset_top = 0.0
-offset_right = -270.0
-offset_bottom = 0.0
 
-[node name="GameOver" type="ColorRect" parent="UILayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
-
-[node name="PanelContainer" type="PanelContainer" parent="UILayer/GameOver"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -330.4375
-offset_top = -100.5625
-offset_right = 330.4375
-offset_bottom = 100.5625
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/GameOver/PanelContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GameOver/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("10_mcffj")
-text = "Peli Ohi"
-
-[node name="Button" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("10_mcffj")
-text = "Aloita uudelleen"
-
-[node name="RestartButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "aloita uudelleen"
-
-[node name="MenuButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "TAKAISIN PÄÄVALIKKOON"
-
-[node name="ContinueButton" type="Button" parent="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "JATKA TALLENNUSPISTEESTÄ"
+[node name="GameOver" parent="UILayer" instance=ExtResource("3_3xj3m")]
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -155,17 +94,9 @@ script = ExtResource("11_3xj3m")
 [node name="MenuController" type="Node" parent="." node_paths=PackedStringArray("_pauseMenu", "_gameOverMenu")]
 script = ExtResource("12_mcffj")
 _pauseMenu = NodePath("../UILayer/PauseMenu")
-_gameOverMenu = NodePath("../UILayer/GameOver")
+_gameOverMenu = NodePath("")
 
 [connection signal="GameOverSignal" from="." to="MenuController" method="GameOver"]
-[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/ResumeButton" to="MenuController" method="Resume"]
-[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/RestartButton" to="MenuController" method="Restart"]
-[connection signal="pressed" from="UILayer/PauseMenu/PanelContainer/VBoxContainer/BackButton" to="MenuController" method="Back"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/Button" to="UILayer/GameOver" method="OnButtonPressed"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="MenuController" method="Restart"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="MenuController" method="Back"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="HandleCheckpoint"]
-[connection signal="pressed" from="UILayer/GameOver/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="MenuController" method="HideAll"]
 [connection signal="pressed" from="GameLayer/PauseButton" to="MenuController" method="Pause"]
 
 [editable path="UILayer/PauseMenu"]
