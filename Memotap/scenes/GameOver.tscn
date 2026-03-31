@@ -10,7 +10,7 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0icj0"]
 texture = ExtResource("2_0winm")
 
-[node name="GameOver" type="ColorRect"]
+[node name="GameOver" type="ColorRect" node_paths=PackedStringArray("_checkPointLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,6 +20,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
 script = ExtResource("1_88ekj")
+_checkPointLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CheckPointLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -64,7 +65,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CheckPointLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)

@@ -57,7 +57,7 @@ public partial class Game : Node2D
 	private Array<string> _levelNames = null;
 	private int[][] _levelSequences = null;
 	private int[][] _lastLevelSequences = null;
-	private int _currentlevelIndex = 0;
+	public int _currentlevelIndex = 0;
 	private int _currentSequenceIndex = 0;
 	private int[] _activeSequence = [];
 	private TileButton _correctButton = null;
