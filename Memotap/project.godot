@@ -14,7 +14,7 @@ config/name="Memotap"
 run/main_scene="uid://0ikkpwvwksh4"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 boot_splash/image="uid://vior2hrdyscq"
-config/icon="uid://btt4md18i885p"
+config/icon="uid://y8kb07iiq3ap"
 
 [audio]
 
