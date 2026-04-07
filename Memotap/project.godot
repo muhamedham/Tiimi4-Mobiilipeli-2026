@@ -47,6 +47,10 @@ test=""
 
 pointing/emulate_touch_from_mouse=true
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/Texts.en.translation", "res://resources/Texts.fi.translation")
+
 [rendering]
 
 renderer/rendering_method="mobile"

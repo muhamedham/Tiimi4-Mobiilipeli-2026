@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://co3l2gnet3l32"]
+[gd_scene load_steps=9 format=3 uid="uid://co3l2gnet3l32"]
 
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://resources/fonts/BAUHS93.ttf" id="1_6bcno"]
 [ext_resource type="Script" uid="uid://c786nv5pnl834" path="res://src/UI/Menus/GameOverMenu.cs" id="1_88ekj"]
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_0winm"]
-[ext_resource type="Texture2D" uid="uid://dolwgavn5oiae" path="res://art/Pelipäättyi.png" id="3_j3qfp"]
+[ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="3_88ekj"]
+[ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="4_0winm"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="4_skdqa"]
 [ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Go_back_button.png" id="6_8dkuh"]
 
@@ -48,8 +49,22 @@ size_flags_vertical = 4
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-texture = ExtResource("3_j3qfp")
+texture = ExtResource("3_88ekj")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 18.4375
+offset_top = 24.5
+offset_right = 251.4375
+offset_bottom = 80.5
+scale = Vector2(0.7203612, 1.2815835)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_0winm")
+theme_override_font_sizes/font_size = 42
+text = "GAMEOVER"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

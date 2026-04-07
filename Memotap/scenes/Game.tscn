@@ -18,7 +18,7 @@ _goStopTexture = NodePath("GameLayer/GoStopTexture")
 _heartField = NodePath("GameLayer/HeartField")
 _tileField = NodePath("GameLayer/TileField")
 _score = NodePath("GameLayer/Score")
-_maxHealth = 5
+_maxHealth = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -26,7 +26,6 @@ layer = 2
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
-visible = false
 _gameRunner = NodePath("../..")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]

@@ -105,6 +105,8 @@ public partial class Game : Node2D
 		LoadLevel();
 		await Timer(_nextRoundDelay);
 		PlaySequence();
+
+		TranslationServer.SetLocale("fi");
 	}
 
 	public override void _ExitTree()
