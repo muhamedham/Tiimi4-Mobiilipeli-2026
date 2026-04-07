@@ -5,6 +5,8 @@ using System;
 public partial class SoundLoader : Node
 {
 
+    //TODO: Stop listening to all signals!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     public static SoundLoader Instance
     {
         get;
@@ -18,6 +20,10 @@ public partial class SoundLoader : Node
         GameOver,
         Click
     }
+
+    int _masterBusIndex = -1;
+    int _musicBusIndex = -1;
+    int _SFXBusIndex = -1;
 
     //define the sounds to play
     Array<AudioStream> audioStreams;
@@ -80,12 +86,17 @@ public partial class SoundLoader : Node
         GetTree().SceneChanged += () => FindChildren(GetParent());
 
         FindChildren(GetParent());
+
+        _masterBusIndex = AudioServer.GetBusIndex("Master");
+        _musicBusIndex = AudioServer.GetBusIndex("Music");
+        _SFXBusIndex = AudioServer.GetBusIndex("SFX");
+
     }
 
     public void RegisterTileButtons(Array<TileButton> arr)
     {
         // the game has started so lower the volume of the background song
-        songPlayer.VolumeDb = -30f;
+        AudioServer.SetBusVolumeDb(_musicBusIndex,-30f);
 
         foreach (TileButton button in arr)
         {
@@ -114,12 +125,17 @@ public partial class SoundLoader : Node
     }
 
 
+    private void ToggleMute(bool toggled)
+    {
+        AudioServer.SetBusMute(_masterBusIndex,toggled);
+    }
 
 // find children if it is a button start listening to its signals
     private void FindChildren(Node parent)
     {
         foreach (Node child in parent.GetChildren())
         {
+
             if (child is Button btn && child is not TileButton)
             {
                 btn.Pressed += () => PlaySound(Sounds.Click);
@@ -127,6 +143,9 @@ public partial class SoundLoader : Node
             {
                 game.GameOverSignal += () => PlaySound(Sounds.GameOver);
                 game.ButtonShownSignal += () => PlaySound(Sounds.Correct);
+            } else if (child is MuteButton muteBtn)
+            {
+                muteBtn.Toggled += ToggleMute;
             }
             // call recursively to find all children
             FindChildren(child);
