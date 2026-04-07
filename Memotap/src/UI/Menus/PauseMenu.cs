@@ -41,6 +41,9 @@ public partial class PauseMenu : ColorRect
     // Called when QuitButton is pressed
     private void OnQuitPressed()
     {
+		Engine.TimeScale = 1;
+		GetTree().Paused = false;
+		Hide();
         GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
     }    
 }

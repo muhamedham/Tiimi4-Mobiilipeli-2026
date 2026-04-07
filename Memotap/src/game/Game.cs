@@ -4,6 +4,7 @@ using System;
 using Godot.Collections;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 
 public partial class Game : Node2D
@@ -23,7 +24,7 @@ public partial class Game : Node2D
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
-
+	private AnimationPlayer _transition = null;
 
 
 	// ---- Timers ----
@@ -100,6 +101,10 @@ public partial class Game : Node2D
 		//give the buttons to soundloader to register sounds
 		SoundLoader.Instance.RegisterTileButtons(_buttons);
 
+		// Set the transition Node and play the transition
+		_transition = GetNode<AnimationPlayer>("TransitionLayer/Transition");
+        _transition.Play("fade-in");
+
 		// Load level data
 		_levelNames = SequenceLoader.GetAvailableLevels();
 		LoadLevel();
@@ -118,7 +123,6 @@ public partial class Game : Node2D
 			button.WrongPress -= () => WrongPressed(button);
 		}
 	}
-
 
 	// ---- GameLoop Management ----
 

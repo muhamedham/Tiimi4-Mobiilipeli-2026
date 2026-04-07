@@ -1,17 +1,18 @@
 [gd_scene load_steps=9 format=3 uid="uid://0ikkpwvwksh4"]
 
+[ext_resource type="Script" uid="uid://628acc4fwfsy" path="res://src/UI/Menus/MainMenu.cs" id="1_1abgu"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="1_aaywf"]
-[ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/Memologo-cropped.png" id="2_b6cxs"]
-[ext_resource type="Script" uid="uid://crdkimsx8mu7j" path="res://src/UI/Menus/PlayButton.cs" id="2_o0tnf"]
+[ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/logot/Memologo-cropped.png" id="2_b6cxs"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="3_b6cxs"]
-[ext_resource type="Script" uid="uid://d35xxmegxv3ix" path="res://src/UI/Menus/QuitButton.cs" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
-[ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/Welltech/Welltech_ilmantaustaa.png" id="7_aaywf"]
+[ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="7_1abgu"]
+[ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/logot/Welltech_ilmantaustaa.png" id="7_aaywf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
 [node name="Menu" type="Node2D"]
 process_mode = 3
+script = ExtResource("1_1abgu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -65,7 +66,6 @@ icon = ExtResource("3_b6cxs")
 flat = true
 expand_icon = true
 language = "fi_FI"
-script = ExtResource("2_o0tnf")
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -77,7 +77,6 @@ theme_override_font_sizes/font_size = 32
 icon = ExtResource("5_aaywf")
 flat = true
 expand_icon = true
-script = ExtResource("3_jmdev")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_direction = 3
@@ -89,3 +88,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("7_aaywf")
 expand_mode = 1
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Transition" parent="TransitionLayer" instance=ExtResource("7_1abgu")]
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="OnQuitPressed"]
+[connection signal="animation_finished" from="TransitionLayer/Transition" to="." method="OnTransitionFinished"]
