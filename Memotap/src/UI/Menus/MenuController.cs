@@ -10,12 +10,6 @@ public partial class MenuController : ColorRect
 		Hide();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-
 	public void Pause()
 	{
 		Engine.TimeScale = 0;
@@ -28,7 +22,6 @@ public partial class MenuController : ColorRect
 	{
 		Engine.TimeScale = 1;
 
-		GD.Print("resume called");
 		GetTree().Paused = false;
 	}
 
@@ -41,9 +34,7 @@ public partial class MenuController : ColorRect
 
 	public void Back()
 	{
-		//mystistä
 		Resume();
-		GD.Print("quit FUNC Called");
 		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 	}
 }

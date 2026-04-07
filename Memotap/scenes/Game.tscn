@@ -34,6 +34,7 @@ layer = -1
 [node name="TextureRect" parent="BGLayer" instance=ExtResource("4_2rd6h")]
 
 [node name="GameLayer" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="HeartField" parent="GameLayer" instance=ExtResource("7_400sg")]
 anchors_preset = 0

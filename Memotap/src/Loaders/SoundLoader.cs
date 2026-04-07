@@ -122,7 +122,6 @@ public partial class SoundLoader : Node
         {
             if (child is Button btn && child is not TileButton)
             {
-                GD.Print(child.Name + " has been found");
                 btn.Pressed += () => PlaySound(Sounds.Click);
             } else if (child is Game game)
             {
