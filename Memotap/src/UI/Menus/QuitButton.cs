@@ -14,7 +14,6 @@ public partial class QuitButton : Button
 
 	public void OnRelease()
 	{
-		GD.Print("Quit called");
 		GetTree().Quit();
 	}
 }

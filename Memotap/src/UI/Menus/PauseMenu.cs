@@ -25,7 +25,6 @@ public partial class PauseMenu : ColorRect
 	{
 		Engine.TimeScale = 1;
 
-		GD.Print("resume called");
 		GetTree().Paused = false;
         Hide();
     }
@@ -33,6 +32,7 @@ public partial class PauseMenu : ColorRect
     // Called when RestartButton is pressed
     private void OnRestartPressed()
     {
+		Engine.TimeScale = 1;
         GetTree().Paused = false;
         Hide();
         GetTree().ReloadCurrentScene();

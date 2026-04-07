@@ -32,7 +32,6 @@ public partial class GameOverMenu : ColorRect
 	{
 		Engine.TimeScale = 1;
 
-		GD.Print("resume called");
 		GetTree().Paused = false;
         Hide();
     }
@@ -41,6 +40,8 @@ public partial class GameOverMenu : ColorRect
     private void OnRestartPressed()
     {
         GetTree().Paused = false;
+        Hide();
+        
         GetTree().ReloadCurrentScene();
     }
 

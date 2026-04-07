@@ -25,7 +25,6 @@ public partial class Indicator : TextureRect
 
 	public void UpDateVisual()
 	{
-		GD.Print("UpdateVisual Callded.");
 		switch (CurrentState)
 		{
 			case TileState.Active:
