@@ -14,7 +14,7 @@ public partial class GameOverMenu : ColorRect
 	public override void _Ready()
 	{
 
-        _gameRunner.GameOverSignal += OnGameOver; 
+        _gameRunner.GameOverSignal += OnGameOver;
 		// make sure the pause menu or gameover menu is not visible when first starting the game.
         Hide();
 	}
@@ -40,8 +40,9 @@ public partial class GameOverMenu : ColorRect
     private void OnRestartPressed()
     {
         GetTree().Paused = false;
+        Engine.TimeScale = 1;
         Hide();
-        
+
         GetTree().ReloadCurrentScene();
     }
 
@@ -49,5 +50,5 @@ public partial class GameOverMenu : ColorRect
     private void OnQuitPressed()
     {
         GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
-    }    
+    }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -8,24 +8,21 @@
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
-[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_g4kob"]
 [ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="10_3xj3m"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
-_goStopTexture = NodePath("GameLayer/GoStopTexture")
 _heartField = NodePath("GameLayer/HeartField")
 _tileField = NodePath("GameLayer/TileField")
 _score = NodePath("GameLayer/Score")
-_maxHealth = 1
+_maxHealth = 5
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
-visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
 visible = false
@@ -72,16 +69,6 @@ offset_bottom = 1848.208
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("3_s0nni")
 
-[node name="GoStopTexture" parent="GameLayer" instance=ExtResource("9_g4kob")]
-anchors_preset = -1
-anchor_top = 0.30900002
-anchor_right = 1.0
-anchor_bottom = 0.61700004
-offset_left = 906.0
-offset_top = -0.23200989
-offset_right = -46.0
-offset_bottom = 0.18395996
-
 [node name="Score" parent="GameLayer" instance=ExtResource("8_qy1jj")]
 anchors_preset = 5
 anchor_left = 0.5
@@ -96,9 +83,6 @@ grow_horizontal = 2
 visible = false
 
 [node name="Transition" parent="TransitionLayer" instance=ExtResource("10_3xj3m")]
-
-[node name="ColorRect" parent="TransitionLayer/Transition" index="0"]
-visible = true
 
 [node name="SequenceLoader" type="Node" parent="."]
 script = ExtResource("11_3xj3m")
