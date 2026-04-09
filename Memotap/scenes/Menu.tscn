@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://628acc4fwfsy" path="res://src/UI/Menus/MainMenu.cs" id="1_1abgu"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="1_aaywf"]
-[ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/logot/Memologo-cropped.png" id="2_b6cxs"]
+[ext_resource type="Texture2D" uid="uid://dw7ygs5fuc7wg" path="res://art/Memologo-cropped.png" id="2_b6cxs"]
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="3_b6cxs"]
 [ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
 [ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="7_1abgu"]
-[ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/logot/Welltech_ilmantaustaa.png" id="7_aaywf"]
+[ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/Welltech/Welltech_ilmantaustaa.png" id="7_aaywf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 

@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="1_6q0ex"]
 [ext_resource type="Script" uid="uid://q7ju5kggev42" path="res://src/UI/Menus/PauseMenu.cs" id="1_jvnd5"]
 [ext_resource type="Texture2D" uid="uid://h5g8y334xvwn" path="res://art/Uusi-tausta-resized.png" id="2_3m1qe"]
-[ext_resource type="Texture2D" uid="uid://5lvrn6wsjso" path="res://art/volume.png" id="3_2tp5j"]
 [ext_resource type="FontFile" uid="uid://7jy8vbcuk36v" path="res://resources/fonts/BAUHS93.ttf" id="3_73e60"]
-[ext_resource type="Texture2D" uid="uid://dkgj1jpwyxv3k" path="res://art/volume_off.png" id="4_rgmlj"]
+[ext_resource type="Texture2D" uid="uid://dgk24gmqai7w" path="res://art/UI/Sound_on_button.png" id="3_77ihb"]
+[ext_resource type="Texture2D" uid="uid://csrdfh1lm83dn" path="res://art/UI/Sound_off_button.png" id="4_2tp5j"]
 [ext_resource type="Script" uid="uid://ccqx7am1o5k0l" path="res://src/UI/Menus/MuteButton.cs" id="5_77ihb"]
 [ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Go_back_button.png" id="7_slthy"]
 
@@ -58,8 +58,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("3_2tp5j")
-texture_pressed = ExtResource("4_rgmlj")
+texture_normal = ExtResource("3_77ihb")
+texture_pressed = ExtResource("4_2tp5j")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("5_77ihb")
