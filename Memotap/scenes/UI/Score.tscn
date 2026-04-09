@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://x5y2xbi82fjm"]
+[gd_scene load_steps=4 format=3 uid="uid://x5y2xbi82fjm"]
 
+[ext_resource type="Texture2D" uid="uid://bqms82ourmavv" path="res://art/level/Tyhja_leveli.png" id="1_td0am"]
 [ext_resource type="Script" uid="uid://dwlke0fj3t84k" path="res://src/UI/Indicators/Score.cs" id="1_ucmtr"]
-[ext_resource type="Texture2D" uid="uid://bytapjxc02aw8" path="res://art/level/Level1.png" id="2_0u3he"]
+[ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="3_2tki2"]
 
 [node name="Score" type="TextureRect"]
 custom_minimum_size = Vector2(300, 200)
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_0u3he")
+texture = ExtResource("1_td0am")
 expand_mode = 1
 script = ExtResource("1_ucmtr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 41.999996
+offset_top = 68.0
+offset_right = 82.0
+offset_bottom = 91.0
+scale = Vector2(1.9233602, 1.0204082)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_2tki2")
+theme_override_font_sizes/font_size = 50
+text = "LEVEL"
