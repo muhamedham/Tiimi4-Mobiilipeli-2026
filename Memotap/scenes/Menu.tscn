@@ -91,9 +91,12 @@ expand_mode = 1
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="Transition" parent="TransitionLayer" instance=ExtResource("7_1abgu")]
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="OnQuitPressed"]
 [connection signal="animation_finished" from="TransitionLayer/Transition" to="." method="OnTransitionFinished"]
+
+[editable path="TransitionLayer/Transition"]
