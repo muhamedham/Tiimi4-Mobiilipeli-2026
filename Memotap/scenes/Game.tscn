@@ -23,6 +23,7 @@ _maxHealth = 5
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
+visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
 visible = false
@@ -40,10 +41,10 @@ process_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 716.0
-offset_top = 24.0
-offset_right = 1286.0
-offset_bottom = 136.85715
+offset_left = 783.00006
+offset_top = 8.000001
+offset_right = 1353.0
+offset_bottom = 120.85715
 scale = Vector2(0.7, 0.7)
 
 [node name="TileField" parent="GameLayer" instance=ExtResource("1_wbfu4")]
@@ -52,10 +53,10 @@ anchors_preset = -1
 anchor_left = 0.02
 anchor_right = 0.02
 anchor_bottom = 0.0
-offset_left = 333.96
-offset_top = 153.0
-offset_right = 3824.8765
-offset_bottom = 3929.4204
+offset_left = 392.96
+offset_top = 150.0
+offset_right = 3883.8765
+offset_bottom = 3926.4204
 scale = Vector2(0.11147484, 0.107637346)
 
 [node name="PauseButton" type="TextureButton" parent="GameLayer"]
