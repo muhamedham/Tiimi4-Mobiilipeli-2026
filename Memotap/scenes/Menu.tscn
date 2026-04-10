@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0ikkpwvwksh4"]
+[gd_scene load_steps=10 format=3 uid="uid://0ikkpwvwksh4"]
 
 [ext_resource type="Script" uid="uid://628acc4fwfsy" path="res://src/UI/Menus/MainMenu.cs" id="1_1abgu"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="1_aaywf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cah77hsn1dud6" path="res://art/UI/Close_button.png" id="5_aaywf"]
 [ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="7_1abgu"]
 [ext_resource type="Texture2D" uid="uid://b0b1e0r61w7cj" path="res://art/Welltech/Welltech_ilmantaustaa.png" id="7_aaywf"]
+[ext_resource type="Script" uid="uid://bgei1ffsvdswt" path="res://scenes/node_2d.gd" id="7_yt8fu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
@@ -89,9 +90,45 @@ size_flags_horizontal = 8
 texture = ExtResource("7_aaywf")
 expand_mode = 1
 
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("7_yt8fu")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Node2D"]
+offset_left = 23.0
+offset_top = 163.0
+offset_right = 165.0
+offset_bottom = 385.0
+
+[node name="Button" type="Button" parent="CanvasLayer/Node2D"]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 48.0
+offset_top = 183.0
+offset_right = 134.0
+offset_bottom = 251.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button2" type="Button" parent="CanvasLayer/Node2D"]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 55.0
+offset_top = 268.0
+offset_right = 127.0
+offset_bottom = 348.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Node2D"]
+offset_left = 70.0
+offset_top = 208.0
+offset_right = 110.0
+offset_bottom = 231.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Node2D"]
+offset_left = 74.0
+offset_top = 297.0
+offset_right = 114.0
+offset_bottom = 320.0
+
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 layer = 10
-visible = false
 
 [node name="Transition" parent="TransitionLayer" instance=ExtResource("7_1abgu")]
 
