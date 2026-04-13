@@ -69,6 +69,7 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
+		
 
 		// Check that all elements were found
 		Lives = _maxHealth;

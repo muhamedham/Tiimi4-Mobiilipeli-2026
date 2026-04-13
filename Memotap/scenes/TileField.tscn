@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://b6648ld30kfui" path="res://src/game/TileField.cs" id="1_hrcbo"]
 
 [node name="TileField" type="GridContainer"]
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
 columns = 3
 script = ExtResource("1_hrcbo")
 _buttonScene = ExtResource("1_cfc18")
