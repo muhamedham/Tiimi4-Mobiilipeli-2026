@@ -25,9 +25,20 @@ buses/default_bus_layout="uid://dmmm2cvxlbon8"
 
 SoundLoader="*res://src/Loaders/SoundLoader.cs"
 
+[display]
+
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/mode=3
+window/energy_saving/keep_screen_on=false
+
 [dotnet]
 
 project/assembly_name="Memotap"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/tuukk/Tamk/Course-active/4A00HB43-3004 Mobiilipelikehitys/Android-export/Test.avi"
 
 [file_customization]
 

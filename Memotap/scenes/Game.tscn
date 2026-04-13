@@ -26,6 +26,7 @@ layer = 2
 visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
+visible = false
 _gameRunner = NodePath("../..")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
@@ -37,36 +38,27 @@ layer = -1
 process_mode = 1
 
 [node name="HeartField" parent="GameLayer" instance=ExtResource("7_400sg")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 783.00006
-offset_top = 8.000001
-offset_right = 1353.0
-offset_bottom = 120.85715
-scale = Vector2(0.7, 0.7)
+offset_left = -570.0
+offset_bottom = 112.85715
 
 [node name="TileField" parent="GameLayer" instance=ExtResource("1_wbfu4")]
 process_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_right = 0.02
-anchor_bottom = 0.0
-offset_left = 392.96
-offset_top = 150.0
-offset_right = 3883.8765
-offset_bottom = 3926.4204
-scale = Vector2(0.11147484, 0.107637346)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = 30.0
+offset_right = -63.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PauseButton" type="TextureButton" parent="GameLayer"]
-anchors_preset = -1
-anchor_right = 0.11100001
-anchor_bottom = 0.15400001
-offset_left = 18.999998
-offset_top = 19.999998
-offset_right = 979.128
-offset_bottom = 1848.208
-scale = Vector2(0.1, 0.1)
+offset_right = 676.0
+offset_bottom = 678.0
+scale = Vector2(0.55, 0.55)
 texture_normal = ExtResource("3_s0nni")
 
 [node name="Score" parent="GameLayer" instance=ExtResource("8_qy1jj")]
@@ -78,7 +70,6 @@ offset_top = -40.0
 offset_right = 150.0
 offset_bottom = 160.0
 grow_horizontal = 2
-scale = Vector2(1.009073, 1.0053545)
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 visible = false

@@ -4,16 +4,8 @@
 [ext_resource type="Script" uid="uid://b6648ld30kfui" path="res://src/game/TileField.cs" id="1_hrcbo"]
 
 [node name="TileField" type="GridContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1496.5608
-offset_bottom = 2203.0725
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.12346328, 0.11995484)
-theme_override_constants/h_separation = 150
-theme_override_constants/v_separation = 150
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 3
 script = ExtResource("1_hrcbo")
 _buttonScene = ExtResource("1_cfc18")
