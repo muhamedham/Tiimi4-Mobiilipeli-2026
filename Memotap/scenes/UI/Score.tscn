@@ -4,22 +4,25 @@
 [ext_resource type="Script" uid="uid://dwlke0fj3t84k" path="res://src/UI/Indicators/Score.cs" id="1_ucmtr"]
 [ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="3_2tki2"]
 
-[node name="Score" type="TextureRect"]
+[node name="Score" type="TextureRect" node_paths=PackedStringArray("_scoreLabel")]
 custom_minimum_size = Vector2(300, 200)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_td0am")
 expand_mode = 1
 script = ExtResource("1_ucmtr")
+_scoreLabel = NodePath("ScoreLabel")
 
-[node name="Label" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1
 offset_left = 41.999996
 offset_top = 68.0
 offset_right = 82.0
 offset_bottom = 91.0
-scale = Vector2(1.9233602, 1.0204082)
+scale = Vector2(1.2347497, 1.0727367)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2tki2")
-theme_override_font_sizes/font_size = 50
-text = "LEVEL"
+theme_override_font_sizes/font_size = 51
+text = "Leveltxt"
+horizontal_alignment = 1
+vertical_alignment = 1

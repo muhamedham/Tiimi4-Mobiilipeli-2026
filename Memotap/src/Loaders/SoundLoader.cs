@@ -146,6 +146,8 @@ public partial class SoundLoader : Node
             } else if (child is MuteButton muteBtn)
             {
                 muteBtn.Toggled += ToggleMute;
+
+                muteBtn.SetPressedNoSignal(AudioServer.IsBusMute(_masterBusIndex));
             }
             // call recursively to find all children
             FindChildren(child);

@@ -2,3 +2,8 @@ keys;en;fi
 LEVEL;Level {0};Taso {0}
 GAMEOVER;Game over;Peli päättyi
 TUTORIAL;Lorem Lipsum Tutorial in english Lorem Lipsum;Lorem Lipsum Tutoriaali suomeksi Lorem Lipsum
+STARTOVER; START OVER; ALOITA UUDELLEEN
+EXIT; EXIT; POISTU
+SOUNDOFF; SOUND OFF; ÄÄNET POIS
+SOUNDON; SOUNDON; ÄÄNET PÄÄLLE
+CONTINUE; CONTINUE; JATKA

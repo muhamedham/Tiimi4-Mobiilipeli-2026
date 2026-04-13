@@ -23,9 +23,9 @@ _maxHealth = 5
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
+visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
-visible = false
 _gameRunner = NodePath("../..")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
@@ -78,6 +78,7 @@ offset_top = -40.0
 offset_right = 150.0
 offset_bottom = 160.0
 grow_horizontal = 2
+scale = Vector2(1.009073, 1.0053545)
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 visible = false

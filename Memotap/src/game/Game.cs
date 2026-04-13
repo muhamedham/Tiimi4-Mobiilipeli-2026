@@ -111,7 +111,8 @@ public partial class Game : Node2D
 		await Timer(_nextRoundDelay);
 		PlaySequence();
 
-		TranslationServer.SetLocale("fi");
+
+
 	}
 
 	public override void _ExitTree()
@@ -371,7 +372,7 @@ public partial class Game : Node2D
 	//helper function to update the scoreboard
 	private void UpdateScoreBoard()
     {
-        _score.SetLevel(_currentLevel);
+        _score.SetLevel(_currentLevel +1);
     }
 
 	// Helper function that disables all buttons, blocking input

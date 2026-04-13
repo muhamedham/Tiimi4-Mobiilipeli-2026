@@ -7,6 +7,25 @@ using System.Linq;
 
 public partial class Score : TextureRect
 {
+
+
+	[Export] Label _scoreLabel;
+
+    public override void _EnterTree()
+    {
+        SetLevel(1);
+    }
+	public void SetLevel(int Level)
+	{
+
+		if (_scoreLabel != null)
+		{
+			string localizedScore = Tr("LEVEL");
+			_scoreLabel.Text = string.Format(localizedScore, Level);
+		}
+	}
+
+	/*
 	// Fixed path where level textures reside
 	[ExportGroup("Level Texture path")]
 	private string _lvlPath = "res://art/level/";
@@ -37,7 +56,7 @@ public partial class Score : TextureRect
 
 		var fileNames = new List<string>();
 
-		
+
 
 		// Start reading
 		dirStream.ListDirBegin();
@@ -85,5 +104,7 @@ public partial class Score : TextureRect
 		string digits = new string(line.Where(char.IsDigit).ToArray());
 		return int.TryParse(digits, out int n) ? n : -1;
 	}
+
+	*/
 }
 
