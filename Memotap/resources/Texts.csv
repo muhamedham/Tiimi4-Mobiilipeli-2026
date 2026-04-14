@@ -1,7 +1,7 @@
 keys;en;fi;sv
 LEVEL;Level {0};Taso {0}; Niva{0}
 GAMEOVER;Game over;Peli päättyi; Spelet Slut
-TUTORIAL;Lorem Lipsum Tutorial in english Lorem Lipsum;Lorem Lipsum Tutoriaali suomeksi Lorem Lipsum; Lorem Lipsum Tutorial på sverige Lorem Lipsum
+TUTORIAL;The green pulsing buttons will show you the sequence needed to pass the level while the indicator on the right tells you when it is your turn; Välkkyvät vihreät ruudut näyttävät sinulle järjestyksen jossa sinun pitää painaa nappeja, kun oikealla oleva laatikko kertoo sinulle milloin on vuorosi; De gröna blinkande knapparna visar dig den sekvens som behövs för att klara nivån medan indikatorn till höger visar när det är din tur.
 STARTOVER; START OVER; ALOITA UUDELLEEN; BÖRJA OM FRÅN BÖRJAN
 EXIT; EXIT; POISTU; UTGÅNG
 SOUNDOFF; SOUND OFF; ÄÄNET POIS; LJUD AV
