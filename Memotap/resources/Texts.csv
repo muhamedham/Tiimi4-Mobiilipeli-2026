@@ -1,9 +1,9 @@
-keys;en;fi
-LEVEL;Level {0};Taso {0}
-GAMEOVER;Game over;Peli päättyi
-TUTORIAL;Lorem Lipsum Tutorial in english Lorem Lipsum;Lorem Lipsum Tutoriaali suomeksi Lorem Lipsum
-STARTOVER; START OVER; ALOITA UUDELLEEN
-EXIT; EXIT; POISTU
-SOUNDOFF; SOUND OFF; ÄÄNET POIS
-SOUNDON; SOUNDON; ÄÄNET PÄÄLLE
-CONTINUE; CONTINUE; JATKA
+keys;en;fi;sv
+LEVEL;Level {0};Taso {0}; Niva{0}
+GAMEOVER;Game over;Peli päättyi; Spelet Slut
+TUTORIAL;Lorem Lipsum Tutorial in english Lorem Lipsum;Lorem Lipsum Tutoriaali suomeksi Lorem Lipsum; Lorem Lipsum Tutorial på sverige Lorem Lipsum
+STARTOVER; START OVER; ALOITA UUDELLEEN; BÖRJA OM FRÅN BÖRJAN
+EXIT; EXIT; POISTU; UTGÅNG
+SOUNDOFF; SOUND OFF; ÄÄNET POIS; LJUD AV
+SOUNDON; SOUND ON; ÄÄNET PÄÄLLE; LJUD PÅ
+CONTINUE; CONTINUE; JATKA; FORTSÄTTA

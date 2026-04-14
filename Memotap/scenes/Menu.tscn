@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0ikkpwvwksh4"]
+[gd_scene load_steps=13 format=3 uid="uid://0ikkpwvwksh4"]
 
 [ext_resource type="Script" uid="uid://628acc4fwfsy" path="res://src/UI/Menus/MainMenu.cs" id="1_1abgu"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="1_aaywf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bouw4y07mtllo" path="res://src/UI/Menus/Translate.cs" id="7_yt8fu"]
 [ext_resource type="Texture2D" uid="uid://x85ctgg0fbqw" path="res://art/Enkun_lippu.png" id="8_4umqm"]
 [ext_resource type="Texture2D" uid="uid://bk2x4q47ahfcl" path="res://art/Suomi_button.png" id="9_pp5m5"]
+[ext_resource type="Texture2D" uid="uid://irme0hwbr3c2" path="res://art/SWEDISHFLAG.png" id="10_pp5m5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
@@ -61,7 +62,7 @@ theme_override_constants/separation = 100
 [node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
 size_flags_stretch_ratio = 60.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
@@ -92,23 +93,30 @@ size_flags_horizontal = 8
 texture = ExtResource("7_aaywf")
 expand_mode = 1
 
-[node name="LanguageMenu" type="Node2D" parent="CanvasLayer"]
+[node name="LanguageMenu" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("English", "Suomi", "Svenska")]
 script = ExtResource("7_yt8fu")
+English = NodePath("ButtonEnglish")
+Suomi = NodePath("ButtonSuomi")
+Svenska = NodePath("ButtonSverige")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LanguageMenu"]
 visible = false
-offset_left = 23.0
-offset_top = 163.0
-offset_right = 165.0
-offset_bottom = 385.0
+offset_left = 5.0
+offset_top = 201.0
+offset_right = 147.0
+offset_bottom = 423.0
 
 [node name="ButtonEnglish" type="Button" parent="CanvasLayer/LanguageMenu"]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 45.0
-offset_top = 190.0
-offset_right = 377.0
-offset_bottom = 414.0
-scale = Vector2(0.31402427, 0.31156188)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.99999
+offset_top = 651.00006
+offset_right = 413.0
+offset_bottom = 875.00006
+grow_vertical = 0
+scale = Vector2(1.2226583, 1.4332117)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 icon = ExtResource("8_4umqm")
@@ -123,11 +131,11 @@ offset_bottom = 80.77344
 
 [node name="ButtonSuomi" type="Button" parent="CanvasLayer/LanguageMenu"]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 38.000008
-offset_top = 273.00003
-offset_right = 1070.0
-offset_bottom = 905.0
-scale = Vector2(0.116145074, 0.119140804)
+offset_left = 51.0
+offset_top = 568.0
+offset_right = 1083.0
+offset_bottom = 1563.4658
+scale = Vector2(0.45163476, 0.4910042)
 icon = ExtResource("9_pp5m5")
 flat = true
 
@@ -135,8 +143,22 @@ flat = true
 layout_mode = 0
 offset_left = 309.95712
 offset_top = 201.44214
-offset_right = 349.95712
+offset_right = 376.41037
 offset_bottom = 224.44214
+
+[node name="ButtonSverige" type="Button" parent="CanvasLayer/LanguageMenu"]
+offset_left = 110.00001
+offset_top = 661.00006
+offset_right = 1561.5107
+offset_bottom = 1597.4658
+scale = Vector2(0.2609679, 0.3286424)
+icon = ExtResource("10_pp5m5")
+flat = true
+
+[node name="SverigeLabel" type="Label" parent="CanvasLayer/LanguageMenu/ButtonSverige"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 layer = 10
