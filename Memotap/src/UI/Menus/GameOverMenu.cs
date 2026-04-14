@@ -32,6 +32,8 @@ public partial class GameOverMenu : ColorRect
 	{
 		Engine.TimeScale = 1;
 
+        _gameRunner.HandleCheckpoint();
+
 		GetTree().Paused = false;
         Hide();
     }

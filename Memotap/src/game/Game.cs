@@ -69,7 +69,7 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
 	{
-		
+
 
 		// Check that all elements were found
 		Lives = _maxHealth;
@@ -112,7 +112,7 @@ public partial class Game : Node2D
 		await Timer(_nextRoundDelay);
 		PlaySequence();
 
-
+		GD.Print(GetViewport().GetVisibleRect().Size.Y);
 
 	}
 
@@ -160,13 +160,12 @@ public partial class Game : Node2D
 	// menu that gives both as options?)
 	private void GameOver()
 	{
-		//TODO: do something when the game is over
 		EmitSignal(SignalName.GameOverSignal);
 	}
 
 	//store the last level to an array
 
-	private async void HandleCheckpoint()
+	public async void HandleCheckpoint()
 	{
 		Lives = _maxHealth;
 		if (_currentLevel != 0)
