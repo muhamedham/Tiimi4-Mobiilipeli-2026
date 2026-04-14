@@ -14,14 +14,17 @@ public partial class Translate : Node
         Suomi.Pressed += OnButtonSuomiPressed;
         Svenska.Pressed += OnButtonSvenskaPressed;
 
-        English.Visible = false;
-        Suomi.Visible = true;
-        Svenska.Visible = false;
+        string locale = TranslationServer.GetLocale();
+        if (locale != "en" && locale != "fi" && locale != "sv")
+        locale = "en";
+        English.Visible = locale == "en";
+        Suomi.Visible = locale == "fi";
+        Svenska.Visible = locale == "sv";
     }
 
     private void OnButtonEnglishPressed()
     {
-        TranslationServer.SetLocale("en");
+        TranslationServer.SetLocale("fi");
         English.Visible = false;
         Suomi.Visible = true;
         Svenska.Visible = false;
@@ -29,7 +32,7 @@ public partial class Translate : Node
 
     private void OnButtonSuomiPressed()
     {
-        TranslationServer.SetLocale("fi");
+        TranslationServer.SetLocale("sv");
         English.Visible = false;
         Suomi.Visible = false;
         Svenska.Visible = true;
@@ -37,7 +40,7 @@ public partial class Translate : Node
 
     private void OnButtonSvenskaPressed()
     {
-        TranslationServer.SetLocale("sv");
+        TranslationServer.SetLocale("en");
         English.Visible = true;
         Suomi.Visible = false;
         Svenska.Visible = false;
