@@ -1,9 +1,4 @@
 using Godot;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
-using System.Linq;
 
 public partial class Score : TextureRect
 {

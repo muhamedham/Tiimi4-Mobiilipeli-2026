@@ -100,7 +100,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="RestartLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -111,7 +111,7 @@ text = "STARTOVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExitLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -121,7 +121,7 @@ text = "EXIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -131,7 +131,7 @@ text = "SOUNDOFF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ContinueaLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)

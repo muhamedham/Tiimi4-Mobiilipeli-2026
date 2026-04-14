@@ -33,6 +33,8 @@ public partial class SoundLoader : Node
 
     AudioStreamPlayer songPlayer;
 
+    Label _soundLabel = null;
+
     // make sure there is only one instance of the soundloader
     public override void _Ready()
     {
@@ -127,10 +129,30 @@ public partial class SoundLoader : Node
 
     private void ToggleMute(bool toggled)
     {
-        AudioServer.SetBusMute(_masterBusIndex,toggled);
+        AudioServer.SetBusMute(_masterBusIndex, toggled);
+
+        ChangeSoundLabel();
     }
 
-// find children if it is a button start listening to its signals
+    private void ChangeSoundLabel()
+    {
+        // if we have not found a sound label can't do anything
+        if(_soundLabel == null)
+        {
+            return;
+        }
+
+        if (AudioServer.IsBusMute(_masterBusIndex))
+        {
+            _soundLabel.Text = Tr("SOUNDON");
+        }
+        else
+        {
+            _soundLabel.Text = Tr("SOUNDOFF");
+        }
+    }
+
+    // find children if it is a button start listening to its signals
     private void FindChildren(Node parent)
     {
         foreach (Node child in parent.GetChildren())
@@ -148,7 +170,13 @@ public partial class SoundLoader : Node
                 muteBtn.Toggled += ToggleMute;
 
                 muteBtn.SetPressedNoSignal(AudioServer.IsBusMute(_masterBusIndex));
+
+            } else if (child is Label soundLabel && child.Name == "SoundLabel")
+            {
+                _soundLabel = soundLabel;
+                ChangeSoundLabel();
             }
+
             // call recursively to find all children
             FindChildren(child);
         }
