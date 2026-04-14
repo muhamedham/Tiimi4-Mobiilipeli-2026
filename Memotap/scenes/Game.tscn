@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -8,12 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
+[ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="10_3xj3m"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_heartField", "_tileField", "_score")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
 process_mode = 1
 script = ExtResource("1_qy1jj")
+_goStopTexture = NodePath("GameLayer/GoStopTexture")
 _heartField = NodePath("GameLayer/HeartField")
 _tileField = NodePath("GameLayer/TileField")
 _score = NodePath("GameLayer/Score")
@@ -23,6 +25,7 @@ _maxHealth = 5
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
+visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
 visible = false
@@ -69,6 +72,21 @@ offset_top = -40.0
 offset_right = 150.0
 offset_bottom = 160.0
 grow_horizontal = 2
+
+[node name="GoStopTexture" parent="GameLayer" instance=ExtResource("9_3xj3m")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -408.00024
+offset_top = -382.00012
+offset_right = -128.56665
+offset_bottom = -182.00012
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.5960858, 6.0299044)
+size_flags_horizontal = 8
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 visible = false

@@ -144,11 +144,11 @@ public partial class SoundLoader : Node
 
         if (AudioServer.IsBusMute(_masterBusIndex))
         {
-            _soundLabel.Text = Tr("SOUNDON");
+            _soundLabel.Text = Tr("SOUNDOFF");
         }
         else
         {
-            _soundLabel.Text = Tr("SOUNDOFF");
+            _soundLabel.Text = Tr("SOUNDON");
         }
     }
 

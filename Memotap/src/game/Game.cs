@@ -21,7 +21,7 @@ public partial class Game : Node2D
 
 	// ---- Node references ----
 	[ExportGroup("Node references")]
-//	[Export] private GoStopTexture _goStopTexture = null;
+	[Export] private GoStopTexture _goStopTexture = null;
 	[Export] private HeartField _heartField = null;
 	[Export] private TileField _tileField = null;
 	[Export] private Score _score = null;
@@ -134,7 +134,7 @@ public partial class Game : Node2D
 	{
 		// Update indicator to active and set up the sequence loop
 		// by fetching the current sequence from the shuffled sequences
-		//_goStopTexture.SetState(Indicator.TileState.Active);
+		_goStopTexture.SetState(Indicator.TileState.Active);
  		_activeSequence = _levelSequences[_currentlevelIndex];
 
 		// Iterate through the active sequence
@@ -151,7 +151,7 @@ public partial class Game : Node2D
 		// Update the indicator and set correct input
 		_currentSequenceIndex = 0;
 		SetCorrectButton(_activeSequence[_currentSequenceIndex]);
-		//_goStopTexture.SetState(Indicator.TileState.Inactive);
+		_goStopTexture.SetState(Indicator.TileState.Inactive);
 
 		// Correct inputs should be setup by now and inputs get unlocked
 		SetAllButtonsDisabled(false);
@@ -240,7 +240,7 @@ public partial class Game : Node2D
 		SetAllButtonsDisabled(true);
 
 		// Trigger indicator and reset sequenceIndex, also remove life
-		//_goStopTexture.SetState(Indicator.TileState.Active);
+		_goStopTexture.SetState(Indicator.TileState.Active);
 		Lives--;
 		_currentSequenceIndex = 0;
 
@@ -292,7 +292,7 @@ public partial class Game : Node2D
 		if (_currentSequenceIndex >= _activeSequence.Length)
 		{
 			// Activate stop-indicator
-			//_goStopTexture.SetState(Indicator.TileState.Active);
+			_goStopTexture.SetState(Indicator.TileState.Active);
 
 			// reset local index and update LevelIndex
 			_currentSequenceIndex = 0;
