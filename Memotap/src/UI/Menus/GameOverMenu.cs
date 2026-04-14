@@ -23,7 +23,9 @@ public partial class GameOverMenu : ColorRect
 	private void OnGameOver()
     {
         Show();
-        _checkPointLabel.Text = "LEVEL " + (_gameRunner._currentlevelIndex + 1);
+
+        string localizedScore = Tr("LEVEL");
+		_checkPointLabel.Text = string.Format(localizedScore, _gameRunner._currentLevel);
     }
 
 

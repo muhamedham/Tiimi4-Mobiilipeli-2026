@@ -1,3 +1,4 @@
+// restarting from the same level multiple times does not work
 using Godot;
 using System;
 
@@ -54,7 +55,7 @@ public partial class Game : Node2D
 	}
 
 	// ---- Level Management ----
-	private int _currentLevel = 0;
+	public int _currentLevel = 0;
 	private Array<string> _levelNames = null;
 	private int[][] _levelSequences = null;
 	private int[][] _lastLevelSequences = null;
