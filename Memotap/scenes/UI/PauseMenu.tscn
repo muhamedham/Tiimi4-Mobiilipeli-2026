@@ -16,15 +16,24 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ecia5"]
 texture = ExtResource("2_3m1qe")
 
-[node name="PauseMenu" type="ColorRect"]
+[node name="PauseMenu" type="Control"]
 process_mode = 2
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.011764706, 0.011764706, 0.011764706, 0.39215687)
 script = ExtResource("1_jvnd5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14509805, 0.14509805, 0.14509805, 0.69411767)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -33,10 +42,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -376.5
-offset_top = -225.0
-offset_right = 376.5
-offset_bottom = 225.0
+offset_left = -1155.375
+offset_top = -544.0
+offset_right = 1155.375
+offset_bottom = 544.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_5w6ei")
@@ -44,40 +53,39 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_ecia5")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+clip_contents = true
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
-[node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 100)
+[node name="RestartButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_73e60")
-icon = ExtResource("8_2tp5j")
-flat = true
-expand_icon = true
+size_flags_vertical = 3
+texture_normal = ExtResource("8_2tp5j")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 100)
+[node name="QuitButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
-icon = ExtResource("7_slthy")
-flat = true
-icon_alignment = 1
-expand_icon = true
+texture_normal = ExtResource("7_slthy")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="MuteButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
@@ -87,18 +95,18 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("5_77ihb")
 
-[node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 100)
+[node name="ResumeButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
-icon = ExtResource("1_6q0ex")
-flat = true
-icon_alignment = 1
-expand_icon = true
+texture_normal = ExtResource("1_6q0ex")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 65
 
 [node name="RestartLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -106,19 +114,18 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 45
 text = "STARTOVER"
-horizontal_alignment = 1
-vertical_alignment = 1
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="ExitLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_73e60")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 45
 text = "EXIT"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
@@ -126,7 +133,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 45
 text = "SOUNDOFF"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -136,7 +143,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 45
 text = "CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
