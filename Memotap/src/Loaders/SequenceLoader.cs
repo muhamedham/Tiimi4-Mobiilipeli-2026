@@ -83,7 +83,55 @@ public partial class SequenceLoader : Node
         dir.ListDirEnd();
 
         // Needed because during testing array has been scrambled.
-        levels.Sort();
+        //levels.Sort();
+        levels = ActualSort(levels);
+
+        return levels;
+    }
+
+    public static Array<String> ActualSort(Array<String> levels)
+    {
+
+        int n = levels.Count;
+
+        int[] indexes = new int[n];
+
+        // get the numbers on the level names and add them on in an array
+        for(int i = 0; i < n; i++ )
+        {
+            string line = levels[i];
+            string[] parts = line.Split(['-', '.']);
+
+            if (int.TryParse(parts[1], out int result))
+            {
+                indexes[i] = result;
+            }
+        }
+
+        // sort the levels array based on the index array
+        for (int i = 0; i < n -1; i++)
+        {
+            int minIdx = i;
+
+            for(int j = i+1;j < n; j++ )
+            {
+                if (indexes[j] < indexes[minIdx])
+                {
+                    minIdx = j;
+                }
+            }
+
+            string temp = levels[i];
+            int tempindex = indexes[i];
+
+            levels[i] = levels[minIdx];
+            indexes[i] = indexes[minIdx];
+
+            levels[minIdx] = temp;
+            indexes[minIdx] = tempindex;
+
+        }
+
         return levels;
     }
 }
