@@ -10,13 +10,13 @@ public partial class Indicator : TextureRect
 		Inactive,
 	}
 
-	private TileState CurrentState = TileState.Active;
+	public TileState CurrentState = TileState.Active;
 
 	[ExportGroup("My Textures")]
 	[Export] public Texture2D Activetexture;
 	[Export] public Texture2D InactiveTexture;
 
-	
+
 	public void SetState(TileState newState)
 	{
 		CurrentState = newState;
@@ -35,5 +35,4 @@ public partial class Indicator : TextureRect
 				break;
 		}
 	}
-
 }

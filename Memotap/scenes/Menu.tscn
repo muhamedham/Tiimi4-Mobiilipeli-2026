@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bouw4y07mtllo" path="res://src/UI/Menus/Translate.cs" id="7_yt8fu"]
 [ext_resource type="Texture2D" uid="uid://x85ctgg0fbqw" path="res://art/Enkun_lippu.png" id="8_4umqm"]
 [ext_resource type="Texture2D" uid="uid://bk2x4q47ahfcl" path="res://art/Suomi_button.png" id="9_pp5m5"]
-[ext_resource type="Texture2D" uid="uid://irme0hwbr3c2" path="res://art/SWEDISHFLAG.png" id="10_pp5m5"]
+[ext_resource type="Texture2D" uid="uid://dbuppx1rq7bk6" path="res://art/Ruotsin_lippu.png" id="10_pp5m5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaywf"]
 
@@ -133,10 +133,10 @@ offset_bottom = 80.77344
 
 [node name="ButtonSuomi" type="Button" parent="CanvasLayer/LanguageMenu"]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 47.000004
-offset_top = 1547.0001
-offset_right = 1079.0
-offset_bottom = 2542.4658
+offset_left = 50.0
+offset_top = 1562.0001
+offset_right = 1082.0
+offset_bottom = 2557.4658
 scale = Vector2(0.45163476, 0.4910042)
 icon = ExtResource("9_pp5m5")
 flat = true
@@ -149,11 +149,13 @@ offset_right = 376.41037
 offset_bottom = 224.44214
 
 [node name="ButtonSverige" type="Button" parent="CanvasLayer/LanguageMenu"]
-offset_left = 111.0
-offset_top = 1648.0
-offset_right = 1562.5107
-offset_bottom = 2541.8667
-scale = Vector2(0.2609679, 0.3286424)
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+offset_left = 7.0
+offset_top = 1522.0001
+offset_right = 2496.0
+offset_bottom = 5038.0
+scale = Vector2(0.21409166, 0.25139114)
 icon = ExtResource("10_pp5m5")
 flat = true
 

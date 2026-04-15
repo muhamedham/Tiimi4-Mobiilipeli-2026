@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=13 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://bo8a20lwwiojx" path="res://scenes/UI/Indicators/GoStopTexture.tscn" id="9_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://crl2y7y0p3yue" path="res://scenes/UI/Transition.tscn" id="10_3xj3m"]
+[ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="10_mcffj"]
 [ext_resource type="Script" uid="uid://cty4ayciq7hql" path="res://src/Loaders/SequenceLoader.cs" id="11_3xj3m"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_goStopTexture", "_heartField", "_tileField", "_score")]
@@ -58,8 +59,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PauseButton" type="TextureButton" parent="GameLayer"]
-offset_right = 676.0
-offset_bottom = 678.0
+offset_left = 67.0
+offset_top = 57.0
+offset_right = 743.0
+offset_bottom = 735.0
 scale = Vector2(0.55, 0.55)
 texture_normal = ExtResource("3_s0nni")
 
@@ -73,20 +76,38 @@ offset_right = 150.0
 offset_bottom = 160.0
 grow_horizontal = 2
 
-[node name="GoStopTexture" parent="GameLayer" instance=ExtResource("9_3xj3m")]
+[node name="GoStopTexture" parent="GameLayer" node_paths=PackedStringArray("GOSTOP") instance=ExtResource("9_3xj3m")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -408.00024
-offset_top = -382.00012
-offset_right = -128.56665
-offset_bottom = -182.00012
+offset_left = -158.99976
+offset_top = 291.0
+offset_right = 91.000244
+offset_bottom = 491.0
 grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(1.5960858, 6.0299044)
+rotation = 3.1415927
+scale = Vector2(3.8667188, 3.3091798)
 size_flags_horizontal = 8
+GOSTOP = NodePath("GOSTOP")
+
+[node name="GOSTOP" type="Label" parent="GameLayer/GoStopTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 224.55573
+offset_top = 97.30506
+offset_right = 185.66467
+offset_bottom = -63.009827
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+theme_override_fonts/font = ExtResource("10_mcffj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 visible = false

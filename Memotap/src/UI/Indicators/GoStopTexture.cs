@@ -2,14 +2,11 @@ using Godot;
 using System;
 
 //heartTexture inherits Indicator
+
 public partial class GoStopTexture : Indicator
 {
-
+    [Export] Label GOSTOP;
 //toiminnallisuus tulee Indicator luokasta
-
-
-
-
     public void SetSize()
     {
         Tween tween = GetTree().CreateTween().SetParallel(true);
@@ -23,5 +20,17 @@ public partial class GoStopTexture : Indicator
 
         tween.TweenProperty(this, "size", CustomMinimumSize,1.0f);
         tween.TweenProperty(this, "position", DefaultPos,1.0f);
+    }
+
+    public void GoStopTurn()
+    {
+        if (CurrentState == TileState.Active)
+        {
+            GOSTOP.Text = ("STOP");
+        }
+        else
+        {
+            GOSTOP.Text = ("GO");
+        }
     }
 }

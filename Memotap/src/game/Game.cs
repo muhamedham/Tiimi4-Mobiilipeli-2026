@@ -135,6 +135,7 @@ public partial class Game : Node2D
 		// Update indicator to active and set up the sequence loop
 		// by fetching the current sequence from the shuffled sequences
 		_goStopTexture.SetState(Indicator.TileState.Active);
+		_goStopTexture.GoStopTurn();
  		_activeSequence = _levelSequences[_currentlevelIndex];
 
 		// Iterate through the active sequence
@@ -152,6 +153,7 @@ public partial class Game : Node2D
 		_currentSequenceIndex = 0;
 		SetCorrectButton(_activeSequence[_currentSequenceIndex]);
 		_goStopTexture.SetState(Indicator.TileState.Inactive);
+		_goStopTexture.GoStopTurn();
 
 		// Correct inputs should be setup by now and inputs get unlocked
 		SetAllButtonsDisabled(false);
@@ -241,6 +243,7 @@ public partial class Game : Node2D
 
 		// Trigger indicator and reset sequenceIndex, also remove life
 		_goStopTexture.SetState(Indicator.TileState.Active);
+		_goStopTexture.GoStopTurn();
 		Lives--;
 		_currentSequenceIndex = 0;
 
@@ -293,6 +296,7 @@ public partial class Game : Node2D
 		{
 			// Activate stop-indicator
 			_goStopTexture.SetState(Indicator.TileState.Active);
+			_goStopTexture.GoStopTurn();
 
 			// reset local index and update LevelIndex
 			_currentSequenceIndex = 0;
