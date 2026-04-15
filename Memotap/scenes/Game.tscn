@@ -99,15 +99,20 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 224.55573
-offset_top = 97.30506
-offset_right = 185.66467
-offset_bottom = -63.009827
+offset_top = 117.66165
+offset_right = 181.34021
+offset_bottom = 1.4266968
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 3.1415927
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_mcffj")
+theme_override_font_sizes/font_size = 23
+text = "Test Text"
 horizontal_alignment = 1
 vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 2
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 visible = false

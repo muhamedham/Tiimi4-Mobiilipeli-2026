@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="3_2tki2"]
 
 [node name="Score" type="TextureRect" node_paths=PackedStringArray("_scoreLabel")]
-custom_minimum_size = Vector2(300, 200)
+custom_minimum_size = Vector2(600, 400)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_td0am")
@@ -15,14 +15,19 @@ _scoreLabel = NodePath("ScoreLabel")
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1
-offset_left = 41.999996
-offset_top = 68.0
-offset_right = 82.0
-offset_bottom = 91.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_top = 123.99999
+offset_right = -174.03271
+offset_bottom = -148.28928
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.2347497, 1.0727367)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2tki2")
-theme_override_font_sizes/font_size = 51
+theme_override_font_sizes/font_size = 100
 text = "Leveltxt"
 horizontal_alignment = 1
 vertical_alignment = 1

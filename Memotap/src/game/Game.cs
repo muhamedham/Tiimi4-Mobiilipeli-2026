@@ -90,6 +90,8 @@ public partial class Game : Node2D
 			_buttons = _tileField.Setup(this);
 		}
 
+		_goStopTexture.GoStopTurn();
+
 		// Disable inputs to avoid early disturbance
 		SetAllButtonsDisabled(true);
 
@@ -113,7 +115,7 @@ public partial class Game : Node2D
 		await Timer(_nextRoundDelay);
 		PlaySequence();
 
-		GD.Print(GetViewport().GetVisibleRect().Size.Y);
+		GD.Print("Viewport height: " + GetViewport().GetVisibleRect().Size.Y);
 
 	}
 
