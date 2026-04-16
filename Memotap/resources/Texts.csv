@@ -4,8 +4,8 @@ GAMEOVER;Game over;Peli päättyi; Spelet Slut
 TUTORIAL;The green pulsing buttons will show you the sequence needed to pass the level while the indicator on the right tells you when it is your turn; Välkkyvät vihreät ruudut näyttävät sinulle järjestyksen jossa sinun pitää painaa nappeja, kun oikealla oleva laatikko kertoo sinulle milloin on vuorosi; De gröna blinkande knapparna visar dig den sekvens som behövs för att klara nivån medan indikatorn till höger visar när det är din tur.
 STARTOVER; START OVER; ALOITA UUDELLEEN; BÖRJA OM FRÅN BÖRJAN
 EXIT; EXIT; POISTU; UTGÅNG
-SOUNDOFF; SOUND OFF; ÄÄNET POIS  ; LJUD AV
-SOUNDON; SOUND ON  ; ÄÄNET PÄÄLLE; LJUD PÅ
+SOUNDOFF; SOUND OFF; ÄÄNET POIS; LJUD AV
+SOUNDON; SOUND ON; ÄÄNET PÄÄLLE; LJUD PÅ
 CONTINUE; CONTINUE; JATKA; FORTSÄTTA
 STOP; WAIT YOUR TURN; ODOTA VUOROASI; VÄNTA PÅ DIN TUR
 GO; START; ALOITA; START
