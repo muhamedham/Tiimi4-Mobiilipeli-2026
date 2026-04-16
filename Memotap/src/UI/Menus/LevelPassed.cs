@@ -4,6 +4,8 @@ using System;
 public partial class LevelPassed : Control
 {
     [Export] Game _game;
+
+	[Export] CpuParticles2D _particleEffect;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -18,11 +20,14 @@ public partial class LevelPassed : Control
     }
 	// Called when pausing between levels
 	public void OnLevelCompletion()
-	{   var timer = GetTree().CreateTimer(0.5f, false);
+	{
+		_particleEffect.Emitting = true;
+		var timer = GetTree().CreateTimer(0.5f, false);
         timer.Timeout += () =>
         {
-            Engine.TimeScale = 0;
+
             GetTree().Paused = true;
+			_particleEffect.Emitting = true;
             Show();
         };
     }
@@ -30,8 +35,6 @@ public partial class LevelPassed : Control
 	// Sets 'paused' to false and hides the pause-menu
 	public void OnResumePressed()
 	{
-		Engine.TimeScale = 1;
-
 		GetTree().Paused = false;
 		Hide();
 	}

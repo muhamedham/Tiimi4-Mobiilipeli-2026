@@ -13,8 +13,6 @@ public partial class PauseMenu : Control
 	// Called when PauseButton is pressed
 	public void OnPausePressed()
 	{
-		Engine.TimeScale = 0;
-
 		GetTree().Paused = true;
 		Show();
 	}
@@ -22,8 +20,6 @@ public partial class PauseMenu : Control
 	// Sets 'paused' to false and hides the pause-menu
 	public void OnResumePressed()
 	{
-		Engine.TimeScale = 1;
-
 		GetTree().Paused = false;
 		Hide();
 	}
@@ -31,7 +27,6 @@ public partial class PauseMenu : Control
 	// Called when RestartButton is pressed
 	private void OnRestartPressed()
 	{
-		Engine.TimeScale = 1;
 		GetTree().Paused = false;
 		Hide();
 		GetTree().ReloadCurrentScene();
@@ -40,7 +35,6 @@ public partial class PauseMenu : Control
 	// Called when QuitButton is pressed
 	private void OnQuitPressed()
 	{
-		Engine.TimeScale = 1;
 		GetTree().Paused = false;
 		Hide();
 		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");

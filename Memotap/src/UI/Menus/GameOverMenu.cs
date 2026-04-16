@@ -31,19 +31,15 @@ public partial class GameOverMenu : ColorRect
 	// Sets 'paused' to false and hides the pause-menu
 	public void OnContinuePressed()
 	{
-		Engine.TimeScale = 1;
-
-        _gameRunner.HandleCheckpoint();
-
 		GetTree().Paused = false;
         Hide();
+        _gameRunner.HandleCheckpoint();
     }
 
     // Called when RestartButton is pressed
     private void OnRestartPressed()
     {
         GetTree().Paused = false;
-        Engine.TimeScale = 1;
         Hide();
 
         GetTree().ReloadCurrentScene();

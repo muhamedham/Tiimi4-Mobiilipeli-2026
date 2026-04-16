@@ -12,16 +12,12 @@ public partial class MenuController : ColorRect
 
 	public void Pause()
 	{
-		Engine.TimeScale = 0;
-
 		GetTree().Paused = true;
 	}
 
 	// Sets 'paused' to false and hides the pause-menu
 	public void Resume()
 	{
-		Engine.TimeScale = 1;
-
 		GetTree().Paused = false;
 	}
 

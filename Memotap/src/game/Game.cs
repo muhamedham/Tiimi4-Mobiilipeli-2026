@@ -420,9 +420,5 @@ public partial class Game : Node2D
 
 	// Helper function that acts as a timer
 	private SignalAwaiter Timer(float seconds) =>
-		ToSignal(GetTree().CreateTimer(seconds),"timeout");
-
-
-
-
+		ToSignal(GetTree().CreateTimer(seconds, false),"timeout");
 }
