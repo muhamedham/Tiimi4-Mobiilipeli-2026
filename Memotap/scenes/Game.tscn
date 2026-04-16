@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdomf0m51tw3l"]
+[gd_scene load_steps=15 format=3 uid="uid://cdomf0m51tw3l"]
 
 [ext_resource type="Script" uid="uid://cwukmxh7ldqxg" path="res://src/game/Game.cs" id="1_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://b6q086eyuuc04" path="res://scenes/TileField.tscn" id="1_wbfu4"]
 [ext_resource type="PackedScene" uid="uid://co3l2gnet3l32" path="res://scenes/GameOver.tscn" id="3_3xj3m"]
 [ext_resource type="Texture2D" uid="uid://bx4vi5j51cehp" path="res://art/UI/pause.png" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://cr36lg753klqk" path="res://scenes/bg_texture.tscn" id="4_2rd6h"]
-[ext_resource type="PackedScene" uid="uid://cgweqmlsetrae" path="res://scenes/UI/Tutorial.tscn" id="4_7ua8r"]
+[ext_resource type="PackedScene" uid="uid://dagu6dgl8cdcf" path="res://scenes/UI/Tutorial.tscn" id="4_7ua8r"]
+[ext_resource type="PackedScene" uid="uid://blf34se3oydbo" path="res://scenes/UI/LevelCheckPoint.tscn" id="5_7ua8r"]
 [ext_resource type="PackedScene" uid="uid://bkydgglni72kp" path="res://scenes/UI/PauseMenu.tscn" id="6_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://bynqth46u1w47" path="res://scenes/UI/Indicators/HeartField.tscn" id="7_400sg"]
 [ext_resource type="PackedScene" uid="uid://x5y2xbi82fjm" path="res://scenes/UI/Score.tscn" id="8_qy1jj"]
@@ -27,13 +28,15 @@ _maxHealth = 5
 layer = 2
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("6_kiw3p")]
-visible = false
 
 [node name="GameOver" parent="UILayer" node_paths=PackedStringArray("_gameRunner") instance=ExtResource("3_3xj3m")]
-visible = false
 _gameRunner = NodePath("../..")
 
 [node name="Tutorial" parent="UILayer" instance=ExtResource("4_7ua8r")]
+visible = false
+
+[node name="LevelPassed" parent="UILayer" node_paths=PackedStringArray("_game") instance=ExtResource("5_7ua8r")]
+_game = NodePath("../..")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 layer = -1

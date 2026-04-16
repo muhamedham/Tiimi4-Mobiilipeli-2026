@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://blf34se3oydbo"]
+
+[ext_resource type="Script" uid="uid://beaci51ap2dgb" path="res://src/UI/Indicators/LevelPassed.cs" id="1_oc0xy"]
+[ext_resource type="Texture2D" uid="uid://h5g8y334xvwn" path="res://art/Uusi-tausta-resized.png" id="2_qtxwc"]
+[ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="3_oc0xy"]
+[ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="5_eexbo"]
+[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="7_s888a"]
+
+[sub_resource type="Theme" id="Theme_5w6ei"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ecia5"]
+texture = ExtResource("2_qtxwc")
+
+[node name="LevelPassed" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oc0xy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14509805, 0.14509805, 0.14509805, 0.69411767)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1155.375
+offset_top = -544.0
+offset_right = 1155.375
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5w6ei")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ecia5")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_oc0xy")
+region_rect = Rect2(132, 123, 2094, 1077)
+patch_margin_left = 348
+patch_margin_top = 340
+patch_margin_right = 278
+patch_margin_bottom = 263
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -536.6249
+offset_top = 144.0
+offset_right = 490.9098
+offset_bottom = 487.0
+grow_horizontal = 2
+scale = Vector2(1.0033724, 0.9666919)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eexbo")
+theme_override_font_sizes/font_size = 150
+text = "LEVELP"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26500002
+anchor_top = 0.56700003
+anchor_right = 0.26500002
+anchor_bottom = 0.56700003
+offset_left = 239.52496
+offset_top = -155.55603
+offset_right = 746.52496
+offset_bottom = 352.44397
+
+[node name="ResumeButton" type="TextureButton" parent="PanelContainer/MarginContainer/NinePatchRect2/HBoxContainer"]
+custom_minimum_size = Vector2(507.61, 0)
+layout_mode = 2
+texture_normal = ExtResource("7_s888a")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/NinePatchRect2/HBoxContainer/ResumeButton" to="." method="OnResumePressed"]

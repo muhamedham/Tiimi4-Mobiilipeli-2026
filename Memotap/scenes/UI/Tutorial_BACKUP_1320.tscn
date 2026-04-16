@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+[gd_scene load_steps=6 format=3 uid="uid://cgweqmlsetrae"]
+=======
 [gd_scene load_steps=3 format=3 uid="uid://dagu6dgl8cdcf"]
+>>>>>>> 896bbaac8aa84fb11e80aab24d07f7237182c448
 
 [ext_resource type="Script" uid="uid://c72uu6bccn0i6" path="res://src/UI/Menus/Tutorial.cs" id="1_6fugc"]
 [ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="2_kdxk5"]

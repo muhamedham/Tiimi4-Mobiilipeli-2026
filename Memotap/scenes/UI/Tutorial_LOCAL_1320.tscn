@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dagu6dgl8cdcf"]
+[gd_scene load_steps=6 format=3 uid="uid://cgweqmlsetrae"]
 
 [ext_resource type="Script" uid="uid://c72uu6bccn0i6" path="res://src/UI/Menus/Tutorial.cs" id="1_6fugc"]
 [ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="2_kdxk5"]
