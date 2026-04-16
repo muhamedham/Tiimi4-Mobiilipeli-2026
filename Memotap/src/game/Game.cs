@@ -6,6 +6,7 @@ using Godot.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.ComponentModel;
 
 
 public partial class Game : Node2D
@@ -18,6 +19,8 @@ public partial class Game : Node2D
 
 		// emit a signal when a button is shown
 	[Signal] public delegate void ButtonShownSignalEventHandler();
+
+	[Signal] public delegate void OnLevelPassedSignalEventHandler();
 
 	// ---- Node references ----
 	[ExportGroup("Node references")]
@@ -316,6 +319,7 @@ public partial class Game : Node2D
 
                 _lastLevelSequences = DupeArr(_levelSequences);
 
+				EmitSignal(SignalName.OnLevelPassedSignal);
 
                 // Load the next levels sequences
                 LoadLevel();

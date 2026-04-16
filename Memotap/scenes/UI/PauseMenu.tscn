@@ -51,25 +51,29 @@ grow_vertical = 2
 theme = SubResource("Theme_5w6ei")
 theme_override_styles/panel = SubResource("StyleBoxTexture_ecia5")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 764.625
+offset_top = 536.0
+offset_right = 3075.375
+offset_bottom = 1624.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 50
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="RestartButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="RestartButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -78,21 +82,21 @@ texture_normal = ExtResource("8_2tp5j")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="QuitButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 texture_normal = ExtResource("7_slthy")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="RestartLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="RestartLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -102,7 +106,7 @@ theme_override_font_sizes/font_size = 100
 text = "STARTOVER"
 horizontal_alignment = 2
 
-[node name="ExitLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExitLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -111,17 +115,17 @@ theme_override_font_sizes/font_size = 100
 text = "EXIT"
 vertical_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="ResumeButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+[node name="ResumeButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 texture_normal = ExtResource("1_6q0ex")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="MuteButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+[node name="MuteButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -132,12 +136,12 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("5_77ihb")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="ContinueaLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4"]
+[node name="ContinueaLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer4"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -147,7 +151,7 @@ text = "CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4"]
+[node name="SoundLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer4"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -157,6 +161,6 @@ text = "SOUNDOFF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/RestartButton" to="." method="OnRestartPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/QuitButton" to="." method="OnQuitPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/ResumeButton" to="." method="OnResumePressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/RestartButton" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/QuitButton" to="." method="OnQuitPressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer3/ResumeButton" to="." method="OnResumePressed"]
