@@ -46,9 +46,9 @@ movie_writer/movie_file="C:/Users/tuukk/Tamk/Course-active/4A00HB43-3004 Mobiili
 
 folder_colors={
 "res://art/": "pink",
-"res://art/Sounds/": "teal",
 "res://levels/": "teal",
 "res://resources/": "yellow",
+"res://resources/Sounds/": "teal",
 "res://scenes/": "purple",
 "res://src/": "green"
 }

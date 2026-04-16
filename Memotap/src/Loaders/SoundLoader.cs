@@ -50,19 +50,20 @@ public partial class SoundLoader : Node
         //setup the music to start playig automatically
         songPlayer = new AudioStreamPlayer
         {
-            Stream =  GD.Load<AudioStream>("res://art/Sounds/MemotapTaustaMusiikki.mp3"),
+            Stream =  GD.Load<AudioStream>("res://resources/Sounds/MemotapTaustaMusiikki.mp3"),
             Bus = "Music",
             Autoplay = true
         };
         AddChild(songPlayer);
 
+
         //load all the audio streams we want to play
         audioStreams =
         [
-            GD.Load<AudioStream>("res://art/Sounds/klikkaus.mp3"),
-            GD.Load<AudioStream>("res://art/Sounds/wronganswer.mp3"),
-            GD.Load<AudioStream>("res://art/Sounds/gameover.mp3"),
-            GD.Load<AudioStream>("res://art/Sounds/Correct.wav")
+            GD.Load<AudioStream>("res://resources/Sounds/klikkaus.mp3"),
+            GD.Load<AudioStream>("res://resources/Sounds/wronganswer.mp3"),
+            GD.Load<AudioStream>("res://resources/Sounds/gameover.mp3"),
+            GD.Load<AudioStream>("res://resources/Sounds/Correct.wav")
 
         ];
 

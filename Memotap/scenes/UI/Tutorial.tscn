@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c72uu6bccn0i6" path="res://src/UI/Menus/Tutorial.cs" id="1_6fugc"]
 [ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="2_kdxk5"]
-[ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Go_back_button.png" id="4_jm2c0"]
+[ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Buttons/Go_back_button.png" id="4_jm2c0"]
 [ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="5_014qv"]
-[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="7_gf8vc"]
+[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Buttons/Play_button.png" id="7_gf8vc"]
 
 [node name="Tutorial" type="Control"]
 process_mode = 2

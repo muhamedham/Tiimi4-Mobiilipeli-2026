@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://h6kwl3wl6w0u" path="res://art/Uusi tausta.png" id="2_0winm"]
 [ext_resource type="Texture2D" uid="uid://dqaaomuc2lqe0" path="res://art/tekstiboxi.png" id="3_88ekj"]
 [ext_resource type="FontFile" uid="uid://b8ekeashfw5ea" path="res://resources/fonts/Bauhaus 93 Regular.ttf" id="4_0winm"]
-[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Play_button.png" id="4_skdqa"]
-[ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Go_back_button.png" id="6_8dkuh"]
+[ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Buttons/Play_button.png" id="4_skdqa"]
+[ext_resource type="Texture2D" uid="uid://bkkrrgcaivbg8" path="res://art/UI/Buttons/Go_back_button.png" id="6_8dkuh"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0icj0"]
 texture = ExtResource("2_0winm")
