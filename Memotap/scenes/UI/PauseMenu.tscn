@@ -63,13 +63,14 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 50
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="RestartButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -78,14 +79,50 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="QuitButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 texture_normal = ExtResource("7_slthy")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="MuteButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 150)
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="RestartLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_rgmlj")
+theme_override_font_sizes/font_size = 100
+text = "STARTOVER"
+horizontal_alignment = 2
+
+[node name="ExitLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_73e60")
+theme_override_font_sizes/font_size = 100
+text = "EXIT"
+vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture_normal = ExtResource("1_6q0ex")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MuteButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
@@ -95,59 +132,31 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("5_77ihb")
 
-[node name="ResumeButton" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 150)
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("1_6q0ex")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_constants/separation = 200
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 65
-
-[node name="RestartLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 45
-text = "STARTOVER"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="ExitLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_73e60")
-theme_override_font_sizes/font_size = 45
-text = "EXIT"
-vertical_alignment = 1
-
-[node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ContinueaLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 45
-text = "SOUNDOFF"
+theme_override_font_sizes/font_size = 100
+text = "CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ContinueaLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+[node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_rgmlj")
-theme_override_font_sizes/font_size = 45
-text = "CONTINUE"
+theme_override_font_sizes/font_size = 100
+text = "SOUNDOFF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/RestartButton" to="." method="OnRestartPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/QuitButton" to="." method="OnQuitPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/ResumeButton" to="." method="OnResumePressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/ResumeButton" to="." method="OnResumePressed"]
