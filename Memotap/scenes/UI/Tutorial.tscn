@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://da5eyw8n2wh57" path="res://art/UI/Buttons/Play_button.png" id="7_gf8vc"]
 
 [node name="Tutorial" type="Control"]
-process_mode = 2
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,3 +93,4 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/HBoxContainer/GoBackButton" to="." method="OnQuitPressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/HBoxContainer/PlayButton" to="." method="OnStartPressed"]

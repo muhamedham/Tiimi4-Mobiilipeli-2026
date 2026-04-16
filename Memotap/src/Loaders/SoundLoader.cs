@@ -38,6 +38,8 @@ public partial class SoundLoader : Node
     // make sure there is only one instance of the soundloader
     public override void _Ready()
     {
+        ProcessMode = ProcessModeEnum.Always;
+
         if (Instance == null)
         {
             Instance = this;
@@ -176,6 +178,9 @@ public partial class SoundLoader : Node
             {
                 _soundLabel = soundLabel;
                 ChangeSoundLabel();
+            } else if (child is TextureButton button && child is not TileButton)
+            {
+                button.Pressed += () => PlaySound(Sounds.Click);
             }
 
             // call recursively to find all children

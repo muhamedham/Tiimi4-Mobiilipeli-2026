@@ -72,57 +72,64 @@ public partial class Game : Node2D
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _EnterTree()
-	{
+    {
 
 
-		// Check that all elements were found
-		Lives = _maxHealth;
-		if (_heartField == null)
-		{
-			GD.PushError("_heartField node not found");
-		} else
-		{
-			_hearts = _heartField.Setup(this);
-		}
+        // Check that all elements were found
+        Lives = _maxHealth;
+        if (_heartField == null)
+        {
+            GD.PushError("_heartField node not found");
+        }
+        else
+        {
+            _hearts = _heartField.Setup(this);
+        }
 
-		if (_tileField == null)
-		{
-			GD.PushError("_tileField node not found");
-		} else
-		{
-			_buttons = _tileField.Setup(this);
-		}
+        if (_tileField == null)
+        {
+            GD.PushError("_tileField node not found");
+        }
+        else
+        {
+            _buttons = _tileField.Setup(this);
+        }
 
-		_goStopTexture.GoStopTurn();
+        _goStopTexture.GoStopTurn();
 
-		// Disable inputs to avoid early disturbance
-		SetAllButtonsDisabled(true);
+        // Disable inputs to avoid early disturbance
+        SetAllButtonsDisabled(true);
 
-		//loop through _buttons arr and start listening to each signal.
-		foreach (TileButton button in _buttons)
-		{
-			button.CorrectPress += () => CorrectPressed(button);
-			button.WrongPress += () => WrongPressed(button);
-		}
+        //loop through _buttons arr and start listening to each signal.
+        foreach (TileButton button in _buttons)
+        {
+            button.CorrectPress += () => CorrectPressed(button);
+            button.WrongPress += () => WrongPressed(button);
+        }
 
-		//give the buttons to soundloader to register sounds
-		SoundLoader.Instance.RegisterTileButtons(_buttons);
+        //give the buttons to soundloader to register sounds
+        SoundLoader.Instance.RegisterTileButtons(_buttons);
 
-		// Set the transition Node and play the transition
-		_transition = GetNode<AnimationPlayer>("TransitionLayer/Transition");
+        // Set the transition Node and play the transition
+        _transition = GetNode<AnimationPlayer>("TransitionLayer/Transition");
         _transition.Play("fade-in");
 
-		// Load level data
-		_levelNames = SequenceLoader.GetAvailableLevels();
-		LoadLevel();
-		await Timer(_nextRoundDelay);
-		PlaySequence();
+        // Load level data
+        _levelNames = SequenceLoader.GetAvailableLevels();
+        LoadLevel();
 
-		GD.Print("Viewport height: " + GetViewport().GetVisibleRect().Size.Y);
+        GD.Print("Viewport height: " + GetViewport().GetVisibleRect().Size.Y);
 
-	}
+    }
 
-	public override void _ExitTree()
+	//we'll actually start the game when the tutorial is dismissed
+    public async Task StartGame()
+    {
+        await Timer(_nextRoundDelay);
+        PlaySequence();
+    }
+
+    public override void _ExitTree()
 	{
 		// stop listening to the signals
 		foreach (var button in _buttons)
