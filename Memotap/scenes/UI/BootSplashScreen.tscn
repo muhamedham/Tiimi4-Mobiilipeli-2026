@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://1ra3cje8i0dk"]
+[gd_scene load_steps=7 format=3 uid="uid://1ra3cje8i0dk"]
 
 [ext_resource type="Texture2D" uid="uid://cns88gh0bgd5n" path="res://art/logot/tiko-logo-eng-valkoinen.png" id="1_qnibg"]
 [ext_resource type="Script" uid="uid://cwghrghrtviqu" path="res://src/UI/Menus/BootSplashScreen.cs" id="1_sv76s"]
 [ext_resource type="Texture2D" uid="uid://bhdn684kdgahv" path="res://art/logot/TRE_LB31_UN_UAS_en_B3__NEGA.png" id="2_qnibg"]
 [ext_resource type="Texture2D" uid="uid://y8kb07iiq3ap" path="res://art/logot/brain-logo.png" id="3_sv76s"]
+[ext_resource type="Texture2D" uid="uid://d3shiox6njrdt" path="res://art/logot/uusi_Welltech.png" id="4_t08g0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnibg"]
 bg_color = Color(0, 0, 0, 1)
@@ -46,19 +47,25 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 150)
+custom_minimum_size = Vector2(1000, 300)
 layout_mode = 2
 texture = ExtResource("1_qnibg")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ColorRect/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
+custom_minimum_size = Vector2(1000, 200)
 layout_mode = 2
 texture = ExtResource("2_qnibg")
 expand_mode = 1
 
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ColorRect/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+texture = ExtResource("4_t08g0")
+expand_mode = 1
+
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 texture = ExtResource("3_sv76s")
 expand_mode = 1
