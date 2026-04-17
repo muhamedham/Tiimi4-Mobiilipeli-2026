@@ -47,8 +47,16 @@ layer = -1
 process_mode = 1
 
 [node name="HeartField" parent="GameLayer" instance=ExtResource("7_400sg")]
-offset_left = -570.0
-offset_bottom = 112.85715
+anchors_preset = -1
+anchor_left = 0.89000005
+anchor_top = 0.081
+anchor_right = 0.96400005
+anchor_bottom = 0.134
+offset_left = -285.6001
+offset_top = 1.0399933
+offset_right = 0.2397461
+offset_bottom = -0.5828247
+grow_vertical = 2
 
 [node name="TileField" parent="GameLayer" instance=ExtResource("1_wbfu4")]
 process_mode = 1

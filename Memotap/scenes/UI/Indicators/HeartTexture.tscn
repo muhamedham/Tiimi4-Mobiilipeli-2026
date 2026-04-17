@@ -5,9 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cw8larcqtpq14" path="res://art/UI/Indicators/heart_button_gray_scale.png" id="3_cbnls"]
 
 [node name="HeartTexture" type="TextureRect"]
-custom_minimum_size = Vector2(100, 100)
-offset_right = 100.0
-offset_bottom = 100.0
+custom_minimum_size = Vector2(250, 250)
 texture = ExtResource("1_0kn5h")
 expand_mode = 1
 script = ExtResource("2_2dybo")
