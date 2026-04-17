@@ -95,7 +95,8 @@ custom_minimum_size = Vector2(450, 400)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("7_aaywf")
-expand_mode = 1
+expand_mode = 4
+stretch_mode = 4
 
 [node name="LanguageMenu" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("English", "Suomi", "Svenska")]
 script = ExtResource("7_yt8fu")
