@@ -38,6 +38,7 @@ public partial class Game : Node2D
 	[Export] public float _betweenFlashDuration = 0.5f;
 	[Export] public float _nextRoundDelay = 1.0f;
 	[Export] public float _wrongPressDelay = 2.0f;
+	[Export] public float _LevelPassDelay  = 0.5f;
 
 	// ---- Tuning ----
 	[ExportGroup("Tuning")]
@@ -326,6 +327,7 @@ public partial class Game : Node2D
 
                 _lastLevelSequences = DupeArr(_levelSequences);
 
+				await Timer(_LevelPassDelay);
 				EmitSignal(SignalName.OnLevelPassedSignal);
 
                 // Load the next levels sequences

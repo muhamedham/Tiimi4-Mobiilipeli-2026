@@ -18,7 +18,8 @@ public partial class SoundLoader : Node
         Correct,
         Wrong,
         GameOver,
-        Click
+        Click,
+        LevelUp
     }
 
     int _masterBusIndex = -1;
@@ -65,7 +66,8 @@ public partial class SoundLoader : Node
             GD.Load<AudioStream>("res://resources/Sounds/klikkaus.mp3"),
             GD.Load<AudioStream>("res://resources/Sounds/wronganswer.mp3"),
             GD.Load<AudioStream>("res://resources/Sounds/gameover.mp3"),
-            GD.Load<AudioStream>("res://resources/Sounds/Correct.wav")
+            GD.Load<AudioStream>("res://resources/Sounds/Correct.wav"),
+            GD.Load<AudioStream>("res://resources/Sounds/Level-Passed.mp3")
 
         ];
 
@@ -126,6 +128,9 @@ public partial class SoundLoader : Node
             case Sounds.Click:
                 audioStreamPlayers[3].Play();
                 break;
+            case Sounds.LevelUp:
+                audioStreamPlayers[4].Play();
+                break;
         }
     }
 
@@ -168,6 +173,7 @@ public partial class SoundLoader : Node
             {
                 game.GameOverSignal += () => PlaySound(Sounds.GameOver);
                 game.ButtonShownSignal += () => PlaySound(Sounds.Correct);
+                game.OnLevelPassedSignal += () => PlaySound(Sounds.LevelUp);
             } else if (child is MuteButton muteBtn)
             {
                 muteBtn.Toggled += ToggleMute;
