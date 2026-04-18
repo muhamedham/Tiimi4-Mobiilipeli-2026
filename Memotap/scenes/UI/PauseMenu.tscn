@@ -15,6 +15,8 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ecia5"]
 texture = ExtResource("2_3m1qe")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -44,7 +46,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1155.375
 offset_top = -544.0
-offset_right = 1155.375
+offset_right = 1334.0
 offset_bottom = 544.0
 grow_horizontal = 2
 grow_vertical = 2
