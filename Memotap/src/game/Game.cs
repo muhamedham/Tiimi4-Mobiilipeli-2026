@@ -1,12 +1,10 @@
-// restarting from the same level multiple times does not work
+// restarting from the same level multiple times does not work correctly
 using Godot;
 using System;
 
 using Godot.Collections;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.ComponentModel;
 
 
 public partial class Game : Node2D
@@ -63,7 +61,7 @@ public partial class Game : Node2D
 	private Array<string> _levelNames = null;
 	private int[][] _levelSequences = null;
 	private int[][] _lastLevelSequences = null;
-	public int _currentlevelIndex = 0;
+	private int _currentlevelIndex = 0;
 	private int _currentSequenceIndex = 0;
 	private int[] _activeSequence = [];
 	private TileButton _correctButton = null;
@@ -119,8 +117,7 @@ public partial class Game : Node2D
         _levelNames = SequenceLoader.GetAvailableLevels();
         LoadLevel();
 
-        GD.Print("Viewport height: " + GetViewport().GetVisibleRect().Size.Y);
-
+		GD.Print(_levelNames.Count);
     }
 
 	//we'll actually start the game when the tutorial is dismissed
@@ -203,7 +200,16 @@ public partial class Game : Node2D
 	// Loads and sets up the active level, called once per level
 	private void LoadLevel()
 	{
-		int[][] completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
+		int[][] completeLevel;
+
+
+		if (_currentLevel < _levelNames.Count)
+		{
+			 completeLevel = SequenceLoader.LoadSequences(_levelNames[_currentLevel]);
+		} else
+		{
+			 completeLevel = SequenceLoader.LoadRandomSequences(_levelLength, _currentLevel);
+		}
 		_levelSequences = ShuffleLevel(completeLevel);
 	}
 
@@ -405,11 +411,13 @@ public partial class Game : Node2D
 	//helper function to deep copy an array
 	private int[][] DupeArr(int[][] oldArr)
 	{
+		// create a 2d array
 		int[][] newArr = new int[oldArr.Length][];
 		for (int i = 0; i < oldArr.Length; i++)
 		{
 			newArr[i] = new int[oldArr[i].Length];
 		}
+
 		for (int i = 0; i < oldArr.Length; i++)
 		{
 			for (int j = 0; j < oldArr[i].Length; j++)

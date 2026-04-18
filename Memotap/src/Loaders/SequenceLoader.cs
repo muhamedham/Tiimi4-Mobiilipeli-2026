@@ -83,13 +83,14 @@ public partial class SequenceLoader : Node
         dir.ListDirEnd();
 
         // Needed because during testing array has been scrambled.
-        //levels.Sort();
+
         levels = ActualSort(levels);
 
         return levels;
     }
 
-    public static Array<String> ActualSort(Array<String> levels)
+    //manually sort the level array
+    private static Array<String> ActualSort(Array<String> levels)
     {
 
         int n = levels.Count;
@@ -133,5 +134,44 @@ public partial class SequenceLoader : Node
         }
 
         return levels;
+
     }
+
+
+    // generates random sequences when we run out of ready sequences
+    // the same button can't be repeated twice in a row.
+    public static int[][] LoadRandomSequences(int levelLength, int buttonCount)
+    {
+        var rng = new RandomNumberGenerator();
+        rng.Randomize();
+
+        buttonCount -= 5;
+
+		// create a 2d array
+		int[][] ints = new int[levelLength][];
+		for (int i = 0; i < levelLength; i++)
+		{
+			ints[i] = new int[buttonCount];
+		}
+
+
+        for (int i = 0; i < levelLength; i++)
+        {
+            for (int j = 0; j < buttonCount; j++)
+            {
+                int num = rng.RandiRange(0, 8);
+                if (j > 0)
+                {
+                    while (num == ints[i][j-1])
+                    {
+                        num = rng.RandiRange(0, 8);
+                    }
+                }
+                ints[i][j] = num;
+            }
+        }
+
+        return ints;
+    }
+
 }
