@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4efk18m8c85t"
-path="res://.godot/imported/Welltech_ilmantaustaa.png-7addf0c0269c9d588222226d325b6393.ctex"
+uid="uid://d3shiox6njrdt"
+path="res://.godot/imported/uusi_Welltech.png-0c51b58ba51466d71aff289abadefcf7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Welltech_ilmantaustaa.png"
-dest_files=["res://.godot/imported/Welltech_ilmantaustaa.png-7addf0c0269c9d588222226d325b6393.ctex"]
+source_file="res://art/uusi_Welltech.png"
+dest_files=["res://.godot/imported/uusi_Welltech.png-0c51b58ba51466d71aff289abadefcf7.ctex"]
 
 [params]
 
