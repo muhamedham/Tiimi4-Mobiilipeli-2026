@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqms82ourmavv"
-path="res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.ctex"
+path.s3tc="res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.s3tc.ctex"
+path.etc2="res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/level/Tyhja_leveli.png"
-dest_files=["res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.ctex"]
+dest_files=["res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.s3tc.ctex", "res://.godot/imported/Tyhja_leveli.png-80a53e7399b28acf100276504c621841.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

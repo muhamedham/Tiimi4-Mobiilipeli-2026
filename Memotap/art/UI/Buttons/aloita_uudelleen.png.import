@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3g8oo4dy38kh"
-path="res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.ctex"
+path.s3tc="res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.s3tc.ctex"
+path.etc2="res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/UI/Buttons/aloita_uudelleen.png"
-dest_files=["res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.ctex"]
+dest_files=["res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.s3tc.ctex", "res://.godot/imported/aloita_uudelleen.png-10eee6b1c757073bd2e24b5875f3a2d2.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

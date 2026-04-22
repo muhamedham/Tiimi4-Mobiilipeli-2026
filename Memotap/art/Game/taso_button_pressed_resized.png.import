@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hcdukplgsafg"
-path="res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.ctex"
+path.s3tc="res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.s3tc.ctex"
+path.etc2="res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/Game/taso_button_pressed_resized.png"
-dest_files=["res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.ctex"]
+dest_files=["res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.s3tc.ctex", "res://.godot/imported/taso_button_pressed_resized.png-38c644a34da45bc999512e565b3f8bca.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

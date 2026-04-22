@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cev1c74e7f626"
-path="res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.ctex"
+path.s3tc="res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.s3tc.ctex"
+path.etc2="res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/UI/Buttons/volume_off_uusi.png"
-dest_files=["res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.ctex"]
+dest_files=["res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.s3tc.ctex", "res://.godot/imported/volume_off_uusi.png-f3be299a4e827563a5fcdd77ca9f78c2.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

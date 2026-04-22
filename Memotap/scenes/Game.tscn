@@ -35,6 +35,7 @@ visible = false
 _gameRunner = NodePath("../..")
 
 [node name="LevelPassed" parent="UILayer" node_paths=PackedStringArray("_game") instance=ExtResource("5_7ua8r")]
+visible = false
 _game = NodePath("../..")
 
 [node name="Tutorial" parent="UILayer" node_paths=PackedStringArray("_game") instance=ExtResource("5_r7sob")]
