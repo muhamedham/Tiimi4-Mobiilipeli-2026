@@ -22,6 +22,7 @@ script = ExtResource("1_1abgu")
 follow_viewport_enabled = true
 
 [node name="BGTextures" parent="CanvasLayer" instance=ExtResource("1_aaywf")]
+scale = Vector2(1.0195855, 1.0126244)
 
 [node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
 offset_right = 40.0
@@ -31,10 +32,13 @@ offset_bottom = 40.0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 311.0
-offset_right = -2.0
+offset_left = 306.00003
+offset_top = 152.0
+offset_right = 304.0
+offset_bottom = 808.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.7494608, 0.5330425)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_aaywf")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
@@ -99,6 +103,8 @@ expand_mode = 4
 stretch_mode = 4
 
 [node name="LanguageMenu" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("English", "Suomi", "Svenska")]
+position = Vector2(40, 19.000061)
+scale = Vector2(0.4410972, 0.5054765)
 script = ExtResource("7_yt8fu")
 English = NodePath("ButtonEnglish")
 Suomi = NodePath("ButtonSuomi")

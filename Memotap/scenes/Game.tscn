@@ -35,7 +35,6 @@ visible = false
 _gameRunner = NodePath("../..")
 
 [node name="LevelPassed" parent="UILayer" node_paths=PackedStringArray("_game") instance=ExtResource("5_7ua8r")]
-visible = false
 _game = NodePath("../..")
 
 [node name="Tutorial" parent="UILayer" node_paths=PackedStringArray("_game") instance=ExtResource("5_r7sob")]
@@ -81,7 +80,7 @@ offset_left = 67.0
 offset_top = 57.0
 offset_right = 743.0
 offset_bottom = 735.0
-scale = Vector2(0.55, 0.55)
+scale = Vector2(0.2740526, 0.2740526)
 texture_normal = ExtResource("3_s0nni")
 
 [node name="Score" parent="GameLayer" instance=ExtResource("8_qy1jj")]
@@ -100,14 +99,14 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -158.99976
-offset_top = 291.0
-offset_right = 91.000244
-offset_bottom = 491.0
+offset_left = -102.0
+offset_top = 147.0
+offset_right = 148.0
+offset_bottom = 347.0
 grow_horizontal = 0
 grow_vertical = 2
 rotation = 3.1415927
-scale = Vector2(3.8667188, 3.3091798)
+scale = Vector2(1.7419444, 1.4907749)
 size_flags_horizontal = 8
 GOSTOP = NodePath("GOSTOP")
 

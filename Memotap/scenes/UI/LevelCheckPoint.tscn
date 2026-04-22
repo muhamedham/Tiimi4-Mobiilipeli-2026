@@ -26,8 +26,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 599.0
+offset_top = 271.0
+offset_right = 599.0
+offset_bottom = 271.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.4291785, 0.49565697)
 script = ExtResource("1_oc0xy")
 _particleEffect = NodePath("Particle")
 
@@ -110,7 +115,7 @@ stretch_mode = 0
 
 [node name="Particle" type="CPUParticles2D" parent="."]
 process_mode = 3
-position = Vector2(1851, 990)
+position = Vector2(941.3333, 524.5563)
 scale = Vector2(1.5612379, 1.5889953)
 emitting = false
 amount = 25

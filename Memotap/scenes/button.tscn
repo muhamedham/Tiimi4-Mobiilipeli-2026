@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dwm8a5c1iunnp" path="res://art/Game/wrong_taso_button_resized.png" id="6_is61r"]
 
 [node name="TileButton" type="TextureButton"]
-custom_minimum_size = Vector2(400, 400)
-offset_right = 480.0
-offset_bottom = 480.0
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
 texture_normal = ExtResource("4_8m7bo")
 texture_pressed = ExtResource("2_1bdt2")
 ignore_texture_size = true
